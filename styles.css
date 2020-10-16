@@ -1,13 +1,34 @@
+body{
+	background-color: blue;
+	
+}
+
 h1 {
 	color: green;
 	text-align: center;
-	
+	background-color: StateBlue;
 }
 
 p {
 	color: red;
+	background-color: purple;
 }
 
+
+a:link, a:visited {
+  background-color: #f44336;
+  color: white;
+  padding: 15px 25px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+}
+
+a:hover, a:active {
+  background-color: red;
+}
+
+/*
 a:link {
   color: green;
   background-color: transparent;
@@ -31,3 +52,4 @@ a:active {
   background-color: transparent;
   text-decoration: underline;
 }
+*/ 
