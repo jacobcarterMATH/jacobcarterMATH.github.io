@@ -1,0 +1,16 @@
+C:\Users\jacob\Desktop\Programming\CSharp Projects\D2HTMLtablemaker\bin\Debug\net5.0\D2HTMLtablemaker.exe
+C:\Users\jacob\Desktop\Programming\CSharp Projects\D2HTMLtablemaker\bin\Debug\net5.0\D2HTMLtablemaker.deps.json
+C:\Users\jacob\Desktop\Programming\CSharp Projects\D2HTMLtablemaker\bin\Debug\net5.0\D2HTMLtablemaker.runtimeconfig.json
+C:\Users\jacob\Desktop\Programming\CSharp Projects\D2HTMLtablemaker\bin\Debug\net5.0\D2HTMLtablemaker.runtimeconfig.dev.json
+C:\Users\jacob\Desktop\Programming\CSharp Projects\D2HTMLtablemaker\bin\Debug\net5.0\D2HTMLtablemaker.dll
+C:\Users\jacob\Desktop\Programming\CSharp Projects\D2HTMLtablemaker\bin\Debug\net5.0\ref\D2HTMLtablemaker.dll
+C:\Users\jacob\Desktop\Programming\CSharp Projects\D2HTMLtablemaker\bin\Debug\net5.0\D2HTMLtablemaker.pdb
+C:\Users\jacob\Desktop\Programming\CSharp Projects\D2HTMLtablemaker\obj\Debug\net5.0\D2HTMLtablemaker.csproj.AssemblyReference.cache
+C:\Users\jacob\Desktop\Programming\CSharp Projects\D2HTMLtablemaker\obj\Debug\net5.0\D2HTMLtablemaker.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\jacob\Desktop\Programming\CSharp Projects\D2HTMLtablemaker\obj\Debug\net5.0\D2HTMLtablemaker.AssemblyInfoInputs.cache
+C:\Users\jacob\Desktop\Programming\CSharp Projects\D2HTMLtablemaker\obj\Debug\net5.0\D2HTMLtablemaker.AssemblyInfo.cs
+C:\Users\jacob\Desktop\Programming\CSharp Projects\D2HTMLtablemaker\obj\Debug\net5.0\D2HTMLtablemaker.csproj.CoreCompileInputs.cache
+C:\Users\jacob\Desktop\Programming\CSharp Projects\D2HTMLtablemaker\obj\Debug\net5.0\D2HTMLtablemaker.dll
+C:\Users\jacob\Desktop\Programming\CSharp Projects\D2HTMLtablemaker\obj\Debug\net5.0\ref\D2HTMLtablemaker.dll
+C:\Users\jacob\Desktop\Programming\CSharp Projects\D2HTMLtablemaker\obj\Debug\net5.0\D2HTMLtablemaker.pdb
+C:\Users\jacob\Desktop\Programming\CSharp Projects\D2HTMLtablemaker\obj\Debug\net5.0\D2HTMLtablemaker.genruntimeconfig.cache
