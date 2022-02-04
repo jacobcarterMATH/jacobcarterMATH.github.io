@@ -1,0 +1,74 @@
+<head>
+<link rel="stylesheet" href="styles.css">
+<style>
+
+
+.incbutton {
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin: 4px 2px;
+  cursor: pointer;
+  position: absolute;
+  top: 47%;
+  left: 47%;
+
+}
+.resbutton {
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 20px;
+  margin: 4px 2px;
+  cursor: pointer;
+  position: absolute;
+  top: 57%;
+  left: 44%;
+
+}
+
+.countdisp{
+	text-align: center;
+	font-size: 30px;
+	vertical-align: center;
+	position: relative;
+}
+
+</style>
+</head>
+
+<body>
+
+<ul>
+	<li><a href="index.html">Runes</a></li>
+	<li><a href="areas.html">Areas</a></li>
+	<li><a href="tc87.html">aLvl 85 Areas</a></li>
+	<li><a class="active" href="counter.html">Run counter</a></li>
+</ul>
+<script>
+	let count = 0;
+	var display = document.getElementById('display');
+	function increment(){
+		count = count + 1;
+		document.getElementById('incrementButton').innerHTML = "Runs: " + count;
+	}
+	
+	function reset(){
+		if (confirm('This cannot be undone - are you sure?')){
+			count = 0;
+		}
+		document.getElementById('incrementButton').innerHTML = "Runs: " + count;
+	}
+
+</script>
+
+<button id="incrementButton" class="incbutton" onclick="increment();"> Runs: 0 </button>
+<button id="resetButton" class="resbutton" onclick="reset();"> Reset Counter </button>
+
+
+</body>
