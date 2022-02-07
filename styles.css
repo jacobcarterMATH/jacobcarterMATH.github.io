@@ -11,9 +11,7 @@
 }
 
 .runes tr:nth-child(even){background-color: #f2f2f2;}
-
-
-
+.runes tr:nth-child(odd){background-color: white;}
 .runes th{
 	padding-top: 12px;
 	padding-bottom: 12px;
@@ -56,4 +54,4 @@ li a:hover {
 
 .active{
 	background-color: #c20000;
-}	
+}
