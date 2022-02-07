@@ -50,22 +50,7 @@
 	<li><a href="tc87.html">aLvl 85 Areas</a></li>
 	<li><a class="active" href="counter.html">Run counter</a></li>
 </ul>
-<script>
-	let count = 0;
-	var display = document.getElementById('display');
-	function increment(){
-		count = count + 1;
-		document.getElementById('incrementButton').innerHTML = "Runs: " + count;
-	}
-	
-	function reset(){
-		if (confirm('This cannot be undone - are you sure?')){
-			count = 0;
-		}
-		document.getElementById('incrementButton').innerHTML = "Runs: " + count;
-	}
-
-</script>
+<script src="count.js"></script>
 
 <button id="incrementButton" class="incbutton" onclick="increment();"> Runs: 0 </button>
 <button id="resetButton" class="resbutton" onclick="reset();"> Reset Counter </button>
