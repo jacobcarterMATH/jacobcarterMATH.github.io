@@ -1,3 +1,22 @@
+body {
+	background-image: url('images/background.jpg');
+	background-size: cover;
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+}
+
+h1 {
+	color: #c20000;
+}
+
+form {
+	color: white;
+}
+
+button{
+	background-color: #c20000;
+	border-color: black;
+}
 .runes {
 	font-family: Arial, Helvetica, sans-serif;
 	border-collapse: collapse;
@@ -12,6 +31,7 @@
 
 .runes tr:nth-child(even){background-color: #f2f2f2;}
 .runes tr:nth-child(odd){background-color: white;}
+
 .runes th{
 	padding-top: 12px;
 	padding-bottom: 12px;
