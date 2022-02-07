@@ -52,7 +52,8 @@
 </ul>
 <script src="count.js"></script>
 
-<button id="incrementButton" class="incbutton" onclick="increment();"> Runs: 0 </button>
+<button id="incrementButton" class="incbutton" onclick="increment();"> </button>
+<script> document.getElementById('incrementButton').innerHTML = "Runs: " + sessionStorage.getItem("count"); </script>
 <button id="resetButton" class="resbutton" onclick="reset();"> Reset Counter </button>
 
 
