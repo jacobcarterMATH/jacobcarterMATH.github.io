@@ -29,6 +29,12 @@
   display: block;
 }
 
+.buttoncontainer{
+	display: flex;
+	flex-direction: column;
+	height: 100%
+}
+
 .flex-parent{
 	display: flex;
 }
@@ -58,12 +64,11 @@
 
 <script src="scripts.js"></script>
 
-
-<button id="incrementButton" class="resbutton" onclick="increment();"> </button>
-
-<script> document.getElementById('incrementButton').innerHTML = "Runs: " + sessionStorage.getItem("count"); </script>
-
-<button id="resetButton" class="resbutton" onclick="reset();"> Reset Counter </button>
+<div class="buttoncontainer">
+	<button id="incrementButton" class="resbutton" onclick="increment();"> </button>
+	<script> document.getElementById('incrementButton').innerHTML = "Runs: " + sessionStorage.getItem("count"); </script>
+	<button id="resetButton" class="resbutton" onclick="reset();"> Reset Counter </button>
+</div>
 
 
 </body>
