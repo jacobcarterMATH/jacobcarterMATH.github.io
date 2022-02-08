@@ -26,12 +26,14 @@ button{
 	font-family: Arial, Helvetica, sans-serif;
 	border-collapse: collapse;
 	width: 50%;
+	
 }
 
 .runes td, .runes th {
-	border: 1px solid #ddd;
-	padding: 1px;
-
+	border: 1px solid #000000;
+	overflow: hidden;
+	max-width: 20px;
+	font-size: 100%;
 }
 
 .runes tr:nth-child(even){background-color: #f2f2f2;}
@@ -82,6 +84,7 @@ ul {
 	background-color: #333;
 	position: fixed;
 	width: 10%;
+	min-width: 100px;
 	overflow: auto;
 }
 
