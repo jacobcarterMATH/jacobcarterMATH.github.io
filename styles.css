@@ -5,6 +5,8 @@ body {
 	background-repeat: no-repeat;
 	min-height: 90%;
 	min-width: 90%
+	max-height: 100%;
+	max-width: 100%
 }
 
 h1 {
@@ -46,7 +48,7 @@ button{
 
 .tooltip .tooltiptext{
 	visibility: hidden;
-	background-color: white;
+	background-color: #f2f2f2;
 	color: black;
 	border: solid;
 	border-color: #c20000;
