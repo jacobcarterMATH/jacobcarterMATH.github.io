@@ -42,11 +42,33 @@ button{
 	background-color: #c20000;
 	color: black;
 }
+.tooltip {}
+
+.tooltip .tooltiptext{
+	visibility: hidden;
+	background-color: white;
+	color: black;
+	border: solid;
+	border-color: #c20000;
+	text-align: center;
+	margin: 0% .5%;
+	position: absolute;
+	z-index: 1;
+}
+
+.tooltip:hover .tooltiptext{
+	visibility: visible;
+}
 
 .runes tr:hover{
 		background-color: #000000;
 		color:white;
 }
+.runes tr:hover .tooltiptext {
+		visibility: visible;
+}
+
+
 
 
 
@@ -78,3 +100,5 @@ li a:hover {
 .active{
 	background-color: #c20000;
 }
+
+
