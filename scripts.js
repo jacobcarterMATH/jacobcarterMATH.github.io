@@ -29,6 +29,42 @@ function hide(){
 		PatchTwoFourAreas[i].hidden = true;
 	}
 }
+
+function hideTwoFour(){
+	var PatchTwoFourAreas = document.querySelectorAll('.twofourflag');
+	var i = 0;
+	var length = PatchTwoFourAreas.length;
+	
+	for(i; i < length; i++){
+		PatchTwoFourAreas[i].hidden = true;
+	}
+	
+	var PrePatchTwoFourAreas = document.querySelectorAll('.pretwofourflag');
+	var j = 0;
+	var length = PrePatchTwoFourAreas.length;
+	
+	for (j; j < length; j++){
+		PrePatchTwoFourAreas[j].hidden = false;
+	}
+}
+
+function hidePreTwoFour(){
+	var PatchTwoFourAreas = document.querySelectorAll('.twofourflag');
+	var i = 0;
+	var length = PatchTwoFourAreas.length;
+	
+	for(i; i < length; i++){
+		PatchTwoFourAreas[i].hidden = false;
+	}
+	
+	var PrePatchTwoFourAreas = document.querySelectorAll('.pretwofourflag');
+	var j = 0;
+	var length = PrePatchTwoFourAreas.length;
+	
+	for (j; j < length; j++){
+		PrePatchTwoFourAreas[j].hidden = true;
+	}
+}
 	
 function show(){
 	var PatchTwoFourAreas = document.querySelectorAll('.twofourflag');

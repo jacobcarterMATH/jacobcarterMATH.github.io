@@ -106,4 +106,78 @@ li a:hover {
 	background-color: #c20000;
 }
 
+.act1 {}
 
+.act1 td{
+	background-color: #be70ff;
+}
+
+.act {}
+
+.act2 td {
+	background-color: #bfb900;
+}
+.act3 {}
+
+.act3 td{
+	background-color: #5aff54;
+}
+.act4 {}
+
+.act4 td{
+	background-color: #ff5454;
+}
+
+.act5 {}
+
+.act5 td{
+	background-color: #5ee7ff;
+}
+
+	.light {
+		padding-top: 12px;
+		padding-bottom: 12px;
+		text-align: left;
+		background-color: #e5ff00;
+		color: black;
+	}
+	.fire {
+		padding-top: 12px;
+		padding-bottom: 12px;
+		text-align: left;
+		background-color: #850000;
+		color: black;
+	}
+	.cold {
+		padding-top: 12px;
+		padding-bottom: 12px;
+		text-align: left;
+		background-color: #3d81ff;
+		color: black;
+	}
+	.poison {
+		padding-top: 12px;
+		padding-bottom: 12px;
+		text-align: left;
+		background-color: #048000;
+		color: black;
+	}
+	.physical {
+		padding-top: 12px;
+		padding-bottom: 12px;
+		text-align: left;
+		background-color: #8a603f;
+		color: black;
+	}
+	.magic {
+		padding-top: 12px;
+		padding-bottom: 12px;
+		text-align: left;
+		background-color: #fc6100;
+		color: black;
+	}
+	
+	.twofourflag{}
+	
+	.pretwofourflag{
+	}
