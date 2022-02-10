@@ -1,12 +1,6 @@
 body {
-	background-image: url('images/background.jpg');
-	background-size: 100% 100%;
-	background-attachment: fixed;
-	background-repeat: no-repeat;
-	min-height: 70%;
-	min-width: 90%;
-	max-height: 80%;
-	max-width: 100%
+	background-color: #120024;
+
 }
 
 h1 {
@@ -29,6 +23,7 @@ button{
 	
 }
 
+
 .runes td, .runes th {
 	border: 1px solid #000000;
 	overflow: hidden;
@@ -36,8 +31,8 @@ button{
 	font-size: 100%;
 }
 
-.runes tr:nth-child(even){background-color: #f2f2f2;}
-.runes tr:nth-child(odd){background-color: white;}
+.runes tr:nth-child(even){background-color: #404040;}
+.runes tr:nth-child(odd){background-color: #555555;}
 
 .runes th{
 	padding-top: 12px;
@@ -86,6 +81,9 @@ ul {
 	width: 10%;
 	min-width: 100px;
 	overflow: auto;
+	font-size: 25px;
+	border: solid;
+	
 }
 
 
@@ -96,11 +94,15 @@ li a {
 	text-align: center;
 	padding: 14px 16px;
 	text-decoration: none;
+	border: solid;
+	border-color: black;
 }
 
 li a:hover {
 	background-color: #111;
 }
+
+
 
 .active{
 	background-color: #c20000;
@@ -111,6 +113,7 @@ li a:hover {
 .act1 td{
 	background-color: #be70ff;
 }
+.act1 tr:nth-child(even){background-color: #404040;}
 
 .act {}
 
