@@ -34,15 +34,7 @@ button{
 	font-size: 100%;
 }
 
-@media all and (max-width: 800px){
-	.runes{
-		margin-left: 50px;
-	}
-	
-	.runes th, .runes td{
-		font-size: 75%;
-	}
-}
+
 .runes tr:nth-child(even){background-color: #404040;}
 .runes tr:nth-child(odd){background-color: #555555;}
 
@@ -112,15 +104,6 @@ li a {
 	border-color: black;
 }
 
-@media all and (max-width: 800px){
-	ul {
-		font-size: 20px;
-	}
-	
-	li a{
-		padding: 5px;
-	}
-}
 
 li a:hover {
 	background-color: #111;
@@ -138,11 +121,7 @@ li a:hover {
 	width: 75%;
 	margin: auto;
 }
-@media all and (max-width: 800px){
-	.container{
-		flex-wrap: wrap;
-	}
-}
+
 .container .runes{
 	width: 100%;
 }
@@ -176,11 +155,7 @@ li a:hover {
 .solotable {
 	width: 50%;
 }
-@media all and (max-width: 800px){
-	.solotable{
-		width: 90%;
-	}
-}
+
 /* coloration for table data */
 
 
@@ -252,4 +227,30 @@ li a:hover {
 .level{
 	background-color: gray;
 	color: black;
+}
+
+/* Screen size adjustments */
+@media all and (max-width: 800px){
+	.container{
+		flex-wrap: wrap;
+	}
+}
+
+@media all and (max-width: 1000px){
+	.runes{
+		margin-left: 50px;
+	}
+	.runes th, .runes td{
+		font-size: 75%;
+	}
+	.solotable{
+		width: 90%;
+	}
+	ul {
+		font-size: 20px;
+	}
+	
+	li a{
+		padding: 5px;
+	}
 }
