@@ -27,9 +27,6 @@ button{
 	border-collapse: collapse;
 }
 
-
-
-
 .runes td, .runes th {
 	border: 1px solid #000000;
 	overflow: hidden;
@@ -61,7 +58,9 @@ button{
 	color: white;
 }
 
-
+.headrow{
+	position: sticky;
+}
 .tooltip .tooltiptext{
 	visibility: hidden;
 	background-color: #f2f2f2;
@@ -88,10 +87,8 @@ button{
 
 
 
-
 /* design for the sidebar */
 ul {
-	list-style-type: none;
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
@@ -113,6 +110,16 @@ li a {
 	text-decoration: none;
 	border: solid;
 	border-color: black;
+}
+
+@media all and (max-width: 800px){
+	ul {
+		font-size: 20px;
+	}
+	
+	li a{
+		padding: 5px;
+	}
 }
 
 li a:hover {
@@ -238,3 +245,11 @@ li a:hover {
 	color: black;
 }
 	
+.bestxp {
+	background-color: #048000;
+}
+
+.level{
+	background-color: gray;
+	color: black;
+}
