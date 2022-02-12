@@ -1,3 +1,5 @@
+/* general settings, modifications on base classes */
+
 body {
 	background-color: #120024;
 
@@ -16,11 +18,23 @@ button{
 	background-color: #c20000;
 	border-color: black;
 }
+
+/* runes class provides design for all tables on the website */
+/* tooltip class supports the runes class but can be used elsewhere */
+/* 		if necessary */
 .runes {
 	font-family: Arial, Helvetica, sans-serif;
 	border-collapse: collapse;
-	width: 50%;
+}
+
+@media all and (max-width: 800px){
+	.runes{
+		margin-left: 50px;
+	}
 	
+	.runes th, .runes td{
+		max-height: 10px;
+	}
 }
 
 
@@ -41,6 +55,10 @@ button{
 	background-color: #c20000;
 	color: black;
 }
+
+.runes tr{
+	color: white;
+}
 .tooltip {}
 
 .tooltip .tooltiptext{
@@ -60,17 +78,17 @@ button{
 }
 
 .runes tr:hover{
-		background-color: #000000;
-		color:white;
+	background-color: #000000;
+	color: #c20000;
 }
 .runes tr:hover .tooltiptext {
-		visibility: visible;
+	visibility: visible;
 }
 
 
 
 
-
+/* design for the sidebar */
 ul {
 	list-style-type: none;
 	margin: 0;
@@ -86,8 +104,6 @@ ul {
 	
 }
 
-
-
 li a {
 	display: block;
 	color: white;
@@ -102,85 +118,130 @@ li a:hover {
 	background-color: #111;
 }
 
-
-
 .active{
 	background-color: #c20000;
 }
 
+
+/* flexbox code (more descriptive text coming later)*/
+.container{
+	display: flex;
+	justify-content: center;
+	width: 75%;
+	margin: auto;
+}
+@media all and (max-width: 800px){
+	.container{
+		flex-wrap: wrap;
+	}
+}
+.container .runes{
+	width: 100%;
+}
+
+.leftitem{
+	order: 0;
+	flex-grow: 1;
+	flex-basis: auto;
+}
+.miditem{
+	order: 0;
+	flex-grow: 1;
+	flex-basis: auto;
+	width: 90%;
+	margin: 0 auto;
+}
+
+.miditem .runes {
+	width: 90%;
+}
+.rightitem {
+	order: 0;
+	flex-grow: 1;
+	flex-basis: auto;
+	width: 90%;
+}
+.rightitem .runes {
+	width: 90%;
+}
+
+
+
+
+/* flags and coloration for table data */
 .act1 {}
 
 .act1 td{
-	background-color: #be70ff;
+	border-color: #be70ff;
 }
 .act1 tr:nth-child(even){background-color: #404040;}
 
 .act {}
 
 .act2 td {
-	background-color: #bfb900;
+	border-color: #bfb900;
 }
 .act3 {}
 
 .act3 td{
-	background-color: #5aff54;
+	border-color: #5aff54;
 }
 .act4 {}
 
 .act4 td{
-	background-color: #ff5454;
+	border-color: #ff5454;
 }
 
 .act5 {}
 
 .act5 td{
-	background-color: #5ee7ff;
+	border-color: #5ee7ff;
 }
 
-	.light {
-		padding-top: 12px;
-		padding-bottom: 12px;
-		text-align: left;
-		background-color: #e5ff00;
-		color: black;
-	}
-	.fire {
-		padding-top: 12px;
-		padding-bottom: 12px;
-		text-align: left;
-		background-color: #850000;
-		color: black;
-	}
-	.cold {
-		padding-top: 12px;
-		padding-bottom: 12px;
-		text-align: left;
-		background-color: #3d81ff;
-		color: black;
-	}
-	.poison {
-		padding-top: 12px;
-		padding-bottom: 12px;
-		text-align: left;
-		background-color: #048000;
-		color: black;
-	}
-	.physical {
-		padding-top: 12px;
-		padding-bottom: 12px;
-		text-align: left;
-		background-color: #8a603f;
-		color: black;
-	}
-	.magic {
-		padding-top: 12px;
-		padding-bottom: 12px;
-		text-align: left;
-		background-color: #fc6100;
-		color: black;
-	}
+.light {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #e5ff00;
+	color: black;
+}
+.fire {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #850000;
+	color: black;
+}
+.cold {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #3d81ff;
+	color: black;
+}
+.poison {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #048000;
+	color: black;
+}
+.physical {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #8a603f;
+	color: black;
+}
+.magic {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #fc6100;
+	color: black;
+}
 	
-	.twofourflag{}
+.twofourflag{}
 	
-	.pretwofourflag{
+.pretwofourflag{
 	}
