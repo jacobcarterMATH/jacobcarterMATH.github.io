@@ -27,15 +27,7 @@ button{
 	border-collapse: collapse;
 }
 
-@media all and (max-width: 800px){
-	.runes{
-		margin-left: 50px;
-	}
-	
-	.runes th, .runes td{
-		max-height: 10px;
-	}
-}
+
 
 
 .runes td, .runes th {
@@ -45,6 +37,15 @@ button{
 	font-size: 100%;
 }
 
+@media all and (max-width: 800px){
+	.runes{
+		margin-left: 50px;
+	}
+	
+	.runes th, .runes td{
+		font-size: 75%;
+	}
+}
 .runes tr:nth-child(even){background-color: #404040;}
 .runes tr:nth-child(odd){background-color: #555555;}
 
@@ -59,7 +60,7 @@ button{
 .runes tr{
 	color: white;
 }
-.tooltip {}
+
 
 .tooltip .tooltiptext{
 	visibility: hidden;
@@ -165,34 +166,30 @@ li a:hover {
 	width: 90%;
 }
 
+.solotable {
+	width: 50%;
+}
+@media all and (max-width: 800px){
+	.solotable{
+		width: 90%;
+	}
+}
+/* coloration for table data */
 
-
-
-/* flags and coloration for table data */
-.act1 {}
 
 .act1 td{
 	border-color: #be70ff;
 }
-.act1 tr:nth-child(even){background-color: #404040;}
-
-.act {}
-
 .act2 td {
 	border-color: #bfb900;
 }
-.act3 {}
-
 .act3 td{
 	border-color: #5aff54;
 }
-.act4 {}
 
 .act4 td{
 	border-color: #ff5454;
 }
-
-.act5 {}
 
 .act5 td{
 	border-color: #5ee7ff;
