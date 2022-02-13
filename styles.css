@@ -19,6 +19,10 @@ button{
 	border-color: black;
 }
 
+button:hover{
+	background-color: red;
+}
+
 /* runes class provides design for all tables on the website */
 /* tooltip class supports the runes class but can be used elsewhere */
 /* 		if necessary */
@@ -122,14 +126,24 @@ li a:hover {
 	margin: auto;
 }
 
+.buttoncontainer{
+	display: flex;
+	justify-content: flex-end;
+	width: 75%;
+	height: 50%;
+	margin: auto;
+	align-items: center;
+	flex-direction: column;
+}
+
 .container .runes{
 	width: 100%;
 }
 
 .leftitem{
+	flex-basis: auto;
 	order: 0;
 	flex-grow: 1;
-	flex-basis: auto;
 }
 .miditem{
 	order: 0;
@@ -159,24 +173,26 @@ li a:hover {
 /* coloration for table data */
 
 
-.act1 td{
-	border-color: #be70ff;
+.act1 td {
+	background-color: #2f0045;
 }
-.act2 td {
-	border-color: #bfb900;
+.act2 td{
+	background-color: #3d3d00;
 }
 .act3 td{
-	border-color: #5aff54;
+	background-color: #053600;
 }
 
 .act4 td{
-	border-color: #ff5454;
+	background-color: #3b0000;
 }
 
-.act5 td{
-	border-color: #5ee7ff;
+.act5 td {
+	background-color: #00233b;
 }
-
+.ubers td{
+	background-color: black;
+}
 .light {
 	padding-top: 12px;
 	padding-bottom: 12px;
@@ -244,7 +260,14 @@ li a:hover {
 		font-size: 75%;
 	}
 	.solotable{
-		width: 90%;
+		width: 80%;
+	}
+	
+	.container {
+		margin-left: 75px;
+	}
+	.leftitem .runes, .rightitem .runes, .miditem .runes{
+		width: 80%;
 	}
 	ul {
 		font-size: 20px;

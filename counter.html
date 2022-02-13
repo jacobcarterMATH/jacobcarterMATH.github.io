@@ -68,9 +68,14 @@
 <script src="scripts.js"></script>
 
 <div class="buttoncontainer">
-	<button id="incrementButton" class="resbutton" onclick="increment();"> </button>
+	<div class="leftitem"> </div>
+	<div class="miditem">
+		<button id="incrementButton" class="resbutton" onclick="increment();"> </button>
+	</div>
 	<script> document.getElementById('incrementButton').innerHTML = "Runs: " + sessionStorage.getItem("count"); </script>
-	<button id="resetButton" class="resbutton" onclick="reset();"> Reset Counter </button>
+	<div class="rightitem">
+		<button id="resetButton" class="resbutton" onclick="reset();"> Reset Counter </button>
+	</div>
 </div>
 
 
