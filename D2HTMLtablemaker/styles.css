@@ -9,8 +9,6 @@ h1 {
 	color: #c20000;
 }
 
-
-
 form {
 	color: white;
 	
@@ -36,6 +34,7 @@ button:hover{
 .runes td, .runes th {
 	border: 1px solid #000000;
 	overflow: hidden;
+	max-width: 20px;
 	font-size: 100%;
 }
 
@@ -82,45 +81,18 @@ button:hover{
 	visibility: visible;
 }
 
-.main{
-	margin-left: 160px;
-	
-}
+
 
 /* design for the sidebar */
-.sidenav {
-	width: 130px;
-	position: fixed;
-	z-index: 1;
-	top: 0;
-	left: 0;
-	overflow-x: hidden;
-	background-color: #333;
-	font-size: 18px;
-	border: 5px solid black;
-}
-
-.sidenav a{
-	display: block;
-	color: white;
-	text-align: center;
-	padding: 14px 16px;
-	text-decoration: none;
-	border-color: black;
-}
-
-.sidenav a:hover {
-	background-color: #111;
-}
-
 ul {
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
 	background-color: #333;
 	position: fixed;
-	width: 100px;
+	width: 10%;
 	min-width: 100px;
+	overflow: auto;
 	font-size: 25px;
 	border: solid;
 	
@@ -150,7 +122,7 @@ li a:hover {
 .container{
 	display: flex;
 	justify-content: center;
-	width: 100%;
+	width: 75%;
 	margin: auto;
 }
 
@@ -164,7 +136,9 @@ li a:hover {
 	flex-direction: column;
 }
 
-
+.container .runes{
+	width: 100%;
+}
 
 .leftitem{
 	flex-basis: auto;
@@ -175,22 +149,27 @@ li a:hover {
 	order: 0;
 	flex-grow: 1;
 	flex-basis: auto;
+	width: 90%;
+	margin: 0 auto;
 }
 
-
+.miditem .runes {
+	width: 90%;
+}
 .rightitem {
 	order: 0;
 	flex-grow: 1;
 	flex-basis: auto;
+	width: 90%;
 }
-
+.rightitem .runes {
+	width: 90%;
+}
 
 .solotable {
+	width: 50%;
 }
 
-.headeralign {
-	text-align: center;
-}
 /* coloration for table data */
 
 
@@ -271,41 +250,30 @@ li a:hover {
 	.container{
 		flex-wrap: wrap;
 	}
-	
-	.sidenav{
-		width: 80px;
-		font-size:15px;
-	}
-	
-	.main{
-		margin-left: 110px;
-	}
-	
-	.miditem{
-		flex-grow: 1;
-		margin-right: 15px;
-	}
-	.rightitem{
-		margin-right: 15px;
-	}
-	.headeralign{
-		text-align: left;
-	}
-	
-	.solotable{
-		flex-grow: 1;
-	}
+}
 
+@media all and (max-width: 1000px){
+	.runes{
+		margin-left: 50px;
+	}
 	.runes th, .runes td{
-		font-size: 70%;
+		font-size: 75%;
+	}
+	.solotable{
+		width: 80%;
 	}
 	
-	.exptable .runes td{
-		font-size: 0px;
-	}	
-	
-	.exptable .runes .level{
-		font-size: 70%;
+	.container {
+		margin-left: 75px;
+	}
+	.leftitem .runes, .rightitem .runes, .miditem .runes{
+		width: 80%;
+	}
+	ul {
+		font-size: 20px;
 	}
 	
+	li a{
+		padding: 5px;
+	}
 }

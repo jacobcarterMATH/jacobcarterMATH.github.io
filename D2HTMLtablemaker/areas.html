@@ -1,36 +1,28 @@
 
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-
+	<ul>
+		<li><a href="index.html">Runes</a></li>
+		<li><a class="active" href="areas.html">Areas</a></li>
+		<li><a href="tc87.html">aLvl 85 Areas</a></li>
+		<li><a href="counter.html">Run counter</a></li>
+		<li><a href="exp.html">XP Table</a></li>
+	</ul>
 	<link rel="stylesheet" href="styles.css">
-
+	<h1 align="center">All Areas</h1>
+	<form align="center">
+		<input type="radio" id="LOD" name="version" value="LOD" onclick="hideTwoFour();">
+		<label for="LOD">Pre-D2R patch 2.4 </label><br>
+		<input type="radio" id="twofour" name="version" value="TWOFOUR" onclick="hidePreTwoFour();" checked>
+		<label for="twofour">D2R patch 2.4</label><br>
+	</form>
 
 	<script src="scripts.js"></script>
 </head>
 <body onload="hidePreTwoFour()">
-<div class="sidenav">
-	
-	<a href="index.html">Runes</a></li>
-	<a class="active" href="areas.html">Areas</a></li>
-	<a href="tc87.html">TC87 Areas</a></li>
-	<a href="counter.html">Run counter</a></li>
-	<a href="exp.html">XP Table</a></li>
-	
-</div>
 
 
-<div class="main">
-	<div class="headeralign">
-		<h1>All Areas</h1>
-		<form>
-			<input type="radio" id="LOD" name="version" value="LOD" onclick="hideTwoFour();">
-			<label for="LOD">Pre-D2R patch 2.4 </label><br>
-			<input type="radio" id="twofour" name="version" value="TWOFOUR" onclick="hidePreTwoFour();" checked>
-			<label for="twofour">D2R patch 2.4</label><br>
-		</form>
-	</div>
-	<div class="container">
-
+<div class="container">
 
 	<div class="miditem">
 		<table class="runes" align="center">
@@ -2975,6 +2967,5 @@
 				</tr>
 			</table>
 		</div>
-</div>
 </div>
 </body>
