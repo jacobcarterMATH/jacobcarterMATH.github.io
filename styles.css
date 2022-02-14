@@ -113,34 +113,6 @@ button:hover{
 	background-color: #111;
 }
 
-ul {
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
-	background-color: #333;
-	position: fixed;
-	width: 100px;
-	min-width: 100px;
-	font-size: 25px;
-	border: solid;
-	
-}
-
-li a {
-	display: block;
-	color: white;
-	text-align: center;
-	padding: 14px 16px;
-	text-decoration: none;
-	border: solid;
-	border-color: black;
-}
-
-
-li a:hover {
-	background-color: #111;
-}
-
 .active{
 	background-color: #c20000;
 }
