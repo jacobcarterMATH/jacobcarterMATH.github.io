@@ -1,0 +1,431 @@
+<table>
+    <tr>
+        <th> Name </th>
+        <th> Sockets </th>
+        <th> Base Type </th>
+        <th> 1 </th>
+        <th> 2 </th>
+        <th> 3 </th>
+        <th> 4 </th>
+        <th> 5 </th>
+        <th> 6 </th>
+        <th> Level </th>
+        <th> Version </th>
+    </tr>
+    <tr>
+        <td> Malice </td>
+        <td> 3 </td>
+        <td> Melee Weapons </td>
+        <td> Ith </td>
+        <td> El </td>
+        <td> Eth </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 15 </td>
+        <td> 1.09 </td>
+    </tr>
+    <tr>
+        <td> Ancient's Pledge </td>
+        <td> 3 </td>
+        <td> Ral </td>
+        <td> Ral </td>
+        <td> Ort </td>
+        <td> Tal </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 21 </td>
+        <td> 1.09 </td>
+    </tr>
+    <tr>
+        <td> Pattern </td>
+        <td> 3 </td>
+        <td> Claw </td>
+        <td> Tal </td>
+        <td> Ort </td>
+        <td> Thul </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 23 </td>
+        <td> 2.4L </td>
+    </tr>
+    <tr>
+        <td> Edge </td>
+        <td> 3 </td>
+        <td> Missile Weapons </td>
+        <td> Tir </td>
+        <td> Tal </td>
+        <td> Amn </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 25 </td>
+        <td> 1.10L </td>
+    </tr>
+    <tr>
+        <td> King's Grace </td>
+        <td> 3 </td>
+        <td> Swords/Scepters </td>
+        <td> Amn </td>
+        <td> Ral </td>
+        <td> Thul </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 25 </td>
+        <td> 1.09 </td>
+    </tr>
+    <tr>
+        <td> Myth </td>
+        <td> 3 </td>
+        <td> Body Armor </td>
+        <td> Hel </td>
+        <td> Amn </td>
+        <td> Nef </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 25 </td>
+        <td> 1.11 </td>
+    </tr>
+    <tr>
+        <td> Radiance </td>
+        <td> 3 </td>
+        <td> Helms </td>
+        <td> Nef </td>
+        <td> Sol </td>
+        <td> Ith </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 27 </td>
+        <td> 1.09 </td>
+    </tr>
+    <tr>
+        <td> Peace </td>
+        <td> 3 </td>
+        <td> Body Armor </td>
+        <td> Shael </td>
+        <td> Thul </td>
+        <td> Amn </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 29 </td>
+        <td> 1.11 </td>
+    </tr>
+    <tr>
+        <td> Black </td>
+        <td> 3 </td>
+        <td> Clubs/Hammers/Maces </td>
+        <td> Thul </td>
+        <td> Io </td>
+        <td> Nef </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 35 </td>
+        <td> 1.09 </td>
+    </tr>
+    <tr>
+        <td> Melody </td>
+        <td> 3 </td>
+        <td> Missile Weapons </td>
+        <td> Shael </td>
+        <td> Ko </td>
+        <td> Nev </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 39 </td>
+        <td> 1.09 </td>
+    </tr>
+    <tr>
+        <td> Lionheart </td>
+        <td> 3 </td>
+        <td> Body Armor </td>
+        <td> Hel </td>
+        <td> Lum </td>
+        <td> Fal </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 41 </td>
+        <td> 1.09 </td>
+    </tr>
+    <tr>
+        <td> Lawbringer </td>
+        <td> 3 </td>
+        <td> Hammers/Scepters/Swords </td>
+        <td> Amn </td>
+        <td> Lem </td>
+        <td> Ko </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 43 </td>
+        <td> 1.10L </td>
+    </tr>
+    <tr>
+        <td> Treachery </td>
+        <td> 3 </td>
+        <td> Body Armor </td>
+        <td> Shael </td>
+        <td> Thul </td>
+        <td> Lem </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 43 </td>
+        <td> 1.11 </td>
+    </tr>
+    <tr>
+        <td> Wealth </td>
+        <td> 3 </td>
+        <td> Body Armor </td>
+        <td> Lem </td>
+        <td> Ko </td>
+        <td> Tir </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 43 </td>
+        <td> 1.09 </td>
+    </tr>
+    <tr>
+        <td> Enlightenment </td>
+        <td> 3 </td>
+        <td> Body Armor </td>
+        <td> Pul </td>
+        <td> Ral </td>
+        <td> Sol </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 45 </td>
+        <td> 1.11 </td>
+    </tr>
+    <tr>
+        <td> Flickering Flame </td>
+        <td> 3 </td>
+        <td> Helm </td>
+        <td> Pul </td>
+        <td> Ith </td>
+        <td> Eld </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 45 </td>
+        <td> 2.4L </td>
+    </tr>
+    <tr>
+        <td> Bone </td>
+        <td> 3 </td>
+        <td> Body Armor </td>
+        <td> Sol </td>
+        <td> Um </td>
+        <td> Um </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 47 </td>
+        <td> 1.11 </td>
+    </tr>
+    <tr>
+        <td> Crescent Moon </td>
+        <td> 3 </td>
+        <td> Axes/Swords/Polearms </td>
+        <td> Shael </td>
+        <td> Um </td>
+        <td> Tir </td>
+        <td> 47 </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 47 </td>
+        <td> 1.10 </td>
+    </tr>
+    <tr>
+        <td> Duress </td>
+        <td> 3 </td>
+        <td> Body Armor </td>
+        <td> Shael </td>
+        <td> Um </td>
+        <td> Thul </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 47 </td>
+        <td> 1.10 </td>
+    </tr>
+    <tr>
+        <td> Gloom </td>
+        <td> 3 </td>
+        <td> Body Armor </td>
+        <td> Fal </td>
+        <td> Um </td>
+        <td> Pul </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 47 </td>
+        <td> 1.10 </td>
+    </tr>
+    <tr>
+        <td> Rain </td>
+        <td> 3 </td>
+        <td> Body Armor </td>
+        <td> Ort </td>
+        <td> Mal </td>
+        <td> Ith </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 49 </td>
+        <td> 1.11 </td>
+    </tr>
+    <tr>
+        <td> Sanctuary </td>
+        <td> 3 </td>
+        <td> Shields </td>
+        <td> Ko </td>
+        <td> Ko </td>
+        <td> Mal </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 49 </td>
+        <td> 1.10 </td>
+    </tr>
+    <tr>
+        <td> Venom </td>
+        <td> 3 </td>
+        <td> Weapons </td>
+        <td> Tal </td>
+        <td> Dol </td>
+        <td> Mal </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 49 </td>
+        <td> 1.09 </td>
+    </tr>
+    <tr>
+        <td> Delirium </td>
+        <td> 3 </td>
+        <td> Helms </td>
+        <td> Lem </td>
+        <td> Ist </td>
+        <td> Io </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 51 </td>
+        <td> 1.10 </td>
+    </tr>
+    <tr>
+        <td> Principle </td>
+        <td> 3 </td>
+        <td> Body Armor </td>
+        <td> Ral </td>
+        <td> Gul </td>
+        <td> Eld </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 53 </td>
+        <td> 1.11 </td>
+    </tr>
+    <tr>
+        <td> Flickering Flame </td>
+        <td> 3 </td>
+        <td> Helms </td>
+        <td> Nef </td>
+        <td> Pul </td>
+        <td> Vex </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 55 </td>
+        <td> 2.4L </td>
+    </tr>
+    <tr>
+        <td> Chaos </td>
+        <td> Claws </td>
+        <td> Claws </td>
+        <td> Fal </td>
+        <td> Ohm </td>
+        <td> Um </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 57 </td>
+        <td> 1.10 </td>
+    </tr>
+    <tr>
+        <td> Dragon </td>
+        <td> 3 </td>
+        <td> Body Armor/Shields </td>
+        <td> Sur </td>
+        <td> Lo </td>
+        <td> Sol </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 61 </td>
+        <td> 1.10L </td>
+    </tr>
+    <tr>
+        <td> Dream </td>
+        <td> 3 </td>
+        <td> Helms/Shields </td>
+        <td> Io </td>
+        <td> Jah </td>
+        <td> Pul </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 65 </td>
+        <td> 1.10L </td>
+    </tr>
+    <tr>
+        <td> Enigma </td>
+        <td> 3 </td>
+        <td> Body Armor </td>
+        <td> Jah </td>
+        <td> Ith </td>
+        <td> Ber </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 65 </td>
+        <td> 1.10 </td>
+    </tr>
+    <tr>
+        <td> Fury </td>
+        <td> 3 </td>
+        <td> Melee Weapons </td>
+        <td> Jah </td>
+        <td> Gul </td>
+        <td> Eth </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 65 </td>
+        <td> 1.09 </td>
+    </tr>
+    <tr>
+        <td> Plague </td>
+        <td> 3 </td>
+        <td> Swords </td>
+        <td> Cham </td>
+        <td> Shael </td>
+        <td> Um </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 67 </td>
+        <td> 2.4L </td>
+    </tr>
+</table>

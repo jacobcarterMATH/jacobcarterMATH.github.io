@@ -1,0 +1,158 @@
+<table>
+    <tr>
+        <th> Name </th>
+        <th> Sockets </th>
+        <th> Base Type </th>
+        <th> 1 </th>
+        <th> 2 </th>
+        <th> 3 </th>
+        <th> 4 </th>
+        <th> 5 </th>
+        <th> 6 </th>
+        <th> Level </th>
+        <th> Version </th>
+    </tr>
+    <tr>
+        <td> Nadir </td>
+        <td> 2 </td>
+        <td> Helms </td>
+        <td> Nef </td>
+        <td> Tir </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 13 </td>
+        <td> 1.09 </td>
+    </tr>
+    <tr>
+        <td> Leaf </td>
+        <td> 2 </td>
+        <td> Staves </td>
+        <td> Tir </td>
+        <td> Ral </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 19 </td>
+        <td> 1.09 </td>
+    </tr>
+    <tr>
+        <td> Zephyr </td>
+        <td> 2 </td>
+        <td> Missile Weapons </td>
+        <td> Ort </td>
+        <td> Eth </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 21 </td>
+        <td> 1.09 </td>
+    </tr>
+    <tr>
+        <td> Strength </td>
+        <td> 2 </td>
+        <td> Melee Weapons </td>
+        <td> Amn </td>
+        <td> Tir </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 25 </td>
+        <td> 1.09 </td>
+    </tr>
+    <tr>
+        <td> Lore </td>
+        <td> 2 </td>
+        <td> Helms </td>
+        <td> Ort </td>
+        <td> Sol </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 27 </td>
+        <td> 1.09 </td>
+    </tr>
+    <tr>
+        <td> Rhyme </td>
+        <td> 2 </td>
+        <td> Shields </td>
+        <td> Shael </td>
+        <td> Eth </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 29 </td>
+        <td> 1.09 </td>
+    </tr>
+    <tr>
+        <td> White </td>
+        <td> 2 </td>
+        <td> Wands </td>
+        <td> Dol </td>
+        <td> Io </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 35 </td>
+        <td> 1.09 </td>
+    </tr>
+    <tr>
+        <td> Smoke </td>
+        <td> 2 </td>
+        <td> Body Armor </td>
+        <td> Nef </td>
+        <td> Lum </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 37 </td>
+        <td> 1.09 </td>
+    </tr>
+    <tr>
+        <td> Splendor </td>
+        <td> 2 </td>
+        <td> Shields </td>
+        <td> Eth </td>
+        <td> Lum </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 37 </td>
+        <td> 1.09 </td>
+    </tr>
+    <tr>
+        <td> Prudence </td>
+        <td> 2 </td>
+        <td> Body Armor </td>
+        <td> Mal </td>
+        <td> Tir </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 49 </td>
+        <td> 1.10 </td>
+    </tr>
+    <tr>
+        <td> Wind </td>
+        <td> 2 </td>
+        <td> Melee Weapons </td>
+        <td> Sur </td>
+        <td> El </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td>  </td>
+        <td> 61 </td>
+        <td> 1.10 </td>
+    </tr>
+</table>
