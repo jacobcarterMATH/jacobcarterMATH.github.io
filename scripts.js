@@ -48,6 +48,42 @@ function hideTwoFour(){
 	}
 }
 
+
+function hideSideNav(){
+	var SideNavElement = document.querySelector('.sidenav');
+	
+	SideNavElement.style.width = "0px";
+	SideNavElement.style.border = "0px solid black";
+	
+	var AltSideNavElement = document.querySelector('.altsidenav');
+	
+	AltSideNavElement.style.width = "20px";
+	AltSideNavElement.style.border = "5px solid black";
+
+	var MainElement = document.querySelector('.main');
+	MainElement.style.marginLeft = "0px";
+	
+}
+
+function showSideNav(){
+	var SideNavElement = document.querySelector('.sidenav');
+	var MainElement = document.querySelector('.main');
+	
+	if(screen.width > 800){
+		SideNavElement.style.width = "130px";
+		MainElement.style.marginLeft = "160px";
+	} else {
+		SideNavElement.style.width = "80px";
+		MainElement.style.marginLeft = "110px";
+	}
+	SideNavElement.style.border = "5px solid black";
+	
+	var AltSideNavElement = document.querySelector('.altsidenav');
+	
+	AltSideNavElement.style.width = "0px";
+	AltSideNavElement.style.border = "0px solid black";
+
+}
 function hidePreTwoFour(){
 	var PatchTwoFourAreas = document.querySelectorAll('.twofourflag');
 	var i = 0;

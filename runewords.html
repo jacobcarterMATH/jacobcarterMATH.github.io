@@ -5,6 +5,7 @@
 
 </head>
 <body>
+<script src="scripts.js"></script>
 <div class="sidenav">
 	
 	<a href="index.html">Runes</a>
@@ -14,7 +15,12 @@
 	<a href="counter.html">Run counter</a>
 	<a href="exp.html">XP Table</a>
 	<a href="breakpoints.html">Breakpoints</a>
+	<a onclick="hideSideNav();"> &lt; &lt; </a>
 
+</div>
+
+<div class="altsidenav">
+	<a onclick="showSideNav();"> &gt; </a>
 </div>
 
 <div class="main">
@@ -23,7 +29,7 @@
 	</div>
 	<div class="container">
 		<div class="solotable">
-			<table class="runes">
+			<table class="runeword runes">
 
 			<tr>
 				<th> Name </th>
@@ -197,7 +203,7 @@
 			<tr>
 				<td> Ancient's Pledge </td>
 				<td> 3 </td>
-				<td> Ral </td>
+				<td> Shields </td>
 				<td> Ral </td>
 				<td> Ort </td>
 				<td> Tal </td>
