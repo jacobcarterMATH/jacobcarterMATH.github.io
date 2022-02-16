@@ -103,7 +103,7 @@ button:hover{
 .sidenav a{
 	display: block;
 	color: white;
-	text-align: center;
+	text-align: left;
 	padding: 14px 16px;
 	text-decoration: none;
 	border-color: black;
@@ -160,6 +160,9 @@ button:hover{
 .solotable {
 }
 
+.leftitem .runes td, .leftitem .runes th{
+	width: 100px;
+}
 .headeralign {
 	text-align: center;
 }
@@ -253,6 +256,9 @@ button:hover{
 		margin-left: 110px;
 	}
 	
+	.leftitem .runes th, .leftitem .runes td{
+		max-width: 40px;
+	}
 	.miditem{
 		flex-grow: 1;
 		margin-right: 15px;
