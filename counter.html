@@ -76,15 +76,16 @@
 </div>
 
 
-
-	<div class="buttoncontainer">
-	<div class="leftitem"> </div>
-	<div class="miditem">
-		<button id="incrementButton" class="resbutton" onclick="increment();"> </button>
-	</div>
-	<script> document.getElementById('incrementButton').innerHTML = "Runs: " + sessionStorage.getItem("count"); </script>
-	<div class="rightitem">
-		<button id="resetButton" class="resbutton" onclick="reset();"> Reset Counter </button>
+<div class="main">
+		<div class="buttoncontainer">
+		<div class="leftitem"> </div>
+		<div class="miditem">
+			<button id="incrementButton" class="resbutton" onclick="increment();"> </button>
+		</div>
+		<script> document.getElementById('incrementButton').innerHTML = "Runs: " + sessionStorage.getItem("count"); </script>
+		<div class="rightitem">
+			<button id="resetButton" class="resbutton" onclick="reset();"> Reset Counter </button>
+		</div>
 	</div>
 </div>
 

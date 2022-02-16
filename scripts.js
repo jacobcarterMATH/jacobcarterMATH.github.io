@@ -63,6 +63,11 @@ function hideSideNav(){
 	var MainElement = document.querySelector('.main');
 	MainElement.style.marginLeft = "0px";
 	
+	var HeaderAlignElement = document.querySelector('.headeralign');
+	if (screen.width < 800){
+		HeaderAlignElement.style.textAlign = "center"; 
+	}
+	
 }
 
 function showSideNav(){
@@ -83,6 +88,10 @@ function showSideNav(){
 	AltSideNavElement.style.width = "0px";
 	AltSideNavElement.style.border = "0px solid black";
 
+	var HeaderAlignElement = document.querySelector('.headeralign');
+	if (screen.width < 800){
+		HeaderAlignElement.style.textAlign = "left"; 
+	}
 }
 function hidePreTwoFour(){
 	var PatchTwoFourAreas = document.querySelectorAll('.twofourflag');

@@ -180,11 +180,11 @@ button:hover{
 }
 
 
-.solotable {
+.solotable  .runes td{
 }
 
 .leftitem .runes td, .leftitem .runes th{
-	width: 100px;
+	width: 50px;
 }
 .headeralign {
 	text-align: center;
