@@ -71,6 +71,10 @@ button:hover{
 	z-index: 1;
 }
 
+.runeword .tooltip .tooltiptext {
+	right: 10%;
+}
+
 .tooltip:hover .tooltiptext{
 	visibility: visible;
 }
