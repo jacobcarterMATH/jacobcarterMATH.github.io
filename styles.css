@@ -137,6 +137,7 @@ button:hover{
 
 .active{
 	background-color: #c20000;
+	
 }
 
 
@@ -162,9 +163,7 @@ button:hover{
 
 
 .leftitem{
-	flex-basis: auto;
-	order: 0;
-	flex-grow: 1;
+	
 }
 .miditem{
 	order: 0;
@@ -180,7 +179,8 @@ button:hover{
 }
 
 
-.solotable  .runes td{
+.solotable {
+	
 }
 
 .leftitem .runes td, .leftitem .runes th{
@@ -272,7 +272,12 @@ button:hover{
 	
 	.sidenav{
 		width: 80px;
-		font-size:15px;
+		font-size:13px;
+		
+	}
+	
+	.sidenav a{
+		padding: 10px 5px;
 	}
 	
 	.main{
