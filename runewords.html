@@ -29,11 +29,11 @@
 	</div>
 	<div class="container">
 		<div class="solotable">
-			<table class="runeword runes">
+			<table class="runeword runes" style="text-align: center;">
 
 			<tr>
-				<th> Name </th>
-				<th> Sockets </th>
+				<th onclick="scriptTest();"> Name </th>
+				<th> #OS </th>
 				<th> Base Type </th>
 				<th> 1 </th>
 				<th> 2 </th>
@@ -45,7 +45,21 @@
 				<th> Version </th>
 			</tr>
 			<tr>
-				<td> Nadir </td>
+				<td class="tooltip"> Nadir 
+					<span class="tooltiptext"> 
+						<strong text-align="center"> Nadir (Nef Tir) </strong>
+						<div></div>
+						<strong text-align="center"> <u> Runeword Stats </u></strong>
+						<div text-align="center"> +50% Enhanced Defense </div>
+						<div text-align="center"> +10 Defense </div>
+						<div text-align="center"> +30 Defense vs. Missile </div>
+						<div text-align="center"> Level 13 Cloak of Shadows (9 Charges) </div>
+						<div text-align="center"> +2 to Mana After Each Kill </div>
+						<div text-align="center"> +5 to Strength </div>
+						<div text-align="center"> -33% Extra Gold from Monsters </div>
+						<div text-align="center"> -3 to Light Radius</div>
+					</span>
+				</td>
 				<td> 2 </td>
 				<td> Helms </td>
 				<td> Nef </td>
@@ -58,7 +72,75 @@
 				<td> 1.09 </td>
 			</tr>
 			<tr>
-				<td> Leaf </td>
+				<td class="tooltip"> Steel
+					<span class="tooltiptext"> 
+						<strong text-align="center"> Steel (Tir El) </strong>
+						<div></div>
+						<strong text-align="center"> <u> Runeword Stats </u></strong>
+						<div text-align="center"> +20% Enhanced Damage </div>
+						<div text-align="center"> +3 to Minimum Damage </div>
+						<div text-align="center"> +3 to Maximum Damage </div>
+						<div text-align="center"> +50 to Attack Rating </div>
+						<div text-align="center"> 50% Chance of Open Wounds </div>
+						<div text-align="center"> 25% Increased Attack Speed </div>
+						<div text-align="center"> +2 to Mana After Each Kill </div>
+						<div text-align="center"> +1 to Light Radius</div>
+					</span>
+				</td>
+				<td> 2 </td>
+				<td> Axes/Maces/Swords </td>
+				<td> Tir </td>
+				<td> El </td>
+				<td>  </td>
+				<td>  </td>
+				<td>  </td>
+				<td>  </td>
+				<td> 13 </td>
+				<td> 1.09 </td>
+			</tr>
+			<tr>
+				<td class="tooltip"> Stealth
+					<span class="tooltiptext"> 
+						<strong text-align="center"> Stealth (Tal Eth) </strong>
+						<div></div>
+						<strong text-align="center"> <u> Runeword Stats </u></strong>
+						<div text-align="center"> Magic Damage Reduced By 3 </div>
+						<div text-align="center"> +6 to Dexterity </div>
+						<div text-align="center"> +15 to Maximum Stamina </div>
+						<div text-align="center"> Poison Resist +30% </div>
+						<div text-align="center"> Regenerate Mana 15% </div>
+						<div text-align="center"> 25% Faster Run/Walk Speed </div>
+						<div text-align="center"> 25% Faster Cast Rate </div>
+						<div text-align="center"> 25% Faster Hit Recovery </div>
+					</span>
+				</td>
+				<td> 2 </td>
+				<td> Body Armor </td>
+				<td> Tal </td>
+				<td> Eth </td>
+				<td>  </td>
+				<td>  </td>
+				<td>  </td>
+				<td>  </td>
+				<td> 17 </td>
+				<td> 1.09 </td>
+			</tr>
+			<tr>
+				<td class="tooltip"> Leaf 
+				<span class="tooltiptext"> 
+						<strong text-align="center"> Leaf (Tir Ral) </strong>
+						<div></div>
+						<strong text-align="center"> <u> Runeword Stats </u></strong>
+						<div text-align="center"> Adds 5-30 Fire Damage </div>
+						<div text-align="center"> +3 to Fire Skills </div>
+						<div text-align="center"> +3 to Fire Bolt (Sorceress Only) </div>
+						<div text-align="center"> +3 to Inferno (Sorceress Only) </div>
+						<div text-align="center"> +3 to Warmth (Sorceress Only) </div>
+						<div text-align="center"> +2 to Mana After Each Kill </div>
+						<div text-align="center"> +2 to Defense per Character Level </div>
+						<div text-align="center"> Cold Resist +33%</div>
+					</span>
+				</td>
 				<td> 2 </td>
 				<td> Staves </td>
 				<td> Tir </td>
@@ -71,7 +153,22 @@
 				<td> 1.09 </td>
 			</tr>
 			<tr>
-				<td> Zephyr </td>
+				<td class="tooltip"> Zephyr 
+				<span class="tooltiptext"> 
+						<strong text-align="center"> Zephyr (Ort Eth) </strong>
+						<div></div>
+						<strong text-align="center"> <u> Runeword Stats </u></strong>
+						<div text-align="center"> +33% Enhanced Damage </div>
+						<div text-align="center"> +66 to Attack Rating </div>
+						<div text-align="center"> Adds 1-50 Lightning Damage </div>
+						<div text-align="center"> -25% Target Defense </div>
+						<div text-align="center"> +25 Defense </div>
+						<div text-align="center"> 25% Faster Run/Walk Speed </div>
+						<div text-align="center"> 25% Increased Attack Speed </div>
+						<div text-align="center"> 7% Chance to Cast Level 1 Twister When Struck</div>
+					</span>
+				</td>
+				</td>
 				<td> 2 </td>
 				<td> Missile Weapons </td>
 				<td> Ort </td>
@@ -84,7 +181,19 @@
 				<td> 1.09 </td>
 			</tr>
 			<tr>
-				<td> Strength </td>
+				<td class="tooltip"> Strength
+					<span class="tooltiptext"> 
+						<strong text-align="center"> Strength (Amn Tir) </strong>
+						<div></div>
+						<strong text-align="center"> <u> Runeword Stats </u></strong>
+						<div text-align="center"> 35% Enhanced Damage </div>
+						<div text-align="center"> 25% Chance of Crushing Blow </div>
+						<div text-align="center"> 7% Life Stolen per Hit </div>
+						<div text-align="center"> +2 to Mana After Each Kill </div>
+						<div text-align="center"> +20 to Strength </div>
+						<div text-align="center"> +10 to Vitality </div>
+					</span>				
+				</td>
 				<td> 2 </td>
 				<td> Melee Weapons </td>
 				<td> Amn </td>
@@ -97,7 +206,19 @@
 				<td> 1.09 </td>
 			</tr>
 			<tr>
-				<td> Lore </td>
+				<td class="tooltip"> Lore
+					<span class="tooltiptext"> 
+						<strong text-align="center"> Lore (Ort Sol) </strong>
+						<div></div>
+						<strong text-align="center"> <u> Runeword Stats </u></strong>
+						<div text-align="center"> +1 to All Skills </div>
+						<div text-align="center"> +10 to Energy </div>
+						<div text-align="center"> +2 to Mana After Each Kill </div>
+						<div text-align="center"> Lightning Resist +30% </div>
+						<div text-align="center"> Damage Reduced by 7 </div>
+						<div text-align="center"> +2 to Light Radius </div>
+					</span>					
+				</td>
 				<td> 2 </td>
 				<td> Helms </td>
 				<td> Ort </td>
@@ -110,7 +231,20 @@
 				<td> 1.09 </td>
 			</tr>
 			<tr>
-				<td> Rhyme </td>
+				<td class="tooltip"> Rhyme
+					<span class="tooltiptext"> 
+						<strong text-align="center"> Rhyme (Shael Eth) </strong>
+						<div></div>
+						<strong text-align="center"> <u> Runeword Stats </u></strong>
+						<div text-align="center"> 20% Increased Chance of Blocking </div>
+						<div text-align="center"> 40% Faster Block Rate </div>
+						<div text-align="center"> All Resistances +25% </div>
+						<div text-align="center"> Regenerate Mana 15% </div>
+						<div text-align="center"> Cannot be Frozen </div>
+						<div text-align="center"> 50% Extra Gold from Monsters </div>
+						<div text-align="center"> 25% Better Chance of Getting Magic Items </div>
+					</span>					
+				</td>
 				<td> 2 </td>
 				<td> Shields </td>
 				<td> Shael </td>
@@ -123,7 +257,23 @@
 				<td> 1.09 </td>
 			</tr>
 			<tr>
-				<td> White </td>
+				<td class="tooltip"> White
+					<span class="tooltiptext"> 
+						<strong text-align="center"> White (Dol Io) </strong>
+						<div></div>
+						<strong text-align="center"> <u> Runeword Stats </u></strong>
+						<div text-align="center"> Hit Causes Monster to Flee 25% </div>
+						<div text-align="center"> +10 to Vitality</div>
+						<div text-align="center"> +3 to Poison and Bone Skills (Necromancer Only) </div>
+						<div text-align="center"> +3 to Bone Armor (Necromancer Only) </div>
+						<div text-align="center"> +2 to Bone Spear (Necromancer Only) </div>
+						<div text-align="center"> +4 to Skeleton Mastery (Necromancer Only) </div>
+						<div text-align="center"> Magic Damage Reduced by 4 </div>
+						<div text-align="center"> 20% Faster Cast Rate </div>
+						<div text-align="center"> +13 to Mana </div>
+					</span>					
+				</td>				
+				</td>
 				<td> 2 </td>
 				<td> Wands </td>
 				<td> Dol </td>
@@ -136,7 +286,20 @@
 				<td> 1.09 </td>
 			</tr>
 			<tr>
-				<td> Smoke </td>
+				<td class="tooltip"> Smoke
+					<span class="tooltiptext"> 
+						<strong text-align="center"> Smoke (Nef Lum) </strong>
+						<div></div>
+						<strong text-align="center"> <u> Runeword Stats </u></strong>
+						<div text-align="center"> +75% Enhanced Defense </div>
+						<div text-align="center"> +280 Defense vs. Missile</div>
+						<div text-align="center"> All Resistances +50% </div>
+						<div text-align="center"> 20% Faster Hit Recovery </div>
+						<div text-align="center"> Level 6 Weaken (18 Charges) </div>
+						<div text-align="center"> +10 to Energy </div>
+						<div text-align="center"> -1 to Light Radius</div>
+					</span>					
+				</td>
 				<td> 2 </td>
 				<td> Body Armor </td>
 				<td> Nef </td>
@@ -149,7 +312,22 @@
 				<td> 1.09 </td>
 			</tr>
 			<tr>
-				<td> Splendor </td>
+				<td class="tooltip"> Splendor
+					<span class="tooltiptext"> 
+						<strong text-align="center"> Splendor (Eth Lum) </strong>
+						<div></div>
+						<strong text-align="center"> <u> Runeword Stats </u></strong>
+						<div text-align="center"> +1 to All Skills </div>
+						<div text-align="center"> +10% Faster Cast Rate</div>
+						<div text-align="center"> +25% Faster Block Rate </div>
+						<div text-align="center"> +60-100% Enhanced Defense (Varies) </div>
+						<div text-align="center"> +10 to Energy </div>
+						<div text-align="center"> Regenerate Mana 15% </div>
+						<div text-align="center"> 50% Extra Gold from Monsters </div>
+						<div text-align="center"> 20% Better Chance of Getting Magic Items </div>
+						<div text-align="center"> +3 to Light Radius </div>
+					</span>					
+				</td>
 				<td> 2 </td>
 				<td> Shields </td>
 				<td> Eth </td>
@@ -162,7 +340,21 @@
 				<td> 1.10 </td>
 			</tr>
 			<tr>
-				<td> Prudence </td>
+				<td class="tooltip"> Prudence
+					<span class="tooltiptext"> 
+						<strong text-align="center"> Prudence(Mal Tir) </strong>
+						<div></div>
+						<strong text-align="center"> <u> Runeword Stats </u></strong>
+						<div text-align="center"> +25% Faster Hit Recovery </div>
+						<div text-align="center"> +140-170% Enhanced Defense (Varies)</div>
+						<div text-align="center"> All Resistances +25-35% (Varies)</div>
+						<div text-align="center"> Damage Reduced by 3 </div>
+						<div text-align="center"> Magic Damage Reduced by 17 </div>
+						<div text-align="center"> +2 to Mana After Each Kill </div>
+						<div text-align="center"> +1 to Light Radius </div>
+						<div text-align="center"> Repairs 1 Durability in 4 Seconds </div>
+					</span>					
+				</td>
 				<td> 2 </td>
 				<td> Body Armor </td>
 				<td> Mal </td>
@@ -175,7 +367,23 @@
 				<td> 1.10 </td>
 			</tr>
 			<tr>
-				<td> Wind </td>
+				<td class="tooltip"> Wind 
+					<span class="tooltiptext"> 
+						<strong text-align="center"> Wind (Sur El) </strong>
+						<div></div>
+						<strong text-align="center"> <u> Runeword Stats </u></strong>
+						<div text-align="center"> 10% Chance to Cast Level 9 Tornado on Striking </div>
+						<div text-align="center"> +20% Faster Run/Walk Speed</div>
+						<div text-align="center"> +40% Increased Attack Speed</div>
+						<div text-align="center"> +15% Faster Hit Recovery </div>
+						<div text-align="center"> +120-160% Enhanced Damage (Varies) </div>
+						<div text-align="center"> -50% Target Defense </div>
+						<div text-align="center"> +50 to Attack Rating </div>
+						<div text-align="center"> Hit Blinds Target </div>
+						<div text-align="center"> +1 to Light Radius </div>
+						<div text-align="center"> Level 13 Twister </div>
+					</span>	
+				</td>
 				<td> 2 </td>
 				<td> Melee Weapons </td>
 				<td> Sur </td>
@@ -188,7 +396,21 @@
 				<td> 1.10 </td>
 			</tr>
 			<tr>
-				<td> Malice </td>
+				<td class="tooltip"> Malice
+					<span class="tooltiptext"> 
+						<strong text-align="center"> Malice (Ith El Eth) </strong>
+						<div></div>
+						<strong text-align="center"> <u> Runeword Stats </u></strong>
+						<div text-align="center"> +33% Enhanced Damage </div>
+						<div text-align="center"> +9 to Maximum Damage</div>
+						<div text-align="center"> 100% Chance of Open Wounds</div>
+						<div text-align="center"> -25% Target Defense </div>
+						<div text-align="center"> -100 to Monster Defense per Hit </div>
+						<div text-align="center"> Prevent Monster Heal </div>
+						<div text-align="center"> +50 to Attack Rating </div>
+						<div text-align="center"> Drain Life -5 </div>
+					</span>					
+				</td>
 				<td> 3 </td>
 				<td> Melee Weapons </td>
 				<td> Ith </td>
@@ -201,7 +423,19 @@
 				<td> 1.09 </td>
 			</tr>
 			<tr>
-				<td> Ancient's Pledge </td>
+				<td class="tooltip"> Ancient's Pledge 
+					<span class="tooltiptext"> 
+						<strong text-align="center"> Ancient's Pledge (Ral Ort Tal) </strong>
+						<div></div>
+						<strong text-align="center"> <u> Runeword Stats </u></strong>
+						<div text-align="center"> +50% Enhanced Defense </div>
+						<div text-align="center"> Cold Resist +43%</div>
+						<div text-align="center"> Fire Resist +48%</div>
+						<div text-align="center"> Lightning Resist +48% </div>
+						<div text-align="center"> Poison Resist +48% </div>
+						<div text-align="center"> 10% Damage Goes to Mana </div>
+					</span>		
+				</td>
 				<td> 3 </td>
 				<td> Shields </td>
 				<td> Ral </td>
@@ -214,7 +448,23 @@
 				<td> 1.09 </td>
 			</tr>
 			<tr>
-				<td> Pattern </td>
+				<td class="tooltip"> Pattern 
+					<span class="tooltiptext"> 
+						<strong text-align="center"> Pattern (Tal Ort Thul) </strong>
+						<div></div>
+						<strong text-align="center"> <u> Runeword Stats </u></strong>
+						<div text-align="center"> +30% Faster Block Rate </div>
+						<div text-align="center"> +40-80% Enhanced Damage (Varies)</div>
+						<div text-align="center"> 10% Bonus to Attack Rating</div>
+						<div text-align="center"> Adds 17-62 Fire Damage</div>
+						<div text-align="center"> Adds 1-50 Lightning Damage</div>
+						<div text-align="center"> Adds 3-14 Cold Damage</div>
+						<div text-align="center"> +75 Poison Damage Over 5 Seconds</div>
+						<div text-align="center"> +6 to Strength</div>
+						<div text-align="center"> +6 to Dexterity</div>
+						<div text-align="center"> All Resistances +15%</div>
+					</span>		
+				</td>
 				<td> 3 </td>
 				<td> Claw </td>
 				<td> Tal </td>
@@ -227,7 +477,24 @@
 				<td> 2.4L </td>
 			</tr>
 			<tr>
-				<td> Edge </td>
+				<td class="tooltip"> Edge 
+					<span class="tooltiptext"> 
+						<strong text-align="center"> Edge (Tir Tal Amn) </strong>
+						<div></div>
+						<strong text-align="center"> <u> Runeword Stats </u></strong>
+						<div text-align="center"> Level 15 Thorns Aura When Equipped </div>
+						<div text-align="center"> +35% Increased Attack Speed </div>
+						<div text-align="center"> +320-380% Damage to Demons (Varies)</div>
+						<div text-align="center"> +280% Damage to Demons </div>
+						<div text-align="center"> +75 Poison Damage Over 5 Seconds</div>
+						<div text-align="center"> 7% Life Stolen per Hit</div>
+						<div text-align="center"> Prevent Monster Heal</div>
+						<div text-align="center"> +5-10 to All Attributes (Varies)</div>
+						<div text-align="center"> +2 to Mana After Each Kill</div>
+						<div text-align="center"> Reduces All Vendor Prices 15% </div>
+					</span>		
+				</td>				
+				</td>
 				<td> 3 </td>
 				<td> Missile Weapons </td>
 				<td> Tir </td>
@@ -240,7 +507,22 @@
 				<td> 1.10L </td>
 			</tr>
 			<tr>
-				<td> King's Grace </td>
+				<td class="tooltip"> King's Grace 
+					<span class="tooltiptext"> 
+						<strong text-align="center"> King's Grace (Amn Ral Thul) </strong>
+						<div></div>
+						<strong text-align="center"> <u> Runeword Stats </u></strong>
+						<div text-align="center"> +100% Enhanced Damage </div>
+						<div text-align="center"> +100% Damage to Demons </div>
+						<div text-align="center"> +50% Damage to Undead </div>
+						<div text-align="center"> Adds 5-30 Fire Damage </div>
+						<div text-align="center"> Adds 3-14 Cold Damage </div>
+						<div text-align="center"> +150 to Attack Rating </div>
+						<div text-align="center"> +100 to Attack Rating Against Demons</div>
+						<div text-align="center"> +100 to Attack Rating Against Undead</div>
+						<div text-align="center"> 7% Life Stolen per Hit</div>
+					</span>	
+				</td>
 				<td> 3 </td>
 				<td> Swords/Scepters </td>
 				<td> Amn </td>
@@ -253,7 +535,20 @@
 				<td> 1.09 </td>
 			</tr>
 			<tr>
-				<td> Myth </td>
+				<td class="tooltip"> Myth 
+					<span class="tooltiptext"> 
+						<strong text-align="center"> Myth (Hel Amn Nef) </strong>
+						<div></div>
+						<strong text-align="center"> <u> Runeword Stats </u></strong>
+						<div text-align="center"> 3% Chance to Cast Level 1 Howl When Struck </div>
+						<div text-align="center"> 10% Chance to Cast Level 1 Taunt on Striking </div>
+						<div text-align="center"> +2 to Barbarian Skill Levels </div>
+						<div text-align="center"> +30 Defense vs. Missile </div>
+						<div text-align="center"> Replenish Life +10 </div>
+						<div text-align="center"> Attacker Takes Damage of 14 </div>
+						<div text-align="center"> Requirements -15% </div>
+					</span>	
+				</td>
 				<td> 3 </td>
 				<td> Body Armor </td>
 				<td> Hel </td>
@@ -266,7 +561,22 @@
 				<td> 1.11 </td>
 			</tr>
 			<tr>
-				<td> Radiance </td>
+				<td class="tooltip"> Radiance 
+					<span class="tooltiptext"> 
+						<strong text-align="center"> Radiance (Nef Sol Ith) </strong>
+						<div></div>
+						<strong text-align="center"> <u> Runeword Stats </u></strong>
+						<div text-align="center"> +75% Enhanced Defense</div>
+						<div text-align="center"> +30 Defense vs. Missile </div>
+						<div text-align="center"> +10 to Energy </div>
+						<div text-align="center"> +10 to Vitality </div>
+						<div text-align="center"> 15% Damage Goes to Mana </div>
+						<div text-align="center"> Magic Damage Reduced by 3 </div>
+						<div text-align="center"> +33 to Mana </div>
+						<div text-align="center"> Damage Reduced by 7 </div>
+						<div text-align="center"> +5 to Light Radius </div>
+					</span>
+				</td>
 				<td> 3 </td>
 				<td> Helms </td>
 				<td> Nef </td>
@@ -279,7 +589,20 @@
 				<td> 1.09 </td>
 			</tr>
 			<tr>
-				<td> Peace </td>
+				<td class="tooltip"> Peace 
+					<span class="tooltiptext"> 
+						<strong text-align="center"> Peace (Shael Thul Amn) </strong>
+						<div></div>
+						<strong text-align="center"> <u> Runeword Stats </u></strong>
+						<div text-align="center"> 4% Chance to Cast Level 5 Slow Misiles When Struck </div>
+						<div text-align="center"> 2% Chance to Cast Level 15 Valkyrie on Striking </div>
+						<div text-align="center"> +2 to Amazon Skill Levels </div>
+						<div text-align="center"> +20% Faster Hit Recovery </div>
+						<div text-align="center"> +2 to Critical Strike </div>
+						<div text-align="center"> Cold Resist +30% </div>
+						<div text-align="center"> Attacker Takes Damage of 14 </div>
+					</span>
+				</td>
 				<td> 3 </td>
 				<td> Body Armor </td>
 				<td> Shael </td>
@@ -292,7 +615,22 @@
 				<td> 1.11 </td>
 			</tr>
 			<tr>
-				<td> Black </td>
+				<td class="tooltip"> Black 
+					<span class="tooltiptext"> 
+						<strong text-align="center"> Black (Thul Io Nef) </strong>
+						<div></div>
+						<strong text-align="center"> <u> Runeword Stats </u></strong>
+						<div text-align="center"> +120% Enhanced Damage </div>
+						<div text-align="center"> 40$ Chance of Crushing Blow </div>
+						<div text-align="center"> +200 to Attack Rating </div>
+						<div text-align="center"> Adds 3-14 Cold Damage </div>
+						<div text-align="center"> +10 to Vitality </div>
+						<div text-align="center"> 15% Increased Attack Speed </div>
+						<div text-align="center"> Knockback </div>
+						<div text-align="center"> Magic Damage Reduced by 2 </div>
+						<div text-align="center"> Level 4 Corpse Explosion (12 Charges) </div>
+					</span>
+				</td>
 				<td> 3 </td>
 				<td> Clubs/Hammers/Maces </td>
 				<td> Thul </td>
@@ -305,7 +643,21 @@
 				<td> 1.09 </td>
 			</tr>
 			<tr>
-				<td> Melody </td>
+				<td class="tooltip"> Melody 
+					<span class="tooltiptext"> 
+						<strong text-align="center"> Melody (Shael Ko Nef) </strong>
+						<div></div>
+						<strong text-align="center"> <u> Runeword Stats </u></strong>
+						<div text-align="center"> +50% Enhanced Damage </div>
+						<div text-align="center"> +300% Damage to Undead </div>
+						<div text-align="center"> +3 to Bow and Crossbow Skills (Amazon Only) </div>
+						<div text-align="center"> +3 to Critical Strike (Amazon Only) </div>
+						<div text-align="center"> +3 to Slow Missiles (Amazon Only) </div>
+						<div text-align="center"> 20% Increased Attack Speed </div>
+						<div text-align="center"> +10 to Dexterity </div>
+						<div text-align="center"> Knockback </div>
+					</span>
+				</td>
 				<td> 3 </td>
 				<td> Missile Weapons </td>
 				<td> Shael </td>
@@ -317,8 +669,22 @@
 				<td> 39 </td>
 				<td> 1.09 </td>
 			</tr>
-			<tr>
-				<td> Lionheart </td>
+			<tr class="tooltip">
+				<td> Lionheart 
+					<span class="tooltiptext"> 
+						<strong text-align="center"> Lionheart (Hel Lum Fal) </strong>
+						<div></div>
+						<strong text-align="center"> <u> Runeword Stats </u></strong>
+						<div text-align="center"> +20% Enhanced Damage </div>
+						<div text-align="center"> Requirements -15% </div>
+						<div text-align="center"> +25 to Strength </div>
+						<div text-align="center"> +10 to Energy </div>
+						<div text-align="center"> +20 to Vitality </div>
+						<div text-align="center"> +15 to Dexterity </div>
+						<div text-align="center"> +50 to Life </div>
+						<div text-align="center"> All Resistances +30% </div>
+					</span>
+				</td>
 				<td> 3 </td>
 				<td> Body Armor </td>
 				<td> Hel </td>
@@ -331,7 +697,23 @@
 				<td> 1.09 </td>
 			</tr>
 			<tr>
-				<td> Lawbringer </td>
+				<td class="tooltip"> Lawbringer 
+					<span class="tooltiptext"> 
+						<strong text-align="center"> Lawbringer (Amn Lem Ko) </strong>
+						<div></div>
+						<strong text-align="center"> <u> Runeword Stats </u></strong>
+						<div text-align="center"> 20% Chance to Cast Level 15 Decrepify on Striking </div>
+						<div text-align="center"> Level 16-18 Sanctuary Aura When Equipped (Varies) </div>
+						<div text-align="center"> -50% Target Defense </div>
+						<div text-align="center"> Adds 150-210 Fire Damage </div>
+						<div text-align="center"> Adds 130-180 Cold Damage </div>
+						<div text-align="center"> 7% Life Stolen per Hit </div>
+						<div text-align="center"> Slain Monsters Rest in Peace </div>
+						<div text-align="center"> +200-250 Defense vs. Missile (Varies) </div>
+						<div text-align="center"> +10 to Dexterity </div>
+						<div text-align="center"> +75% Extra Gold From Monsters </div>
+					</span>				
+				</td>
 				<td> 3 </td>
 				<td> Hammers/Scepters/Swords </td>
 				<td> Amn </td>
@@ -344,7 +726,20 @@
 				<td> 1.10L </td>
 			</tr>
 			<tr>
-				<td> Treachery </td>
+				<td class="tooltip"> Treachery 
+					<span class="tooltiptext"> 
+						<strong text-align="center"> Treachery (Shael Thul Lem) </strong>
+						<div></div>
+						<strong text-align="center"> <u> Runeword Stats </u></strong>
+						<div text-align="center"> 5% Chance to Cast Level 15 Fade When Struck </div>
+						<div text-align="center"> 25% Chance to Cast Level 15 Venom on Striking </div>
+						<div text-align="center"> +2 to Assassin Skills </div>
+						<div text-align="center"> +45% Increased Attack Speed </div>
+						<div text-align="center"> +20% Faster Hit Recovery </div>
+						<div text-align="center"> Cold Resist +30% </div>
+						<div text-align="center"> 50% Extra Gold from Monsters </div>
+					</span>	
+				</td>
 				<td> 3 </td>
 				<td> Body Armor </td>
 				<td> Shael </td>
@@ -357,7 +752,17 @@
 				<td> 1.11 </td>
 			</tr>
 			<tr>
-				<td> Wealth </td>
+				<td class="tooltip"> Wealth 
+					<span class="tooltiptext"> 
+						<strong text-align="center"> Wealth (Lem Ko Tir) </strong>
+						<div></div>
+						<strong text-align="center"> <u> Runeword Stats </u></strong>
+						<div text-align="center"> 300% Extra Gold from Monsters </div>
+						<div text-align="center"> 100% Better Chance of Getting Magic Items </div>
+						<div text-align="center"> +2 to Mana After Each Kill </div>
+						<div text-align="center"> +10 to Dexterity </div>
+					</span>	
+				</td>
 				<td> 3 </td>
 				<td> Body Armor </td>
 				<td> Lem </td>
@@ -370,7 +775,20 @@
 				<td> 1.09 </td>
 			</tr>
 			<tr>
-				<td> Enlightenment </td>
+				<td class="tooltip"> Enlightenment 
+					<span class="tooltiptext"> 
+						<strong text-align="center"> Enlightenment (Pul Ral Sol) </strong>
+						<div></div>
+						<strong text-align="center"> <u> Runeword Stats </u></strong>
+						<div text-align="center"> 5% Chance to Cast Level 15 Blaze When Struck </div>
+						<div text-align="center"> 5% Chance to Cast Level 15 Fireball on Striking </div>
+						<div text-align="center"> +2 to Sorceress Skill Levels </div>
+						<div text-align="center"> +1 to Warmth </div>
+						<div text-align="center"> +30% Enhanced Defense </div>
+						<div text-align="center"> Fire Resist +30% </div>
+						<div text-align="center"> Damage Reduced by 7 </div>
+					</span>	
+				</td>
 				<td> 3 </td>
 				<td> Body Armor </td>
 				<td> Pul </td>
@@ -383,7 +801,22 @@
 				<td> 1.11 </td>
 			</tr>
 			<tr>
-				<td> Wisdom </td>
+				<td class="tooltip"> Wisdom 
+					<span class="tooltiptext"> 
+						<strong text-align="center"> Wisdom (Pul Ith Eld) </strong>
+						<div></div>
+						<strong text-align="center"> <u> Runeword Stats </u></strong>
+						<div text-align="center"> +33% Piercing Attack </div>
+						<div text-align="center"> +15-25% Bonus to Attack Rating (Varies) </div>
+						<div text-align="center"> 4-8% Mana Stolen per Hit (Varies) </div>
+						<div text-align="center"> +30% Enhanced Defense </div>
+						<div text-align="center"> +10 to Energy </div>
+						<div text-align="center"> 15% Slower Stamina Drain </div>
+						<div text-align="center"> Cannot be Frozen </div>
+						<div text-align="center"> +5 Mana After Each Kill </div>
+						<div text-align="center"> 15% Damage Taken Goes to Mana </div>
+					</span>			
+				</td>
 				<td> 3 </td>
 				<td> Helm </td>
 				<td> Pul </td>
@@ -396,7 +829,18 @@
 				<td> 2.4L </td>
 			</tr>
 			<tr>
-				<td> Bone </td>
+				<td class="tooltip"> Bone 
+					<span class="tooltiptext"> 
+						<strong text-align="center"> Bone (Sol Um Um) </strong>
+						<div></div>
+						<strong text-align="center"> <u> Runeword Stats </u></strong>
+						<div text-align="center"> 15% Chance to Cast Bone Armor When Struck </div>
+						<div text-align="center"> 15% Chance to Cast Level 10 Bone Spear on Striking </div>
+						<div text-align="center"> +2 to Necromancer Skill Levels </div>
+						<div text-align="center"> All Resistances +30% </div>
+						<div text-align="center"> Damage Reduced by 7</div>
+					</span>	
+				</td>
 				<td> 3 </td>
 				<td> Body Armor </td>
 				<td> Sol </td>
@@ -409,7 +853,23 @@
 				<td> 1.11 </td>
 			</tr>
 			<tr>
-				<td> Crescent Moon </td>
+				<td class="tooltip"> Crescent Moon 
+					<span class="tooltiptext"> 
+						<strong text-align="center"> Crescent Moon (Shael Um Tir) </strong>
+						<div></div>
+						<strong text-align="center"> <u> Runeword Stats </u></strong>
+						<div text-align="center"> 10% Chance to Cast Level 17 Chain Lightning on Striking </div>
+						<div text-align="center"> 7% Chance to Cast Level 13 Static Field on Striking </div>
+						<div text-align="center"> +20% Increased Attack Speed </div>
+						<div text-align="center"> +180-220% Enhanced Damage (Varies) </div>
+						<div text-align="center"> Ignores Target Defense </div>
+						<div text-align="center"> -35% to Enemy Lightning Resistance </div>
+						<div text-align="center"> 25% Chance of Open Wounds </div>
+						<div text-align="center"> +9-11 to Magic Absorb (Varies) </div>
+						<div text-align="center"> +2 Mana After Each Kill </div>
+						<div text-align="center"> Level 18 Summon Spirit Wolf (30 Charges) </div>
+					</span>	
+				</td>
 				<td> 3 </td>
 				<td> Axes/Swords/Polearms </td>
 				<td> Shael </td>
@@ -928,6 +1388,201 @@
 				<td>  </td>
 				<td> 67 </td>
 				<td> 1.10L </td>
+			</tr>
+			<tr>
+				<td> Honor </td>
+				<td> 5 </td>
+				<td> Melee </td>
+				<td> Amn </td>
+				<td> El </td>
+				<td> Ith </td>
+				<td> Tir </td>
+				<td> Sol </td>
+				<td>  </td>
+				<td> 27 </td>
+				<td> 1.09 </td>
+			</tr>
+			<tr>
+				<td> Obedience </td>
+				<td> 5 </td>
+				<td> Polearms </td>
+				<td> Hel </td>
+				<td> Ko </td>
+				<td> Thul </td>
+				<td> Eth </td>
+				<td> Fal </td>
+				<td>  </td>
+				<td> 41 </td>
+				<td> 1.10L </td>
+			</tr>
+			<tr>
+				<td> Death </td>
+				<td> 5 </td>
+				<td> Axes/Swords </td>
+				<td> Hel </td>
+				<td> El </td>
+				<td> Vex </td>
+				<td> Ort </td>
+				<td> Gul </td>
+				<td>  </td>
+				<td> 55 </td>
+				<td> 1.10L </td>
+			</tr>
+			<tr>
+				<td> Call to Arms </td>
+				<td> 5 </td>
+				<td> Weapons </td>
+				<td> Amn </td>
+				<td> Ral </td>
+				<td> Mal </td>
+				<td> Ist </td>
+				<td> Ohm </td>
+				<td>  </td>
+				<td> 57 </td>
+				<td> 1.10 </td>
+			</tr>
+			<tr>
+				<td> Grief </td>
+				<td> 5 </td>
+				<td> Axes/Swords </td>
+				<td> Eth </td>
+				<td> Tir </td>
+				<td> Lo </td>
+				<td> Mal </td>
+				<td> Ral </td>
+				<td>  </td>
+				<td> 59 </td>
+				<td> 1.10L </td>
+			</tr>
+			<tr>
+				<td> Beast </td>
+				<td> 5 </td>
+				<td> Axes/Hammers/Scepters </td>
+				<td> Ber </td>
+				<td> Tir </td>
+				<td> Um </td>
+				<td> Mal </td>
+				<td> Lum </td>
+				<td>  </td>
+				<td> 63 </td>
+				<td> 1.10 </td>
+			</tr>
+			<tr>
+				<td> Eternity </td>
+				<td> 5 </td>
+				<td> Melee </td>
+				<td> Amn </td>
+				<td> Ber </td>
+				<td> Ist </td>
+				<td> Sol </td>
+				<td> Sur </td>
+				<td>  </td>
+				<td> 63 </td>
+				<td> 1.10 </td>
+			</tr>
+			<tr>
+				<td> Destruction </td>
+				<td> 5 </td>
+				<td> Polearms/Swords </td>
+				<td> Vex </td>
+				<td> Lo </td>
+				<td> Ber </td>
+				<td> Jah </td>
+				<td> Ko </td>
+				<td>  </td>
+				<td> 65 </td>
+				<td> 1.10L </td>
+			</tr>
+			<tr>
+				<td> Doom </td>
+				<td> 5 </td>
+				<td> Axes/Hammers/Polearms </td>
+				<td> Hel </td>
+				<td> Ohm </td>
+				<td> Um </td>
+				<td> Lo </td>
+				<td> Cham </td>
+				<td>  </td>
+				<td> 67 </td>
+				<td> 1.10 </td>
+			</tr>
+			<tr>
+				<td> Mist </td>
+				<td> 5 </td>
+				<td> Missile Weapons </td>
+				<td> Cham </td>
+				<td> Shael </td>
+				<td> Gul </td>
+				<td> Thul </td>
+				<td> Ith </td>
+				<td>  </td>
+				<td> 67 </td>
+				<td> 2.4L </td>
+			</tr>
+			<tr>
+				<td> Unbending Will </td>
+				<td> 6 </td>
+				<td> Swords </td>
+				<td> Fal </td>
+				<td> Io </td>
+				<td> Ith </td>
+				<td> Eld </td>
+				<td> El </td>
+				<td> Hel </td>
+				<td> 41 </td>
+				<td> 2.4L </td>
+			</tr>
+			<tr>
+				<td> Silence </td>
+				<td> 6 </td>
+				<td> Weapons </td>
+				<td> Dol </td>
+				<td> Eld </td>
+				<td> Hel </td>
+				<td> Ist </td>
+				<td> Tir </td>
+				<td> Vex </td>
+				<td> 55 </td>
+				<td> 1.09 </td>
+			</tr>
+			<tr>
+				<td> Last Wish </td>
+				<td> 6 </td>
+				<td> Axes/Hammers/Swords </td>
+				<td> Jah </td>
+				<td> Mal </td>
+				<td> Jah </td>
+				<td> Sur </td>
+				<td> Jah </td>
+				<td> Ber </td>
+				<td> 65 </td>
+				<td> 1.10L </td>
+			</tr>
+			<tr>
+				<td> Breath of the Dying </td>
+				<td> 6 </td>
+				<td> Weapons </td>
+				<td> Vex </td>
+				<td> Hel </td>
+				<td> El </td>
+				<td> Eld </td>
+				<td> Zod </td>
+				<td> Eth </td>
+				<td> 69 </td>
+				<td> 1.10 </td>
+			</tr>
+			<tr>
+				<td> Obsession </td>
+				<td> 6 </td>
+				<td> Staves </td>
+				<td> Zod </td>
+				<td> Ist </td>
+				<td> Lem </td>
+				<td> Lum </td>
+				<td> Io </td>
+				<td> Nef </td>
+				<td> 69 </td>
+				<td> 2.4L </td>
 			</tr>
 		</table>
 		</div>

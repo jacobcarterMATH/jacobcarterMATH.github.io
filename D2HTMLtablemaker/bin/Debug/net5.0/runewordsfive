@@ -1,0 +1,223 @@
+<table>
+    <tr>
+        <th> Name </th>
+        <th> Sockets </th>
+        <th> Base Type </th>
+        <th> 1 </th>
+        <th> 2 </th>
+        <th> 3 </th>
+        <th> 4 </th>
+        <th> 5 </th>
+        <th> 6 </th>
+        <th> Level </th>
+        <th> Version </th>
+    </tr>
+    <tr>
+        <td> Honor </td>
+        <td> 5 </td>
+        <td> Melee </td>
+        <td> Amn </td>
+        <td> El </td>
+        <td> Ith </td>
+        <td> Tir </td>
+        <td> Sol </td>
+        <td>  </td>
+        <td> 27 </td>
+        <td> 1.09 </td>
+    </tr>
+    <tr>
+        <td> Obedience </td>
+        <td> 5 </td>
+        <td> Polearms </td>
+        <td> Hel </td>
+        <td> Ko </td>
+        <td> Thul </td>
+        <td> Eth </td>
+        <td> Fal </td>
+        <td>  </td>
+        <td> 41 </td>
+        <td> 1.10L </td>
+    </tr>
+    <tr>
+        <td> Death </td>
+        <td> 5 </td>
+        <td> Axes/Swords </td>
+        <td> Hel </td>
+        <td> El </td>
+        <td> Vex </td>
+        <td> Ort </td>
+        <td> Gul </td>
+        <td>  </td>
+        <td> 55 </td>
+        <td> 1.10L </td>
+    </tr>
+    <tr>
+        <td> Call to Arms </td>
+        <td> 5 </td>
+        <td> Weapons </td>
+        <td> Amn </td>
+        <td> Ral </td>
+        <td> Mal </td>
+        <td> Ist </td>
+        <td> Ohm </td>
+        <td>  </td>
+        <td> 57 </td>
+        <td> 1.10 </td>
+    </tr>
+    <tr>
+        <td> Grief </td>
+        <td> 5 </td>
+        <td> Axes/Swords </td>
+        <td> Eth </td>
+        <td> Tir </td>
+        <td> Lo </td>
+        <td> Mal </td>
+        <td> Ral </td>
+        <td>  </td>
+        <td> 59 </td>
+        <td> 1.10L </td>
+    </tr>
+    <tr>
+        <td> Beast </td>
+        <td> Axes/Hammers/Scepters </td>
+        <td> Axes/Hammers/Scepters </td>
+        <td> Ber </td>
+        <td> Tir </td>
+        <td> Um </td>
+        <td> Mal </td>
+        <td> Lum </td>
+        <td>  </td>
+        <td> 63 </td>
+        <td> 1.10 </td>
+    </tr>
+    <tr>
+        <td> Eternity </td>
+        <td> 5 </td>
+        <td> Melee </td>
+        <td> Amn </td>
+        <td> Ber </td>
+        <td> Ist </td>
+        <td> Sol </td>
+        <td> Sur </td>
+        <td>  </td>
+        <td> 63 </td>
+        <td> 1.10 </td>
+    </tr>
+    <tr>
+        <td> Destruction </td>
+        <td> 5 </td>
+        <td> Polearms/Swords </td>
+        <td> Vex </td>
+        <td> Lo </td>
+        <td> Ber </td>
+        <td> Jah </td>
+        <td> Ko </td>
+        <td>  </td>
+        <td> 65 </td>
+        <td> 1.10L </td>
+    </tr>
+    <tr>
+        <td> Doom </td>
+        <td> 5 </td>
+        <td> Hel </td>
+        <td> Ohm </td>
+        <td> Um </td>
+        <td> Lo </td>
+        <td> remove </td>
+        <td> this </td>
+        <td> row </td>
+        <td> oo </td>
+        <td> ok </td>
+    </tr>
+    <tr>
+        <td> Doom </td>
+        <td> 5 </td>
+        <td> Axes/Hammers/Polearms </td>
+        <td> Hel </td>
+        <td> Ohm </td>
+        <td> Um </td>
+        <td> Lo </td>
+        <td> Cham </td>
+        <td>  </td>
+        <td> 67 </td>
+        <td> 1.10 </td>
+    </tr>
+    <tr>
+        <td> Mist </td>
+        <td> 5 </td>
+        <td> Missile Weapons </td>
+        <td> Cham </td>
+        <td> Shael </td>
+        <td> Gul </td>
+        <td> Thul </td>
+        <td> Ith </td>
+        <td>  </td>
+        <td> 67 </td>
+        <td> 2.4L </td>
+    </tr>
+    <tr>
+        <td> Unbending Will </td>
+        <td> 6 </td>
+        <td> Swords </td>
+        <td> Fal </td>
+        <td> Io </td>
+        <td> Ith </td>
+        <td> Eld </td>
+        <td> El </td>
+        <td> Hel </td>
+        <td> 41 </td>
+        <td> 2.4L </td>
+    </tr>
+    <tr>
+        <td> Silence </td>
+        <td> 6 </td>
+        <td> Weapons </td>
+        <td> Dol </td>
+        <td> Eld </td>
+        <td> Hel </td>
+        <td> Ist </td>
+        <td> Tir </td>
+        <td> Vex </td>
+        <td> 55 </td>
+        <td> 1.09 </td>
+    </tr>
+    <tr>
+        <td> Last Wish </td>
+        <td> 6 </td>
+        <td> Axes/Hammers/Swords </td>
+        <td> Jah </td>
+        <td> Mal </td>
+        <td> Jah </td>
+        <td> Sur </td>
+        <td> Jah </td>
+        <td> Ber </td>
+        <td> 65 </td>
+        <td> 1.10L </td>
+    </tr>
+    <tr>
+        <td> Breath of the Dying </td>
+        <td> 6 </td>
+        <td> Weapons </td>
+        <td> Vex </td>
+        <td> Hel </td>
+        <td> El </td>
+        <td> Eld </td>
+        <td> Zod </td>
+        <td> Eth </td>
+        <td> 69 </td>
+        <td> 1.10 </td>
+    </tr>
+    <tr>
+        <td> Obsession </td>
+        <td> 6 </td>
+        <td> Staves </td>
+        <td> Zod </td>
+        <td> Ist </td>
+        <td> Lem </td>
+        <td> Lum </td>
+        <td> Io </td>
+        <td> Nef </td>
+        <td> 69 </td>
+        <td> 2.4L </td>
+    </tr>
+</table>

@@ -93,6 +93,10 @@ function showSideNav(){
 		HeaderAlignElement.style.textAlign = "left"; 
 	}
 }
+
+function scriptTest(){
+	alert("test");
+}
 function hidePreTwoFour(){
 	var PatchTwoFourAreas = document.querySelectorAll('.twofourflag');
 	var i = 0;

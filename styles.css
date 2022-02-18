@@ -67,6 +67,7 @@ button:hover{
 	text-align: center;
 	margin: 0% .5%;
 	position: absolute;
+	right: 25%;
 	z-index: 1;
 }
 
@@ -162,9 +163,6 @@ button:hover{
 
 
 
-.leftitem{
-	
-}
 .miditem{
 	order: 0;
 	flex-grow: 1;
@@ -179,9 +177,6 @@ button:hover{
 }
 
 
-.solotable {
-	
-}
 
 .leftitem .runes td, .leftitem .runes th{
 	width: 50px;
@@ -191,6 +186,9 @@ button:hover{
 }
 /* coloration for table data */
 
+.emptyitem{
+	flex-grow:1;
+}
 
 .act1 td {
 	background-color: #2f0045;
@@ -298,10 +296,11 @@ button:hover{
 		text-align: left;
 	}
 	
+	/* add back in if mobile looks funky
 	.solotable{
 		flex-grow: 1;
 	}
-
+	*/
 	.runes th, .runes td{
 		font-size: 70%;
 	}
@@ -318,4 +317,7 @@ button:hover{
 		max-width: 30px;
 	}
 	
+	.tooltip .tooltiptext{
+		right: 5%;
+	}
 }
