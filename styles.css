@@ -74,9 +74,6 @@ button:hover{
 	
 }
 
-.tooltip:hover .tooltiptext, .tooltip:active .tooltiptext{
-	visibility: visible;
-}
 
 .runes tr:hover, .runes tr:active{
 	background-color: #000000;
