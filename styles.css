@@ -67,23 +67,22 @@ button:hover{
 	text-align: center;
 	margin: 0% .5%;
 	position: absolute;
-	right: 25%;
 	z-index: 1;
 }
 
 .runeword .tooltip .tooltiptext {
-	right: 10%;
+	
 }
 
-.tooltip:hover .tooltiptext{
+.tooltip:hover .tooltiptext, .tooltip:active .tooltiptext{
 	visibility: visible;
 }
 
-.runes tr:hover{
+.runes tr:hover, .runes tr:active{
 	background-color: #000000;
 	color: #c20000;
 }
-.runes tr:hover .tooltiptext {
+.runes tr:hover .tooltiptext, .runes tr:active .tooltiptext {
 	visibility: visible;
 }
 
@@ -266,6 +265,9 @@ button:hover{
 	color: black;
 }
 
+.optional {
+	text-indent: 20px;
+}
 /* Screen size adjustments */
 @media all and (max-width: 800px){
 	.container{
