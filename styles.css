@@ -58,6 +58,8 @@ button:hover{
 .headrow{
 	position: sticky;
 }
+
+
 .tooltip .tooltiptext{
 	visibility: hidden;
 	background-color: #f2f2f2;
