@@ -65,8 +65,10 @@ button:hover{
 	border: solid;
 	border-color: #c20000;
 	text-align: center;
-	margin: 0% .5%;
-	position: absolute;
+	margin: 0% 0%;
+	top: 5px;
+	right: 5px;
+	position: fixed;
 	z-index: 1;
 }
 
