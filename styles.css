@@ -269,6 +269,12 @@ button:hover{
 .optional {
 	text-indent: 20px;
 }
+
+.bigimage {
+	border: solid black 3px;
+	max-width: 75vw;
+	max-height: 30vw;
+}
 /* Screen size adjustments */
 @media all and (max-width: 800px){
 	.container{
