@@ -1,0 +1,913 @@
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="styles.css">	 
+	
+
+</head>
+<body>
+<script src="scripts.js"></script>
+<div class="sidenav">
+	
+	<a href="index.html">Runes</a>
+	<a href="runewords.html">Runewords</a>
+	<a href="areas.html">Areas</a>
+	<a href="tc87.html">TC87 Areas</a>
+	<a href="counter.html">Run counter</a>
+	<a href="exp.html">XP Table</a>
+	<a href="breakpoints.html">Breakpoints</a>
+	<a class="active" href="recipes.html">Recipes</a>
+	<a onclick="hideSideNav();"> &lt; &lt; </a>
+
+</div>
+
+<div class="altsidenav">
+	<a onclick="showSideNav();"> &gt; </a>
+</div>
+
+<div class="main">
+	<div class="container">
+		<div class="miditem">
+			<div class="headeralign">
+				<h3 style="color:#d15400;"> Hit Power Items </h3>
+			</div>
+			<table class="runes" align="center">
+			
+				<tr>
+				<th>Crafted Item</th>
+				<th>Crafted Recipe</th>
+				<th>Fixed Effects</th>
+				</tr>
+
+				<tr>
+				<td>Hit Power Helm</td>
+
+				<td>
+				<span>Magic Full Helm/Basinet/Giant Conch</span><br>
+				<span class="runecolor">Ith Rune</span><br>
+				<span class="sapphire"> <span class="sapphire"> Perfect Sapphire </span> </span><br>
+				<span class="magicitem"> Magic Jewel </span><br>
+				</td>
+
+				<td>
+				(25-50) Defense vs. Missiles<br>
+				5% Chance To Cast Level 4 Frost Nova When Struck<br>
+				Attacker Takes Damage of (3-7)
+				</td>
+				</tr>
+
+				<tr>
+				<td>Hit Power Boots</td>
+
+				<td>
+				<span>Magic Chain/Mesh/Boneweave Boots</span><br>
+				<span class="runecolor">Ral Rune</span><br>
+				<span class="sapphire"> <span class="sapphire"> Perfect Sapphire </span> </span><br>
+				<span class="magicitem"> Magic Jewel </span><br>
+				</td>
+
+				<td>
+				(25-50) Defense vs. Melee<br>
+				5% Chance To Cast Level 4 Frost Nova When Struck<br>
+				Attacker Takes Damage of (3-7)
+				</td>
+				</tr>
+
+				<tr>
+				<td>Hit Power Gloves</td>
+
+				<td>
+				<span>Magic Chain Gloves/Heavy Bracers/Vambraces</span><br>
+				<span class="runecolor">Ort Rune</span><br>
+				<span class="sapphire"> <span class="sapphire"> Perfect Sapphire </span> </span><br>
+				<span class="magicitem"> Magic Jewel </span><br>
+				</td>
+
+				<td>
+				Knockback<br>
+				5% Chance To Cast Level 4 Frost Nova When Struck<br>
+				Attacker Takes Damage of (3-7)
+				</td>
+				</tr>
+
+				<tr>
+				<td>Hit Power Belt</td>
+
+				<td>
+				<span>Magic Heavy Belt/Battle Belt/Troll Belt</span><br>
+				<span class="runecolor">Tal Rune</span><br>
+				<span class="sapphire"> <span class="sapphire"> Perfect Sapphire </span> </span><br>
+				<span class="magicitem"> Magic Jewel </span><br>
+				</td>
+
+				<td>
+				(5-10) % Damage Goes to Mana<br>
+				5% Chance To Cast Level 4 Frost Nova When Struck<br>
+				Attacker Takes Damage of (3-7)
+				</td>
+				</tr>
+
+				<tr>
+				<td>Hit Power Shield</td>
+
+				<td>
+				<span>Magic Gothic Shield/Ancient Shield/Ward</span><br>
+				<span class="runecolor">Eth Rune</span><br>
+				<span class="sapphire"> <span class="sapphire"> Perfect Sapphire </span> </span><br>
+				<span class="magicitem"> Magic Jewel </span><br>
+				</td>
+
+				<td>
+				(5-10%) Increased Chance of Blocking<br>
+				5% Chance To Cast Level 4 Frost Nova When Struck<br>
+				Attacker Takes Damage of (3-10)
+				</td>
+				</tr>
+
+				<tr>
+				<td>Hit Power Body</td>
+
+				<td>
+				<span>Magic Field Plate/Sharktooth Armor/Kraken Shell</span><br>
+				<span class="runecolor">Nef Rune</span><br>
+				<span class="sapphire"> <span class="sapphire"> Perfect Sapphire </span> </span><br>
+				<span class="magicitem"> Magic Jewel </span><br>
+				</td>
+
+				<td>
+				10-20% Faster Hit Recovery<br>
+				5% Chance To Cast Level 4 Frost Nova When Struck<br>
+				Attacker Takes Damage of (3-10)
+				</td>
+				</tr>
+
+				<tr>
+				<td>Hit Power Amulet</td>
+
+				<td>
+				<span>Magic Amulet</span><br>
+				<span class="runecolor">Thul Rune</span><br>
+				<span class="sapphire"> <span class="sapphire"> Perfect Sapphire </span> </span><br>
+				<span class="magicitem"> Magic Jewel </span><br>
+				</td>
+
+				<td>
+				Hit Causes Monster To Flee (3-11)%<br>
+				5% Chance To Cast Level 4 Frost Nova When Struck<br>
+				Attacker Takes Damage of (3-10)
+				</td>
+				</tr>
+
+				<tr>
+				<td>Hit Power Ring</td>
+
+				<td>
+				<span>Magic Ring</span><br>
+				<span class="runecolor">Amn Rune</span><br>
+				<span class="sapphire"> <span class="sapphire"> Perfect Sapphire </span> </span><br>
+				<span class="magicitem"> Magic Jewel </span><br>
+				</td>
+
+				<td>
+				+ (1-5) To Dexterity<br>
+				5% Chance To Cast Level 4 Frost Nova When Struck<br>
+				Attacker Takes Damage of (3-6)
+				</td>
+				</tr>
+
+				<tr>
+				<td>Hit Power Weapon</td>
+
+				<td>
+				<span>Magic Normal/Exceptional/Elite Blunt Weapon</span><br>
+				<span class="runecolor">Tir Rune</span><br>
+				<span class="sapphire"> <span class="sapphire"> Perfect Sapphire </span> </span><br>
+				<span class="magicitem"> Magic Jewel </span><br>
+				</td>
+
+				<td>
+				+ (35-60%) Enhanced Damage<br>
+				5% Chance To Cast Level 4 Frost Nova When Struck<br>
+				Attacker Takes Damage of (3-7)
+				</td>
+				</tr>
+
+			</table>
+			<div class="headeralign">
+				<h3 style="color:#c21000;"> Blood Items </h3>
+			</div>
+			<table class="runes" align="center">
+
+				<tr>
+				<th>Crafted Item</th>
+				<th>Crafted Recipe</th>
+				<th>Fixed Effects</th>
+				</tr>
+
+				<tr>
+				<td>Blood Helm</td>
+
+				<td>
+				<span>Magic Helm/Casque/Armet</span><br>
+				<span class="runecolor">Ral Rune</span><br>
+				<span class="ruby"> <span class="ruby"> Perfect Ruby </span> </span><br>
+				<span class="magicitem"> Magic Jewel </span><br>
+				</td>
+
+				<td>
+				5-10% Deadly Strike<br>
+				(1-3)% Life Stolen Per Hit<br>
+				+(10-20) To Life
+				</td>
+				</tr>
+
+				<tr>
+				<td>Blood Boots</td>
+
+				<td>
+				<span>Magic Light Plated Boots/Battle Boots/Mirrored Boots</span><br>
+				<span class="runecolor">Eth Rune</span><br>
+				<span class="ruby"> <span class="ruby"> Perfect Ruby </span> </span><br>
+				<span class="magicitem"> Magic Jewel </span><br>
+				</td>
+
+				<td>
+				Replenish Life + (5-10)<br>
+				(1-3)% Life Stolen Per Hit<br>
+				+(10-20) To Life
+				</td>
+				</tr>
+
+				<tr>
+				<td>Blood Gloves</td>
+
+				<td>
+				<span>Magic Heavy Gloves/Sharkskin Gloves/Vampirebone Gloves</span><br>
+				<span class="runecolor">Nef Rune</span><br>
+				<span class="ruby"> <span class="ruby"> Perfect Ruby </span> </span><br>
+				<span class="magicitem"> Magic Jewel </span><br>
+				</td>
+
+				<td>
+				Crushing Blow (5-10)%<br>
+				(1-3)% Life Stolen Per Hit<br>
+				+(10-20) To Life
+				</td>
+				</tr>
+
+				<tr>
+				<td>Blood Belt</td>
+
+				<td>
+				<span>Magic Belt/Mesh Belt/Mithril Coil</span><br>
+				<span class="runecolor">Tal Rune</span><br>
+				<span class="ruby"> <span class="ruby"> Perfect Ruby </span> </span><br>
+				<span class="magicitem"> Magic Jewel </span><br>
+				</td>
+
+				<td>
+				Open Wounds (5-10)%<br>
+				(1-3)% Life Stolen Per Hit<br>
+				+(10-20) To Life
+				</td>
+				</tr>
+
+				<tr>
+				<td>Blood Shield</td>
+
+				<td>
+				<span>Magic Spiked Shield/Barbed Shield/Blade Barrier</span><br>
+				<span class="runecolor">Ith Rune</span><br>
+				<span class="ruby"> <span class="ruby"> Perfect Ruby </span> </span><br>
+				<span class="magicitem"> Magic Jewel </span><br>
+				</td>
+
+				<td>
+				Attacker Takes Damage of (4-7)<br>
+				(1-3)% Life Stolen Per Hit<br>
+				+(10-20) To Life
+				</td>
+				</tr>
+
+				<tr>
+				<td>Blood Body</td>
+
+				<td>
+				<span>Magic Plate Mail/Templar Coat/Hellforge Plate</span><br>
+				<span class="runecolor">Thul Rune</span><br>
+				<span class="ruby"> <span class="ruby"> Perfect Ruby </span> </span><br>
+				<span class="magicitem"> Magic Jewel </span><br>
+				</td>
+
+				<td>
+				+ (1-3) Life Per Demon Kill<br>
+				(1-3)% Life Stolen Per Hit<br>
+				+(10-20) To Life
+				</td>
+				</tr>
+
+				<tr>
+				<td>Blood Amulet</td>
+
+				<td>
+				<span>Magic Amulet</span><br>
+				<span class="runecolor">Amn Rune</span><br>
+				<span class="ruby"> <span class="ruby"> Perfect Ruby </span> </span><br>
+				<span class="magicitem"> Magic Jewel </span><br>
+				</td>
+
+				<td>
+				5-10% Faster Run/Walk<br>
+				(1-4)% Life Stolen Per Hit<br>
+				+(10-20) To Life
+				</td>
+				</tr>
+
+				<tr>
+				<td>Blood Ring</td>
+
+				<td>
+				<span>Magic Ring</span><br>
+				<span class="runecolor">Sol Rune</span><br>
+				<span class="ruby"> <span class="ruby"> Perfect Ruby </span> </span><br>
+				<span class="magicitem"> Magic Jewel </span><br>
+				</td>
+
+				<td>
+				+ (1-5) To Strength<br>
+				(1-3)% Life Stolen Per Hit<br>
+				+(10-20) To Life
+				</td>
+				</tr>
+
+				<tr>
+				<td>Blood Weapon</td>
+
+				<td>
+				<span>Magic Normal/Exceptional/Elite Axe</span><br>
+				<span class="runecolor">Ort Rune</span><br>
+				<span class="ruby"> <span class="ruby"> Perfect Ruby </span> </span><br>
+				<span class="magicitem"> Magic Jewel </span><br>
+				</td>
+
+				<td>
+				+ (35-60%) Enhanced Damage<br>
+				(1-4)% Life Stolen Per Hit<br>
+				+(10-20) To Life
+				</td>
+				</tr>
+
+			</table>
+			<div class="headeralign">
+				<h3 style="color:#00d1ce;"> Caster Items </h3>
+			</div>
+			<table class="runes" align="center">
+
+				<tr>
+				<th>Crafted Item</th>
+				<th>Crafted Recipe</th>
+				<th>Fixed Effects</th>
+				</tr>
+
+				<tr>
+				<td>Caster Helm</td>
+
+				<td>
+				<span>Magic Mask/Death Mask/Demonhead Mask</span><br>
+				<span class="runecolor">Nef Rune</span><br>
+				<span class="amethyst"> <span class="amethyst"> Perfect Amethyst </span> </span><br>
+				<span class="magicitem"> Magic Jewel </span><br>
+				</td>
+
+				<td>
+				(1-4)% Mana Stolen Per Hit<br>
+				Regenerate Mana (4-10)%<br>
+				+ (10-20) To Mana
+				</td>
+				</tr>
+
+				<tr>
+				<td>Caster Boots</td>
+
+				<td>
+				<span>Magic Boots/Demonhide Boots/Wyrmhide Boots</span><br>
+				<span class="runecolor">Thul Rune</span><br>
+				<span class="amethyst"> <span class="amethyst"> Perfect Amethyst </span> </span><br>
+				<span class="magicitem"> Magic Jewel </span><br>
+				</td>
+
+				<td>
+				Increase Maximum Mana (2-5)%<br>
+				Regenerate Mana (4-10)%<br>
+				+ (10-20) To Mana
+				</td>
+				</tr>
+
+				<tr>
+				<td>Caster Gloves</td>
+
+				<td>
+				<span>Magic Leather Gloves/Demonhide Gloves/Bramble Mitts</span><br>
+				<span class="runecolor">Ort Rune</span><br>
+				<span class="amethyst"> <span class="amethyst"> Perfect Amethyst </span> </span><br>
+				<span class="magicitem"> Magic Jewel </span><br>
+				</td>
+
+				<td>
+				+ (1-3) Mana Per Kill<br>
+				Regenerate Mana (4-10)%<br>
+				+ (10-20) To Mana
+				</td>
+				</tr>
+
+				<tr>
+				<td>Caster Belt</td>
+
+				<td>
+				<span>Magic Light Belt/Sharkskin Belt/Vampirefang Belt</span><br>
+				<span class="runecolor">Ith Rune</span><br>
+				<span class="amethyst"> <span class="amethyst"> Perfect Amethyst </span> </span><br>
+				<span class="magicitem"> Magic Jewel </span><br>
+				</td>
+
+				<td>
+				5-10% Faster Cast Rate<br>
+				Regenerate Mana (4-10)%<br>
+				+ (10-20) To Mana
+				</td>
+				</tr>
+
+				<tr>
+				<td>Caster Shield</td>
+
+				<td>
+				<span>Magic Small Shield/Round Shield/Luna</span><br>
+				<span class="runecolor">Eth Rune</span><br>
+				<span class="amethyst"> <span class="amethyst"> Perfect Amethyst </span> </span><br>
+				<span class="magicitem"> Magic Jewel </span><br>
+				</td>
+
+				<td>
+				+ (5-10)% Increased Chance Of Blocking<br>
+				Regenerate Mana (4-10)%<br>
+				+ (10-20) To Mana
+				</td>
+				</tr>
+
+				<tr>
+				<td>Caster Body</td>
+
+				<td>
+				<span>Magic Light Plate/Mage Plate/Archon Plate</span><br>
+				<span class="runecolor">Tal Rune</span><br>
+				<span class="amethyst"> <span class="amethyst"> Perfect Amethyst </span> </span><br>
+				<span class="magicitem"> Magic Jewel </span><br>
+				</td>
+
+				<td>
+				+ (1-3) Mana Per Kill<br>
+				Regenerate Mana (4-10)%<br>
+				+ (10-20) To Mana
+				</td>
+				</tr>
+
+				<tr>
+				<td>Caster Amulet</td>
+
+				<td>
+				<span>Magic Amulet</span><br>
+				<span class="runecolor">Ral Rune</span><br>
+				<span class="amethyst"> <span class="amethyst"> Perfect Amethyst </span> </span><br>
+				<span class="magicitem"> Magic Jewel </span><br>
+				</td>
+
+				<td>
+				(5-10)% Faster Cast Rate<br>
+				Regenerate Mana (4-10)%<br>
+				+ (10-20) To Mana
+				</td>
+				</tr>
+
+				<tr>
+				<td>Caster Ring</td>
+
+				<td>
+				<span>Magic Ring</span><br>
+				<span class="runecolor">Amn Rune</span><br>
+				<span class="amethyst"> <span class="amethyst"> Perfect Amethyst </span> </span><br>
+				<span class="magicitem"> Magic Jewel </span><br>
+				</td>
+
+				<td>
+				+ (1-5) To Energy<br>
+				Regenerate Mana (4-10)%<br>
+				+ (10-20) To Mana
+				</td>
+				</tr>
+
+				<tr>
+				<td>Caster Weapon</td>
+
+				<td>
+				<span>Magic Normal/Exceptional/Elite Rod</span>**<br>
+				<span class="runecolor">Tir Rune</span><br>
+				<span class="amethyst"> <span class="amethyst"> Perfect Amethyst </span> </span><br>
+				<span class="magicitem"> Magic Jewel </span><br>
+				</td>
+
+				<td>
+				Increase Maximum Mana (1-5)%<br>
+				Regenerate Mana (4-10)%<br>
+				+ (10-20) To Mana
+				</td>
+				</tr>
+
+			</table>
+			<div class="headeralign">
+				<h3 style="color:#007302;"> Safety Items </h3>
+			</div>
+			<table class="runes" align="center">
+
+			<tr>
+			<th>Crafted Item</th>
+			<th>Crafted Recipe</th>
+			<th>Fixed Effects</th>
+			</tr>
+
+			<tr>
+			<td>Safety Helm</td>
+
+			<td>
+				<span>Magic Crown/Grand Crown/Corona</span><br>
+				<span class="runecolor">Ith Rune</span><br>
+				<span class="emerald"> <span class="emerald"> Perfect Emerald </span> </span><br>
+				<span class="magicitem"> Magic Jewel </span><br>
+			</td>
+
+			<td>
+			+ (10-30)% Enhanced Defense<br>
+			Lightning Resist + (5-10)%<br>
+			Magic Damage Reduced By (1-2)<br>
+			Damage Reduced By (1-4)
+			</td>
+			</tr>
+
+			<tr>
+			<td>Safety Boots</td>
+
+			<td>
+			<span>Magic Greaves/War Boots/Myrmidon Boots</span><br>
+			<span class="runecolor">Ort Rune</span><br>
+			<span class="emerald"> <span class="emerald"> Perfect Emerald </span> </span><br>
+			<span class="magicitem"> Magic Jewel </span><br>
+			</td>
+
+			<td>
+			+ (10-30)% Enhanced Defense<br>
+			Fire Resist + (5-10)%<br>
+			Magic Damage Reduced By (1-2)<br>
+			Damage Reduced By (1-4)
+			</td>
+			</tr>
+
+			<tr>
+			<td>Safety Gloves</td>
+
+			<td>
+			<span>Magic Gauntlets/War Gauntlets/Ogre Gauntlets</span><br>
+			<span class="runecolor">Ral Rune</span><br>
+			<span class="emerald"> <span class="emerald"> Perfect Emerald </span> </span><br>
+			<span class="magicitem"> Magic Jewel </span><br>
+			</td>
+
+			<td>
+			+ (10-30)% Enhanced Defense<br>
+			Cold Resist + (5-10)%<br>
+			Magic Damage Reduced By (1-2)<br>
+			Damage Reduced By (1-4)
+			</td>
+			</tr>
+
+			<tr>
+			<td>Safety Belt</td>
+
+			<td>
+			<span>Magic Sash/Demonhide Sash/Spiderweb Sash</span><br>
+			<span class="runecolor">Tal Rune</span><br>
+			<span class="emerald"> <span class="emerald"> Perfect Emerald </span> </span><br>
+			<span class="magicitem"> Magic Jewel </span><br>
+			</td>
+
+			<td>
+			+ (10-30)% Enhanced Defense<br>
+			Poison Resist +(5-10)%<br>
+			Magic Damage Reduced By (1-2)<br>
+			Damage Reduced By (1-4)
+			</td>
+			</tr>
+
+			<tr>
+			<td>Safety Shield</td>
+
+			<td>
+			<span>Magic Kite Shield/Dragon Shield/Monarch</span><br>
+			<span class="runecolor">Nef Rune</span><br>
+			<span class="emerald"> <span class="emerald"> Perfect Emerald </span> </span><br>
+			<span class="magicitem"> Magic Jewel </span><br>
+			</td>
+
+			<td>
+			+ (10-30)% Enhanced Defense<br>
+			Magic Resistance +(5-10)%<br>
+			Magic Damage Reduced By (1-2)<br>
+			Damage Reduced By (1-4)
+			</td>
+			</tr>
+
+			<tr>
+			<td>Safety Body</td>
+
+			<td>
+			<span>Magic Breast Plate/Cuirass/Great Hauberk</span><br>
+			<span class="runecolor">Eth Rune</span><br>
+			<span class="emerald"> <span class="emerald"> Perfect Emerald </span> </span><br>
+			<span class="magicitem"> Magic Jewel </span><br>
+			</td>
+
+			<td>
+			+ (10-30)% Enhanced Defense<br>
+			Half Freeze Duration<br>
+			Magic Damage Reduced By (1-2)<br>
+			Damage Reduced By (1-4)
+			</td>
+			</tr>
+
+			<tr>
+			<td>Safety Amulet</td>
+
+			<td>
+			<span>Magic Amulet</span><br>
+			<span class="runecolor">Thul Rune</span><br>
+			<span class="emerald"> <span class="emerald"> Perfect Emerald </span> </span><br>
+			<span class="magicitem"> Magic Jewel </span><br>
+			</td>
+
+			<td>
+			+ (1-10)% Increased Chance Of Blocking<br>
+			Magic Damage Reduced By (1-2)<br>
+			Damage Reduced By (1-4)
+			</td>
+			</tr>
+
+			<tr>
+			<td>Safety Ring</td>
+
+			<td>
+			<span>Magic Ring</span><br>
+			<span class="runecolor">Amn Rune</span><br>
+			<span class="emerald"> <span class="emerald"> Perfect Emerald </span> </span><br>
+			<span class="magicitem"> Magic Jewel </span><br>
+			</td>
+
+			<td>
+			+ (1-5) To Vitality<br>
+			Magic Damage Reduced By (1-2)<br>
+			Damage Reduced By (1-4)
+			</td>
+			</tr>
+
+			<tr>
+			<td>Safety Weapon</td>
+
+			<td>
+			<span>Magic Normal/Exceptional/Elite Spear or Javelin</span><br>
+			<span class="runecolor">Sol Rune</span><br>
+			<span class="emerald"> <span class="emerald"> Perfect Emerald </span> </span><br>
+			<span class="magicitem"> Magic Jewel </span><br>
+			</td>
+
+			<td>
+			+ (5-10%) Enhanced Defense<br>
+			Magic Damage Reduced By (1-2)<br>
+			Damage Reduced By (1-4)
+			</td>
+			</tr>
+
+		</table>
+		</div>
+		<div class="rightitem">
+			<div class="headeralign">
+				<h3 style="color:#ff3333;"> Rerolling Items </h3>
+			</div>
+		<table class="runes" align="center">
+			<tr>
+				<th> Recipe </th>
+				<th> Yield </th>
+			</tr>
+			<tr>
+				<td>
+					3 Perfect Gems <br> <span class="magicitem"> Magic Item </span>
+				</td>
+				<td>
+					New random Magic item of the same type
+				</td>
+			</tr>
+			<tr>
+				<td>
+					6 Perfect Skulls <br> <span class="rare"> Rare Item </span>
+				</td>
+				<td>
+					Random low quality Rare item of the same type
+				</td>
+			</tr>
+			
+		</table>
+		<div class="headeralign">
+			<h3 style="color:white;"> Socketing Items </h3>
+		</div>
+		<table class="runes" align="center">
+			<tr>
+				<th> Recipe </th>
+				<th> Yield </th>
+			</tr>
+			<tr>
+				<td> <span class="runecolor"> Hel Rune </span> <br> Scroll of Town Portal <br> Socketed Item </td>
+				<td> Removes gems, jewels, or runes from the socketed item. <br>
+					 Any items removed cannot be recovered. </td>
+			</tr>
+			<tr>
+				<td> <span class="runecolor"> Tal Rune </span> <br>
+					<span class="runecolor"> Thul Rune</span> <br> 
+					<span class="Topaz"> Perfect Topaz </span> <br> 
+					Normal Body Armor </td>
+				<td> Socketed Body Armor of Same Type </td>
+			</tr>
+			<tr>
+				<td> <span class="runecolor"> Ral Rune </span> <br>
+					 <span class="runecolor"> Amn Rune </span> <br>
+					 <span class="amethyst"> Perfect Amethyst </span> <br>
+					 Normal Weapon</td>
+				<td> Socketed Weapon of Same Type </td>
+			</tr>
+			<tr>
+				<td> <span class="runecolor"> Ral Rune </span> <br> 
+				     <span class="runecolor"> Thul Rune </span> <br> 
+					 <span class="sapphire"> Perfect Sapphire </span> <br>
+					 Normal Helm </td>
+				<td> Socketed Helm of Same Type </td>
+			</tr>
+			<tr>
+				<td> <span class="runecolor"> Tal Rune </span> <br>
+					<span class="runecolor"> Amn Rune </span> <br>
+						<span class="ruby"> Perfect Ruby </span> <br>
+						Normal Shield </td>
+				<td> Socketed Shield of Same Type </td>
+			</tr>
+			<tr>
+				<td> 3 Perfect Skulls <br>
+					<span class="rare"> Rare Item </span> <br>  1 Stone of Jordan </td>
+				<td> Adds 1 Socket to the Rare Item <br> (Max 1 socket for Rares) </td>
+			</tr>
+		</table>
+		<div class="headeralign">
+			<h3 style="color:#33f1ff;"> Repairing/Recharging Items </h3>
+		</div>
+		<table class="runes" align="center">
+			<tr>
+				<th> Recipe </th>
+				<th> Yield </th>
+			</tr>
+			<tr>
+				<td> <span class="runecolor"> Ort Rune </span> <br> Weapon </td>
+				<td> Fully Repaired Weapon </td>
+			</tr>
+			<tr>
+				<td> <span class="runecolor"> Ral Rune </span> <br>  Armor </td>
+				<td> Fully Repaired Armor </td>
+			</tr>
+			<tr>
+				<td> <span class="runecolor"> Ort Rune </span> <br> Chipped Gem <br> Weapon </td>
+				<td> Fully Repaired + Fully Recharged Weapon </td>
+			</tr>
+			<tr>
+				<td> <span class="runecolor"> Ral Rune </span> <br> Flawed Gem <br> Armor </td>
+				<td> Fully Repaired + Fully Recharged Armor </td>
+			</tr>
+		</table>
+		
+		<div class="headeralign">
+			<h3 style="color:#2eff43;"> Upgrading Items </h3>
+		</div>
+		<table class="runes" align="center">
+			<tr>
+				<th> Recipe </th>
+				<th> Yield </th>
+			</tr>
+			<tr>
+				<td> <span class="runecolor"> Ort Rune </span> <br> 
+				<span class="runecolor"> Amn Rune </span> <br> <span class="sapphire"> Perfect Sapphire </span> <br>
+					<span class="rare">Normal Rare Weapon </span> </td>
+				<td> Exceptional Version of Weapon </td>
+			</tr>
+			<tr>
+				<td> <span class="runecolor"> Ral Rune </span> <br>
+					<span class="runecolor"> Thul Rune </span> <br>
+					<span class="amethyst"> Perfect Amethyst </span> <br>
+					<span class="rare">Normal Rare Armor </span> </td>
+				<td> Exceptional Version of Armor </td>
+			</tr>
+			<tr>
+				<td> <span class="runecolor"> Fal Rune </span> <br> 
+				<span class="runecolor"> Um Rune </span> <br>
+				<span class="sapphire"> Perfect Sapphire </span> <br>
+				<span class="rare">Exceptional Rare Weapon </span> </td>
+				<td> Elite Version of Weapon </td>
+			</tr>
+			<tr>
+				<td> <span class="runecolor"> Ko Rune </span> <br>
+					<span class="runecolor"> Pul Rune </span> <br>
+					<span class="amethyst"> Perfect Amethyst </span> <br>
+					<span class="Rare"> Exceptional Rare Armor </span> </td>
+				<td> Elite Version of Armor </td>
+			</tr>
+			<tr>
+				<td> <span class="runecolor"> Ral Rune </span> <br> 
+				<span class="runecolor"> Sol Rune </span> <br> <span class="emerald"> Perfect Emerald </span> <br>
+					<span class="unique">Normal Unique Weapon </span> </td>
+				<td> Exceptional Version of Weapon </td>
+			</tr>
+			<tr>
+				<td> <span class="runecolor"> Tal Rune </span> <br>
+					<span class="runecolor"> Shael Rune </span> <br>
+					<span class="diamond"> Perfect Diamond </span> <br>
+					<span class="unique">Normal Unique Armor </span> </td>
+				<td> Exceptional Version of Armor </td>
+			</tr>
+			<tr>
+				<td> <span class="runecolor"> Lum Rune </span> <br> 
+				<span class="runecolor"> Pul Rune </span> <br>
+				<span class="emerald"> Perfect Emerald </span> <br>
+				<span class="unique">Exceptional Unique Weapon </span> </td>
+				<td> Elite Version of Weapon </td>
+			</tr>
+			<tr>
+				<td> <span class="runecolor"> Ko Rune </span> <br>
+					<span class="runecolor"> Lem Rune </span> <br>
+					<span class="diamond"> Perfect Diamond </span> <br>
+					<span class="unique"> Exceptional Unique Armor </span> </td>
+				<td> Elite Version of Armor </td>
+			</tr>
+			
+		</table>
+		<div class="headeralign">
+			<h3 style="color:white;"> Misc. Formulae </h3>
+		</div>
+		<table class="runes" align="center">
+			<tr>
+				<th> Recipe </th>
+				<th> Yield </th>
+			</tr>
+			
+			<tr>
+				<td> Wirt's Leg <br> Tome of Town Portal <br>
+				(Recipe must be used in Rogue Encampment)</td>
+				<td> Opens a portal to the Secret Cow Level </td>
+			</tr>
+			
+			<tr>
+				<td> 6 Perfect Gems (1 of Each Type) <br>
+					<span class="magicitem"> Magic Amulet </span> </td>
+				<td> Prismatic Amulet (+16-20 All Res) <br> (may also roll a suffix)</td>
+			</tr>
+			<tr>
+				<td> <span class="magicitem"> Magic Ring </span> <br>
+					<span class="emerald"> Perfect Emerald </span> <br>
+					Antidote Potion</td>
+				<td> Jade Ring (21-30 Poison Res) <br> (may also roll a suffix) </td>
+			</tr>
+			<tr>
+				<td> <span class="magicitem"> Magic Ring </span> <br>
+					<span class="ruby"> Perfect Ruby </span> <br>
+					Exploding Potion</td>
+				<td> Garnet Ring (21-30 Fire Res) <br> (may also roll a suffix) </td>
+			</tr>
+			<tr>
+				<td> <span class="magicitem"> Magic Ring </span> <br>
+					<span class="topaz"> Perfect Topaz </span> <br>
+					Rejuvination Potion</td>
+				<td> Coral Ring (21-30 Light Res) <br> (may also roll a suffix) </td>
+			</tr>
+			<tr>
+				<td> <span class="magicitem"> Magic Ring </span> <br>
+					<span class="sapphire"> Perfect Sapphire </span> <br>
+					Thawing Potion</td>
+				<td> Cobalt Ring (21-30 Cold Res) <br> (may also roll a suffix) </td>
+			</tr>
+			
+			
+		</table>
+	</div>
+		
+	</div>
+</div>
+
+</body>

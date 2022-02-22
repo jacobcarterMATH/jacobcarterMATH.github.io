@@ -74,10 +74,6 @@ button:hover{
 	z-index: 1;
 }
 
-.runeword .tooltip .tooltiptext {
-	
-}
-
 
 .runes tr:hover, .runes tr:active{
 	background-color: #000000;
@@ -256,7 +252,38 @@ button:hover{
 	background-color: #fc6100;
 	color: black;
 }
-	
+.runecolor{
+	color: #fc6f03;
+}
+.emerald{
+	color: #13bf00;
+}
+.sapphire {
+	color: #2969ff;
+}	
+.ruby {
+	color: #f00000;
+}
+.amethyst {
+	color: #3b0073;
+}
+.diamond {
+	color: #42f2ff;
+}
+.topaz {
+	color: #ffe97a;
+}
+.magicitem{
+	color: #9270ff;
+}
+
+.unique{
+	color: #ad8a66;
+}
+
+.rare{
+	color: #ffe32b;
+}
 .bestxp {
 	background-color: #048000;
 }
