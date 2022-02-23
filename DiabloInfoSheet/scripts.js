@@ -121,6 +121,56 @@ function show(){
 	var length = PatchTwoFourAreas.length;
 	
 	for(i; i < length; i++){
-		PatchTwoFourAreas[i].hidden = false;;
+		PatchTwoFourAreas[i].hidden = false;
+	}
+}
+
+function filterTableByName(){
+	var filter = document.getElementById("filterByItem").value.toLowerCase();
+	var prefixTable = document.getElementById('prefix');
+	var rows = prefixTable.rows;
+	
+	for (var i = 1; i < rows.length; i++){
+		if (!(rows[i].getElementsByTagName("TD")[2].innerHTML.toLowerCase().includes(filter))){
+			rows[i].hidden = true;
+		} else {
+			rows[i].hidden = false;
+		}
+	}
+	
+	var suffixTable = document.getElementById('suffix');
+	rows = suffixTable.rows;
+	
+	for (var i = 1; i < rows.length; i++){
+		if (!(rows[i].getElementsByTagName("TD")[2].innerHTML.toLowerCase().includes(filter))){
+			rows[i].hidden = true;
+		} else {
+			rows[i].hidden = false;
+		}
+	}
+}
+
+function filterTableByStat(){
+	var filter = document.getElementById("filterByStat").value.toLowerCase();
+	var prefixTable = document.getElementById('prefix');
+	var rows = prefixTable.rows;
+	
+	for (var i = 1; i < rows.length; i++){
+		if (!(rows[i].getElementsByTagName("TD")[1].innerHTML.toLowerCase().includes(filter))){
+			rows[i].hidden = true;
+		} else {
+			rows[i].hidden = false;
+		}
+	}
+	
+	var suffixTable = document.getElementById('suffix');
+	rows = suffixTable.rows;
+	
+	for (var i = 1; i < rows.length; i++){
+		if (!(rows[i].getElementsByTagName("TD")[1].innerHTML.toLowerCase().includes(filter))){
+			rows[i].hidden = true;
+		} else {
+			rows[i].hidden = false;
+		}
 	}
 }

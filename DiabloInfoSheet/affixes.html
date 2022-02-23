@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="styles.css">	 
@@ -35,14 +35,24 @@
 			<h5 style="color:#34a1eb;"> For some items, certain affixes spawn at different values at different iLvls. For instance, the "Stout" (+3-12 defense) prefix can spawn on Grand Charms. However, if the Grand Charm is iLvl 1, this prefix can only provide +3-5 defense. Once the Grand Charm is iLvl 7, the prefix can then provide +6-9 defense. In cases like this where the affix's values can be split between iLvls, brackets will follow the iLvl stating what the stat's range is for that iLvl. i.e., <span>
 				<font color="#9270ff">Grand Charm</font>(1)[3-5](7)[6-9](12)[10-12].
 				</span></h5>
+
+		
+		<form>
+			<label for="filterByItem"> Filter Affixes by Item Name: </label>
+			<input type="text" id="filterByItem" name="itemFilter" oninput="filterTableByName();">
+			<br>
+			<br>
+			<label for="filterByItem"> Filter Affixes by Stat Name: </label>
+			<input type="text" id="filterByStat" name="statFilter" oninput="filterTableByStat();">
+		</form>
 		</div>
 	<div class="container">
-
+	
 		<div class="miditem">
 			<div class="headeralign">
 				<h3 style="color:#d15400;"> Item Prefixes </h3>
 			</div>
-			<table align="center" class="runes" style="max-width:600px;">
+			<table align="center" class="runes" id="prefix" style="max-width:600px;">
 
 				<tr>
 					<th> Prefix </th>
@@ -2120,8 +2130,6 @@
 				<font color="yellow">Throwing Weapons</font>(38)
 				</span></td>
 				</tr>
-				
-				<tr>
 
 
 				<tr>
@@ -3796,9 +3804,6 @@
 				</span></td>
 				</tr>
 
-
-
-
 				</table>
 		</div>
 		
@@ -3807,7 +3812,7 @@
 				<h3 style="color:#d15400;"> Item Suffixes </h3>
 			</div>
 			
-			<table align="center" class="runes" style="max-width:600px;">
+			<table align="center" class="runes" id="suffix" style="max-width:600px;">
 				<tr>
 					<th>Suffix</th>
 					<th>Effect</th>
