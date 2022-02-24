@@ -19,6 +19,19 @@
   width: 150px;
 }
 
+.decbutton {
+  color: black;
+  padding: 5px 5px;
+  text-align: center;
+  text-decoration: none;
+  font-size: 20px;
+  cursor: pointer;
+  position: relative;
+  margin: auto;
+  border-radius: 8px;
+  display: block;
+  width: 30px;
+}
 .buttoncontainer{
 	display: flex;
 	flex-direction: column;
@@ -62,6 +75,7 @@
 		<div class="emptyitem"> </div>
 		<div class="miditem">
 			<button id="incrementButton" class="resbutton" onclick="increment();"> </button>
+			<button id="decrementButton" class="decbutton" onclick="decrement();" > - </button>
 		</div>
 		<script> document.getElementById('incrementButton').innerHTML = "Runs: " + sessionStorage.getItem("count"); </script>
 		<div class="rightitem">

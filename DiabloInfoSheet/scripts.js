@@ -11,6 +11,15 @@ function increment(){
 	sessionStorage.setItem("count", count);
 	document.getElementById('incrementButton').innerHTML = "Runs: " + sessionStorage.getItem("count");
 }
+
+function decrement(){
+	count = count - 1;
+	if (count < 0) {
+		count = 0;
+	}
+	sessionStorage.setItem("count", count);
+	document.getElementById('incrementButton').innerHTML = "Runs: " + sessionStorage.getItem("count");
+}
 	
 function reset(){
 	if (confirm('This cannot be undone - are you sure?')){
@@ -127,47 +136,30 @@ function show(){
 
 function filterTableByName(){
 	var filter = document.getElementById("filterByItem").value.toLowerCase();
-	var prefixTable = document.getElementById('prefix');
-	var rows = prefixTable.rows;
+	hideRows('prefix', 2, filter);
 	
-	for (var i = 1; i < rows.length; i++){
-		if (!(rows[i].getElementsByTagName("TD")[2].innerHTML.toLowerCase().includes(filter))){
-			rows[i].hidden = true;
-		} else {
-			rows[i].hidden = false;
-		}
-	}
+	hideRows('suffix', 2, filter);
 	
-	var suffixTable = document.getElementById('suffix');
-	rows = suffixTable.rows;
-	
-	for (var i = 1; i < rows.length; i++){
-		if (!(rows[i].getElementsByTagName("TD")[2].innerHTML.toLowerCase().includes(filter))){
-			rows[i].hidden = true;
-		} else {
-			rows[i].hidden = false;
-		}
-	}
+	hideRows('charged', 1, filter);
 }
 
 function filterTableByStat(){
 	var filter = document.getElementById("filterByStat").value.toLowerCase();
-	var prefixTable = document.getElementById('prefix');
-	var rows = prefixTable.rows;
+
+	hideRows('prefix', 1, filter);
 	
-	for (var i = 1; i < rows.length; i++){
-		if (!(rows[i].getElementsByTagName("TD")[1].innerHTML.toLowerCase().includes(filter))){
-			rows[i].hidden = true;
-		} else {
-			rows[i].hidden = false;
-		}
-	}
+	hideRows('suffix', 1, filter);
+
+	hideRows('charged', 0, filter);
+
+}
+
+function hideRows(elementId, rowToFilter, filterString){
+	var tableToFilter = document.getElementById(elementId);
+	var rows = tableToFilter.rows;
 	
-	var suffixTable = document.getElementById('suffix');
-	rows = suffixTable.rows;
-	
-	for (var i = 1; i < rows.length; i++){
-		if (!(rows[i].getElementsByTagName("TD")[1].innerHTML.toLowerCase().includes(filter))){
+		for (var i = 1; i < rows.length; i++){
+		if (!(rows[i].getElementsByTagName("TD")[rowToFilter].innerHTML.toLowerCase().includes(filterString))){
 			rows[i].hidden = true;
 		} else {
 			rows[i].hidden = false;

@@ -336,11 +336,7 @@ button:hover{
 		text-align: left;
 	}
 	
-	/* add back in if mobile looks funky
-	.solotable{
-		flex-grow: 1;
-	}
-	*/
+	
 	.runes th, .runes td{
 		font-size: 70%;
 	}
@@ -354,7 +350,8 @@ button:hover{
 	}
 	
 	.runeword td, .runeword th{
-		max-width: 30px;
+		max-width: 50px;
+		overflow: wrap;
 	}
 	
 	.tooltip .tooltiptext{
