@@ -30,20 +30,20 @@
 	</div>
 	<div class="container">
 		<div class="solotable">
-			<table class="runeword runes" style="text-align: center;">
+			<table class="runeword runes" id ="runewords" style="text-align: center;">
 
 			<tr>
-				<th onclick="scriptTest();"> Name </th>
-				<th> #OS </th>
-				<th> Base Type </th>
+				<th onclick="sortRows(0, 'runewords');"> Name </th>
+				<th onclick="sortRows(1, 'runewords');"> #OS </th>
+				<th onclick="sortRows(2, 'runewords');"> Base Type </th>
 				<th> 1 </th>
 				<th> 2 </th>
 				<th> 3 </th>
 				<th> 4 </th>
 				<th> 5 </th>
 				<th> 6 </th>
-				<th> Level </th>
-				<th> Version </th>
+				<th onclick="sortRows(9, 'runewords');"> Level </th>
+				<th onclick="sortRows(10, 'runewords');"> Version </th>
 			</tr>
 			<tr tabindex="0">
 				<td class="tooltip"> Nadir 

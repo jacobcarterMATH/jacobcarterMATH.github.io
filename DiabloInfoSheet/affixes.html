@@ -39,11 +39,16 @@
 		
 		<form>
 			<label for="filterByItem"> Filter Affixes by Item Name: </label>
-			<input type="text" id="filterByItem" name="itemFilter" oninput="filterTableByName();">
+			<input type="text" id="filterByItem" name="itemFilter" oninput="itemCheck();">
 			<br>
 			<br>
-			<label for="filterByItem"> Filter Affixes by Stat Name: </label>
-			<input type="text" id="filterByStat" name="statFilter" oninput="filterTableByStat();">
+			<label for="filterByItem"> Filter Affixes by Effect Name: </label>
+			<input type="text" id="filterByStat" name="statFilter" oninput="statCheck();">
+			<br>
+			<br>
+			<label for="cofilterbox"> Cross filtering enabled? </label>
+			<input type="checkbox" id="cofilterbox" name="booleanbox" value="booleanbox" checked>
+			
 		</form>
 		</div>
 	<div class="container">

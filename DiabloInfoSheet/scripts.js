@@ -136,6 +136,7 @@ function show(){
 
 function filterTableByName(){
 	var filter = document.getElementById("filterByItem").value.toLowerCase();
+	var filterboth = document.getElementById("cofilterbox").checked;
 	hideRows('prefix', 2, filter);
 	
 	hideRows('suffix', 2, filter);
@@ -145,7 +146,7 @@ function filterTableByName(){
 
 function filterTableByStat(){
 	var filter = document.getElementById("filterByStat").value.toLowerCase();
-
+	var filterboth = document.getElementById("cofilterbox").checked;
 	hideRows('prefix', 1, filter);
 	
 	hideRows('suffix', 1, filter);
@@ -154,6 +155,38 @@ function filterTableByStat(){
 
 }
 
+function filterTables(){
+	var filterStat = document.getElementById("filterByStat").value.toLowerCase();
+	var filterItem = document.getElementById("filterByItem").value.toLowerCase();
+	
+	hideRowsMultipleFilter('prefix', 2, 1, filterItem, filterStat);
+	
+	hideRowsMultipleFilter('suffix', 2, 1, filterItem, filterStat);
+	
+	hideRowsMultipleFilter('charged', 1, 0, filterItem, filterStat);
+}
+
+function statCheck(){
+	var filterboth = document.getElementById("cofilterbox").checked;
+	
+	if (filterboth){
+		filterTables();
+	} else {
+		filterTableByStat();
+	}
+	
+}
+
+function itemCheck(){
+	var filterboth = document.getElementById("cofilterbox").checked;
+	
+	if (filterboth){
+		filterTables();
+	} else {
+		filterTableByName();
+	}
+	
+}
 function hideRows(elementId, rowToFilter, filterString){
 	var tableToFilter = document.getElementById(elementId);
 	var rows = tableToFilter.rows;
@@ -165,4 +198,50 @@ function hideRows(elementId, rowToFilter, filterString){
 			rows[i].hidden = false;
 		}
 	}
+}
+
+function hideRowsMultipleFilter(elementId, rowToFilterOne, rowToFilterTwo, filterStringOne, filterStringTwo){
+	var tableToFilter = document.getElementById(elementId);
+	var rows = tableToFilter.rows;
+	
+		for (var i = 1; i < rows.length; i++){
+		if (!(rows[i].getElementsByTagName("TD")[rowToFilterOne].innerHTML.toLowerCase().includes(filterStringOne))
+			|| !(rows[i].getElementsByTagName("TD")[rowToFilterTwo].innerHTML.toLowerCase().includes(filterStringTwo))){
+			rows[i].hidden = true;
+		} else {
+			rows[i].hidden = false;
+		}
+	}
+}
+
+function sortRows(column, tableId){
+	var tableToSort = document.getElementById(tableId);
+	var rows;
+	
+	var sort = true;
+	
+	var x, y, i, shouldSwitch;
+	
+	while (sort){
+		sort = false;
+		rows = tableToSort.rows;
+		
+		for (i = 1; i < rows.length - 1; i++){
+			shouldSwitch = false;
+			
+			x = rows[i].getElementsByTagName("TD")[column];
+			y = rows[i + 1].getElementsByTagName("TD")[column];
+			
+			if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()){
+				shouldSwitch = true;
+				break;
+			}
+		}
+		
+		if (shouldSwitch){
+			rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+			sort = true;
+		}
+	}
+	
 }
