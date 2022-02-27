@@ -1,0 +1,139 @@
+h1 {
+	color: #fac9ff;
+	font-family: 'Brush Script MT', cursive;
+	align: center;
+
+}
+
+body {
+	background-color: #ffebfe;
+	background-image: linear-gradient(180deg, #ffffff, #eb8aff);
+}
+
+ul {
+	list-style-type: none; 
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	width: 100%;
+	border-radius: 20px;
+	
+}
+
+li {
+	float: left;
+}
+
+li a {
+	display: block;
+	text-align: center;
+	text-decoration: none;
+	font-size: 20px;
+	padding: 5px 35px;
+	border-radius: 20px;
+	color: #551A8B;
+}
+
+li a:hover{
+	background-color: #fac9ff;
+	transition: 0.8s;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.genericItem{
+	margin: 10px;
+}
+.contentContainer {
+	display: flex;
+	flex-direction: row;
+	align-items: center; 
+	flex-wrap: wrap;
+	justify-content: center;
+	width: 800px;
+}
+
+.header {
+	text-align: center;
+	flex-grow: 0;
+	background-image: url('images/aestheticCupcakePicture.jpg');
+	background-repeat: no-repeat;
+	border-radius: 5px;
+	border: 1px solid #551A8B;
+	padding: 0 10px;
+}
+
+.header h1 {
+	background-image: linear-gradient(90deg, #ffffff, #fff00f);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+.footer {
+
+	background-color: #ffffff;
+	border-radius: 20px;
+	border: 1px solid #551A8B;
+}
+
+.footer h3{
+	padding: 10px 20px;
+	margin: 0;
+	color: #551A8B;
+	text-align: left;
+}
+
+.footer a{
+	text-decoration: none;
+	color: #551A8B;
+	padding: 5px 10px;
+	border-radius: 20px;
+}
+
+.footer a:hover{
+	background-color: #fac9ff;
+	transition: 0.8s;
+}
+.contentCard {
+	display: flex;
+	flex-direction: row;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+	transition: 0.3s;
+	border-radius: 10px;
+	margin: 10px;
+}
+
+.contentCard img {
+	border-radius: 10px 0 0 10px;
+	border: solid #551A8B;
+	width: 450px;
+}
+
+.contentCard:hover{
+	box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
+}
+
+.cardText {
+	padding: 2px 16px;
+	font-family: 'Times New Roman', serif;
+	background-color: white;
+	border-radius: 0 10px 10px 0;
+	max-width: 150px;
+	text-align: center;
+	padding: 20px 0;
+}
+
+/* Screen size adjustments */
+@media all and (max-width: 800px){
+	.contentContainer{
+		width: 600px;
+	}
+	
+	.contentCard img{
+		width: 250px;
+	}
+}
