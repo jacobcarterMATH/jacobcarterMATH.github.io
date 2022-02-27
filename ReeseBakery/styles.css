@@ -140,4 +140,8 @@ li a:hover{
 	ul {
 		width: 50%;
 	}
+	
+	li a{
+		padding: 5px 8px;
+	}
 }
