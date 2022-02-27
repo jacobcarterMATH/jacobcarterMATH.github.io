@@ -136,4 +136,8 @@ li a:hover{
 	.contentCard img{
 		width: 250px;
 	}
+	
+	ul {
+		width: 50%;
+	}
 }
