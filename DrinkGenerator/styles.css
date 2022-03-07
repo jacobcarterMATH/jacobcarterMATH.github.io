@@ -32,14 +32,13 @@ body {
 .vertFooter {
 	flex: 1 1 auto;
 	order: 1;
-	width: 200px;
-	height: 50px;
 	border: 2px solid black;
 	border-radius: 5px;
 	background-color: white;
 	font-size: 10px;
 	color: #006241;
 	padding: 1px 1px;
+	max-width: 200px;
 }
 .verticalContent img {
 	width: 120px;
