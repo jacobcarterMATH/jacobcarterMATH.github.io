@@ -1,0 +1,64 @@
+h1 {
+	color: #006241; /* Cadmium Green */
+}
+
+body { 
+	font-family: Verdana, sans-serif;
+	background-image: linear-gradient(180deg, #ffffff, #006241);
+}
+
+.sideFlexContainer {
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	justify-content: center;
+}
+
+.vertFlexContainer {
+	flex: 1 1 auto;
+	
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.verticalContent {
+	flex: 1 1 auto;
+	margin: 5px 5px;
+	color: #006241;
+}
+
+.vertFooter {
+	flex: 1 1 auto;
+	order: 1;
+	width: 200px;
+	height: 50px;
+	border: 2px solid black;
+	border-radius: 5px;
+	background-color: white;
+	font-size: 10px;
+	color: #006241;
+	padding: 1px 1px;
+}
+.verticalContent img {
+	width: 120px;
+}
+
+.contentCard {
+	display: flex;
+	flex-direction: row;
+	
+}
+
+.contentCardItem{
+	height: 400px;
+	min-width: 150px;
+	background-color: white;
+	text-align: left;
+	padding: 0px 5px;
+	color: black;
+	border: 1px solid black;
+	border-radius: 0px 5px 5px 0px;
+}
+
