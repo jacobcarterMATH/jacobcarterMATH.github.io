@@ -1,208 +1,314 @@
 class Drink {
 	
+    size;
+    drinkName;
+    mods;
+    syrups;
+    milk;
+    possibleMods;
+    possibleSyrups;
+    possibleMilks;
 	constructor(){
 		this.size = "Gr";
 		this.drinkName = "Latte";
-		this.drinkType = "Espresso";
-		this.hot = true;
-		this.mods = new Array();
-		this.syrups = new Array();
+		this.mods = [];
+		this.syrups = [];
+        this.possibleMods = ["Caramel Drizzle", "Mocha Drizzle", "Vanilla Sweet Cream CF", "Salted Crml CF", "Whipped Cream", "Cinnamon Powder", "Cinnamon Dolce Powder", "Cocoa Powder", "Salted Brown Butter Topping", "Vanilla Bean Powder"];
+        this.possibleSyrups = ["Vanilla Syrup", "Hazelnut Syrup", "Caramel Syrup", "White Mocha", "Mocha", "Toffee Nut Syrup", "Classic Syrup", "Brown Sugar Syrup", "SF Vanilla Syrup", "Raspberry Syrup"];
+        this.possibleMilks = ["2% Milk", "Whole Milk", "Coconut Milk", "Almond Milk", "Soy Milk", "Oat Milk", "Nonfat Milk", "Breve", "Heavy Cream"];
 	}
 	
+    modsToInnerHTML(){
+        var returnString = "";
+        
+        //Add syrups to inner HTML
+        for (var i = 0; i < this.syrups.length; i++){
+            returnString = returnString.concat(" <br> " + this.syrups[i]);
+        }
+        
+        for (var i = 0; i < this.mods.length; i++){
+            returnString = returnString.concat(" <br> " + this.mods[i]);
+        }
+        return returnString;
+        
+    }
+    
 	toInnerHTML(){
-		if(this.hot){
-			return "<b>" + this.size + " " + this.drinkName + "</b>";
-		} else {
-			return "<b>" + this.size + " Icd " + this.drinkName + "</b>";
-		}
+        var retString = "<b>" + this.size + " " + this.drinkName + "</b>";
+        
+        retString = retString + this.modsToInnerHTML();
+		return retString;
 	}
+    
+
 	
 	randomize(){
 		var randInt;
-		//Randomize the drink type
-		randInt = randomInteger(2);
-		
-		if (randInt == 0){
-			this.drinkType = "Espresso";
-		} else if (randInt == 1){
-			this.drinkType = "Trenta";
-		} else if (randInt == 2){
-			this.drinkType = "Frapp";
-		}
-		
-		
-		//Randomize whether drink is hot or iced
-		if (this.drinkType === "Espresso"){
-			if(randomInteger(1) == 1){
-				this.hot = true;
-			} else {
-				this.hot = false;
-			}
-		}
-		
-		//Randomize Size
-		if (this.drinkType === "Espresso"){
-			randInt = randomInteger(3);
-			if (randInt == 0){
-				if (this.hot){
-					this.size = "Sh";
-				} else {
-					this.size = "Vt";
-				}
-			} else if (randInt == 1){
-				this.size = "Tl";
-			} else if (randInt == 2){
-				this.size = "Gr";
-			} else {
-				this.size = "Vt";
-			}
-		} else if (this.drinkType === "Trenta") {
-			randInt = randomInteger(3);
-			if (randInt == 0){
-				this.size = "Tr";
-			} else if (randInt == 1){
-				this.size = "Tl";
-			} else if (randInt == 2){
-				this.size = "Gr";
-			} else {
-				this.size = "Vt";
-			} 
-		} else {
-			randInt = randomInteger(2);
-			if (randInt == 0){
-				this.size = "Tl";
-			} else if (randInt == 1){
-				this.size = "Gr";
-			} else {
-				this.size = "Vt";
-			} 
-		}
-		
-		// Randomize Drinkname
-		/* ------Drink possibilities------
-			Espresso: Latte, Shaken Espresso, Cappucino, Caramel Macch.,
-				Mocha, White Mocha, Flat White, Americano,
-				Tea Lattes - Chai, REB, London Fog (not esp but fits category)
-				
-			TrentaAvlbl: Cold Brew, Iced Coffee, Shaken Green Tea,
-				Shaken Black Tea, Shaken Passion Tea, Lemonade, 
-				
-			Frapps: Caramel Frapp, Mocha Frapp, Mocha Cookie Crumble Frapp,
-				Caramel Ribbon Crunch Frapp, Vanilla Bean Frapp, Strawberry Frapp,
-				
-			Other: Brewed Coffee, Nitro Cold Brew, Hot Brewed Teas (Earl Grey,
-					Emperor's Cloud & Mist, English Bfast, Mint Maj, Jade Citrus,
-					Peach Tranq, Honey Citrus Mint, 
-		
-		*/
-		
-		if(this.drinkType == "Espresso"){
-			randInt = randomInteger(7);
-			if(randInt == 0){
-				this.drinkName = "Latte";
-			} else if (randInt == 1){
-				this.drinkName = "Shkn Espr";
-			} else if (randInt == 2){
-				this.drinkName = "Cappucino";
-			} else if (randInt == 3){
-				this.drinkName = "Caramel Macch";
-			} else if (randInt == 4){
-				this.drinkName = "Mocha";
-			} else if (randInt == 5){
-				this.drinkName = "White Mocha";
-			} else if (randInt == 6){
-				this.drinkName = "Flat White";
-			} else if (randInt == 7){
-				this.drinkName = "Americano";
-			}
-		} else if (this.drinkType == "Trenta") {
-			randInt = randomInteger(17);
-			
-			if(randInt == 0){
-				this.drinkName = "Icd Coff";
-			} else if (randInt == 1){
-				this.drinkName = "Cold Brew";
-			} else if (randInt == 2){
-				this.drinkName = "Shk Grn Tea";
-			} else if (randInt == 3){
-				this.drinkName = "Shk Grn Tea Lmnd";
-			} else if (randInt == 4){
-				this.drinkName = "Shk Pch Grn Tea Lmnd";
-			} else if (randInt == 5){
-				this.drinkName = "Shk Blk Tea";
-			} else if (randInt == 6){
-				this.drinkName = "Shk Blk Tea Lmnd";
-			} else if (randInt == 7){
-				this.drinkName = "Shk Psn Tea";
-			} else if (randInt == 8){
-				this.drinkName = "Shk Psn Tea Lmnd";
-			}  else if (randInt == 9){
-				this.drinkName = "Pink Drink";
-			}  else if (randInt == 10){
-				this.drinkName = "Dragon Drink";
-			}  else if (randInt == 11){
-				this.drinkName = "Star Drink";
-			}  else if (randInt == 12){
-				this.drinkName = "Str Acai Rfrshr";
-			} else if (randInt == 13){
-				this.drinkName = "Str Acai Rfrshr Lmnd";
-			}  else if (randInt == 14){
-				this.drinkName = "Mango Drgnf Rfrshr Lmnd";
-			} else if (randInt == 15){
-				this.drinkName = "Mango Drgnf Rfrshr";
-			} else if (randInt == 16){
-				this.drinkName = "Kiwi Stfrt Rfrshr";
-			} else if (randInt == 17){
-				this.drinkName = "Kiwi Stfrt Rfrshr Lmnd";
-			}
-		} else if (this.drinkType == "Frapp") {
-			randInt = randomInteger(12);
-			if(randInt == 0){
-				this.drinkName = "Caramel Frap";
-			} else if (randInt == 1){
-				this.drinkName = "Mocha Frap";
-			} else if (randInt == 2){
-				this.drinkName = "Vanilla Bean Crmfr";
-			} else if (randInt == 3){
-				this.drinkName = "Strawberry Crmfr";
-			} else if (randInt == 4){
-				this.drinkName = "Mcha Cookie Crmbl Frap";
-			} else if (randInt == 5){
-				this.drinkName = "Crml Rbn Crnch Frap";
-			} else if (randInt == 6){
-				this.drinkName = "Crml Rbn Crnch Crmfr";
-			} else if (randInt == 7){
-				this.drinkName = "Choc Cookie Crmbl Crmfr";
-			} else if (randInt == 8){
-				this.drinkName = "2Chc Chip Crmfr";
-			} else if (randInt == 9){
-				this.drinkName = "Java Chip Frap";
-			} else if (randInt == 10){
-				this.drinkName = "Coffee Frap";
-			} else if (randInt == 11){
-				this.drinkName = "Espresso Frap";
-			} else if (randInt == 12){
-				this.drinkName = "Caffe Vanilla Frap";
-			}
-		}
+        const drinkSizes = ["Tl", "Gr", "Vt"];
+        randInt = randomInteger(2);
+        this.size = drinkSizes[randInt];
+        
+        //determine whether to add random syrups, then add up to 5
+        var addRandomSyrups = randomInteger(2);
+        var amtSyrupsToAdd;
+        if (addRandomSyrups >= 1){
+            amtSyrupsToAdd = randomInteger(5);
+            for (var i = 0; i < amtSyrupsToAdd; i++){
+                this.addRandomSyrup();
+            }
+        }
+        
+        //add chance to customize syrup amounts, then do it if so
+        var custSyrupAmt;
+        var randSyrupAmt;
+        var pumpsAmt = "";
+        for (var i = 0; i < this.syrups.length; i++){
+            custSyrupAmt = randomInteger(1);
+            if (custSyrupAmt == 1){
+                randSyrupAmt = randomInteger(12);
+                if (randSyrupAmt == 0){
+                    randSyrupAmt = 1;
+                }
+                pumpsAmt = randSyrupAmt.toString() + " pumps ";
+                this.syrups[i] = pumpsAmt.concat(this.syrups[i]);
+            }
+        }
+        
+        //determine whether to add random mods, then add up to 5 
+        var addRandomMods = randomInteger(2);
+        var amtModsToAdd;
+        if (addRandomMods >= 1){
+            amtModsToAdd = randomInteger(5);
+            for (var i = 0; i < amtModsToAdd; i++){
+                this.addRandomMod();
+            }
+        }
+        
+        //determine whether to change the milk, then change it if so
+        var changeMilk = randomInteger(1);
+        if (changeMilk == 1){
+            this.pickRandomMilk();
+        }
 	}
 	
+    pickRandomMilk(){
+        var randInt;
+        randInt = randomInteger(this.possibleMilks.length - 1);
+        this.mods.push(this.possibleMilks[randInt]);
+        
+    }
 	addRandomMod(){
-		
+        
+        var randInt;
+        randInt = randomInteger(this.possibleMods.length - 1);
+        if (!this.mods.includes(this.possibleMods[randInt])){
+            this.mods.push(this.possibleMods[randInt]);
+        }
 	}
 	
 	addRandomSyrup(){
-		
+		var randInt;
+        randInt = randomInteger(this.possibleSyrups.length - 1);
+        if (!this.syrups.includes(this.possibleSyrups[randInt])){
+            this.syrups.push(this.possibleSyrups[randInt]);
+        }
 	}
 }
+
+class ChargeMilk extends Drink {
+    
+    constructor(){
+        super();
+    }
+    
+    randomize(){
+        super.randomize();
+    }
+}
+
+class Espresso extends ChargeMilk {
+    shots;
+    
+    constructor(){
+        super();
+        this.shots = 0;
+    }
+    
+    randomizeShots(){
+        const currShots = this.shots;
+        while (this.shots == currShots){
+            this.shots = randomInteger(8);
+        }
+    }
+    randomize(){
+        //Randomize the drink name
+        const drinkNames = ["Latte", "Shkn Espr", "Cappucino", "Caramel Macch", "Mocha", "White Mocha", "Flat White", "Americano"];
+        var randInt = randomInteger(7);
+        this.drinkName = drinkNames[randInt];
+        super.randomize();
+    }
+
+}
+
+class Hot extends Espresso {
+    constructor(){
+        super();
+    }
+    
+    initShots(){
+        if (this.size == "Sh"){
+            this.shots = 1;
+        } else if (this.size == "Tl"){
+            this.shots = 1;
+        } else if (this.size == "Gr"){
+            this.shots = 2;
+        } else if (this.size == "Vt"){
+            this.shots = 2;
+        }
+    }
+    
+    randomize(){
+        super.randomize();
+        //Randomize the drink size
+        const drinkSizes = ["Sh", "Tl", "Gr", "Vt"];
+        var randInt = randomInteger(3);
+        this.size = drinkSizes[randInt];
+        this.initShots();
+    }
+    
+}
+class Iced extends Espresso {
+    
+    constructor(){
+        super();
+    }
+    
+    initShots(){
+        if (this.size == "Tl"){
+            this.shots = 1;
+        } else if (this.size == "Gr"){
+            this.shots = 2;
+        } else if (this.size == "Vt"){
+            this.shots = 3;
+        }
+    }
+    
+    randomize(){
+        super.randomize();
+        this.initShots();
+    }
+    
+    toInnerHTML(){
+        var retString = "<b>" + this.size + " Icd " + this.drinkName + "</b>";
+        
+        retString = retString + this.modsToInnerHTML();
+		return retString;
+	}
+}
+
+class Frapp extends ChargeMilk{
+    constructor(){
+        super();
+    }
+    
+    randomize(){
+        super.randomize();
+        
+        const drinkNames = ["Caramel Frap","Mocha Frap","VBean Crmfr","Strawberry Crmfr","Mcha Cookie Crmbl Frap","Crml Rbn Crnch Frap","Crml Rbn Crnch Crmfr","Choc Cookie Crmbl Crmfr","2Chc Chip Crmfr","Java Chip Frap","Coffee Frap","Espresso Frap","Caffe Vanilla Frap"];
+        var randInt = randomInteger(drinkNames.length - 1);
+        this.drinkName = drinkNames[randInt];
+    }
+}
+
+
+class NoChargeMilk extends Drink {
+    constructor(){
+        super();
+    }
+    
+    randomize(){
+        super.randomize();
+    }
+}
+
+//possible sizes tall thru trenta
+class Trenta extends NoChargeMilk {
+    constructor(){
+        super();
+    }
+    
+    randomize(){
+        
+        super.randomize();
+        const drinkNames = ["Icd Coff", "Cold Brew", "Shk Grn Tea", "Shk Grn Tea Lmnd", "Shk Pch Grn Tea Lmnd", "Shk Blk Tea", "Shk Blk Tea Lmnd","Shk Psn Tea", "Shk Psn Tea Lmnd","Pink Drink","Dragon Drink","Star Drink","Str Acai Rfrshr","Str Acai Rfrshr Lmnd", "Mango Drgnf Rfrshr Lmnd","Mango Drgnf Rfrshr", "Kiwi Stfrt Rfrshr", "Kiwi Stfrt Rfrshr Lmnd"];
+        var randInt = randomInteger(drinkNames.length - 1);
+        this.drinkName = drinkNames[randInt];
+        
+        const drinkSizes = ["Tl", "Gr", "Vt", "Tr"];
+        randInt = randomInteger(3);
+        this.size = drinkSizes[randInt];
+    }
+}
+
+//possible sizes tall thru venti
+class CoffeeTea extends NoChargeMilk {
+    constructor(){
+        super();
+    }
+    
+    randomize(){
+        
+        super.randomize();
+        const drinkNames = ["Pike Place Roast", "Earl Grey", "Emp Cloud & Mist", "Mint Majsty", "Jade Ctrs Mint", "Peach Tranq", "Honey Citrus Mint"];
+        var randInt = randomInteger(drinkNames.length - 1);
+        this.drinkName = drinkNames[randInt];
+    }
+}
+
+//possible sizes tall and grande
+class Nitro extends NoChargeMilk {
+    constructor(){
+        super();
+    }
+    
+    randomize(){
+        
+        super.randomize();
+        const drinkNames = ["Nitro Cold Brew", "Nitro CB W/ VSC", "Sltd Crml CF NCB"];
+        var randInt = randomInteger(drinkNames.length - 1);
+        this.drinkName = drinkNames[randInt];
+        
+        const drinkSizes = ["Tl", "Gr"];
+        randInt = randomInteger(1);
+        this.size = drinkSizes[randInt];
+    }
+}
+
 
 // Returns and random integer from 0 to x
 function randomInteger(x){
 	return Math.floor(Math.random() * (x + 1));
 }
+
 function Generate(){
-	
+	var randInt;
 	let myDrink = new Drink();
+    randInt = randomInteger(5);
+    if (randInt == 0){
+         myDrink = new Hot();
+    } else if (randInt == 1){
+         myDrink = new Iced();
+    } else if (randInt == 2){
+         myDrink = new Frapp();
+    } else if (randInt == 3){
+         myDrink = new Trenta();
+    } else if (randInt == 4){
+         myDrink = new CoffeeTea();
+    } else if (randInt == 5){
+         myDrink = new Nitro();
+    }
+    
 	myDrink.randomize();
+
 	document.getElementById("mainDrink").innerHTML = myDrink.toInnerHTML();
 }
