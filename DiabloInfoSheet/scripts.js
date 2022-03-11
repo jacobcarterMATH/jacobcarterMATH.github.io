@@ -103,9 +103,7 @@ function showSideNav(){
 	}
 }
 
-function scriptTest(){
-	alert("test");
-}
+
 function hidePreTwoFour(){
 	var PatchTwoFourAreas = document.querySelectorAll('.twofourflag');
 	var i = 0;
