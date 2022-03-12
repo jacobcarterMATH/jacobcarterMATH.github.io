@@ -1,10 +1,13 @@
 h1 {
-	color: #036635; /* Cadmium Green */
+	color: #036635;
+    background-color: white;
+    border-radius: 4px;
+    padding: 5px;
 }
 
 body { 
 	font-family: Verdana, sans-serif;
-	background-image: linear-gradient(180deg, #ffffff, #036635);
+	background-image: linear-gradient(180deg, #1e3932, #036635);
 }
 
 .sideFlexContainer {
@@ -49,9 +52,27 @@ body {
 	
 }
 
-.contentCardItem{
+.contentCardItemLeft{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 	height: 300px;
-	width: 150px;
+	width: 140px;
+	background-color: white;
+	text-align: left;
+	padding: 0px 5px;
+	color: black;
+	border: 1px solid black;
+	border-radius: 5px 0px 0px 5px;
+    font-size: 13px;
+}
+
+.contentCardItemLeft label{
+    
+}
+.contentCardItemRight{
+	height: 300px;
+	width: 160px;
 	background-color: white;
 	text-align: left;
 	padding: 0px 5px;
@@ -61,7 +82,20 @@ body {
     font-size: 13px;
 }
 
-.contentCardItem b{
+.contentCardItemRight b{
     font-size: 15px;
 }
 
+
+button {
+    background-color: #036635;
+    width: 90px;
+    margin: 5px 25px;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+button:hover{
+    cursor: pointer;
+    background-color: #0f6f3f;
+}

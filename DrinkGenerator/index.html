@@ -14,9 +14,43 @@
 			</div>
 			<div class="verticalContent">
 				<div class="contentCard">
-					<button onclick="Generate()"> <b> Generate Drink </b> </button>
-					
-					<div id="mainDrink" class="contentCardItem">
+                    <div class="contentCardItemLeft">
+                        <div>
+                            <input type="checkbox" id="excIcdTea">
+                            <label for="excIcdTea"> Exclude Iced Teas & Refreshers </label>
+                            <br>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="excHotTea">
+                            <label for="excHotTea"> Exclude Hot Teas </label>
+                            <br>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="excColdEsp">
+                            <label for="excColdEsp"> Exclude Iced Espresso </label>
+                            <br>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="excHotEsp">
+                            <label for="excHotEsp"> Exclude Hot Espresso </label>
+                            <br>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="excFrap">
+                            <label for="excFrap"> Exclude Frappucinos </label>
+                            <br>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="excBrewed">
+                            <label for="excBrewed"> Exclude Brewed Coffee </label>
+                            <br>
+                        </div>
+                        <div>
+                            <button onclick="Generate()"> <b> Generate Drink </b> </button>
+                        </div>
+                        
+                    </div>
+					<div id="mainDrink" class="contentCardItemRight">
 					</div>
 				</div>
 			</div>

@@ -49,11 +49,11 @@ class Drink {
         randInt = randomInteger(2);
         this.size = drinkSizes[randInt];
         
-        //determine whether to add random syrups, then add up to 5
+        //determine whether to add random syrups, then add up to 3
         var addRandomSyrups = randomInteger(2);
         var amtSyrupsToAdd;
         if (addRandomSyrups >= 1){
-            amtSyrupsToAdd = randomInteger(5);
+            amtSyrupsToAdd = randomInteger(3);
             for (var i = 0; i < amtSyrupsToAdd; i++){
                 this.addRandomSyrup();
             }
@@ -138,7 +138,7 @@ class Espresso extends ChargeMilk {
     randomizeShots(){
         const currShots = this.shots;
         while (this.shots == currShots){
-            this.shots = randomInteger(8);
+            this.shots = randomInteger(this.shots + 3);
             if (this.shots == 0){
                 this.shots = 1;
             }
@@ -291,42 +291,63 @@ function randomInteger(x){
 }
 
 function Generate(){
-    
-    const trDrinkNames = ["Icd Coff", "Cold Brew", "Shk Grn Tea", "Shk Grn Tea Lmnd", "Shk Pch Grn Tea Lmnd", "Shk Blk Tea", "Shk Blk Tea Lmnd","Shk Psn Tea", "Shk Psn Tea Lmnd","Pink Drink","Dragon Drink","Star Drink","Str Acai Rfrshr","Str Acai Rfrshr Lmnd", "Mango Drgnf Rfrshr Lmnd","Mango Drgnf Rfrshr", "Kiwi Stfrt Rfrshr", "Kiwi Stfrt Rfrshr Lmnd"];
-    const espDrinkNames = ["Latte", "Shkn Espr", "Cappucino", "Caramel Macch", "Mocha", "White Mocha", "Flat White", "Americano"]
-    const frapDrinkNames = ["Caramel Frap","Mocha Frap","VBean Crmfr","Strawberry Crmfr","Mcha Cookie Crmbl Frap","Crml Rbn Crnch Frap","Crml Rbn Crnch Crmfr","Choc Cookie Crmbl Crmfr","2Chc Chip Crmfr","Java Chip Frap","Coffee Frap","Espresso Frap","Caffe Vanilla Frap"];
-    const brewDrinkNames = ["Pike Place Roast", "Earl Grey", "Emp Cloud & Mist", "Mint Majsty", "Jade Ctrs Mint", "Peach Tranq", "Honey Citrus Mint"];
+    const trDrinkNames = ["Shk Grn Tea", "Shk Grn Tea Lmnd", "Shk Pch Grn Tea Lmnd", "Shk Blk Tea", "Shk Blk Tea Lmnd","Shk Psn Tea", "Shk Psn Tea Lmnd","Pink Drink","Dragon Drink","Star Drink","Str Acai Rfrshr","Str Acai Rfrshr Lmnd", "Mango Drgnf Rfrshr Lmnd","Mango Drgnf Rfrshr", "Kiwi Stfrt Rfrshr", "Kiwi Stfrt Rfrshr Lmnd"];
+    const espDrinkNames = ["Latte", "Cappucino", "Caramel Macch", "Mocha", "White Mocha", "Flat White", "Americano"];
+    const frapDrinkNames = ["Caramel Frap","Mocha Frap","Vbean Crmfr","Strawberry Crmfr","Mcha Cookie Crmbl Frap","Crml Rbn Crnch Frap","Crml Rbn Crnch Crmfr","Choc Cookie Crmbl Crmfr","2Chc Chip Crmfr","Java Chip Frap","Coffee Frap","Espresso Frap","Caffe Vanilla Frap"];
+    const brewedHotCoffeeNames = ["Pike Place Roast", "Blonde Roast", "Dark Roast"];
     const nitroDrinkNames = ["Nitro Cold Brew", "Nitro CB W/ VSC", "Sltd Crml CF NCB"];
+    const hotTeaNames = ["Earl Grey", "Emp Cloud & Mist", "Mint Majsty", "Jade Ctrs Mint", "Peach Tranq", "Honey Citrus Mint", "Royal English Breakfast", "Brewed Chai Tea"];
+    const brewedColdCoffeeNames = ["Icd Coff", "Cold Brew", "Vnlla Swt Crm Cld Brw", "Salted Crml Cf CB"];
     
-    const trDrinks        =    [];
-    const espHotDrinks    =    [];
-    const espIcdDrinks    =    [];
-    const frapDrinks      =    [];
-    const brewDrinks      =    [];
-    const nitroDrinks     =    [];
+    const trDrinks                   =    [];
+    const espHotDrinks               =    [];
+    const espIcdDrinks               =    [];
+    const frapDrinks                 =    [];
+    const brewedHotCoffeeDrinks      =    [];
+    const nitroDrinks                =    [];
+    const hotTeaDrinks               =    []; 
+    const brewedColdCoffeeDrinks     =    [];
     
+    if (!document.getElementById("excIcdTea").checked){
+        for (var i = 0; i < trDrinkNames.length; i++){
+            trDrinks.push(new Trenta(trDrinkNames[i]));
+        }
+    }
+    if (!document.getElementById("excHotTea").checked){
+        for (var i = 0; i < hotTeaNames.length; i++){
+            hotTeaDrinks.push(new CoffeeTea(hotTeaNames[i]));
+        }
+    }
+    if (!document.getElementById("excHotEsp").checked){
+        for (var i = 0; i < espDrinkNames.length; i++){
+            espHotDrinks.push(new Hot(espDrinkNames[i]));
+        }
+    }
+    if (!document.getElementById("excColdEsp").checked){
+        for (var i = 0; i < espDrinkNames.length; i++){
+            espIcdDrinks.push(new Iced(espDrinkNames[i]));
+        }
+        espIcdDrinks.push(new Iced("Shkn Espr"));
+    }
+    if (!document.getElementById("excFrap").checked){
+        for (var i = 0; i < frapDrinkNames.length; i++){
+            frapDrinks.push(new Frapp(frapDrinkNames[i]));
+        }
+    }
+
+    if (!document.getElementById("excBrewed").checked){
+        for (var i = 0; i < nitroDrinkNames.length; i++){
+            nitroDrinks.push(new Nitro(nitroDrinkNames[i]));
+        }
+        for (var i = 0; i < brewedHotCoffeeNames.length; i++){
+            brewedHotCoffeeDrinks.push(new CoffeeTea(brewedHotCoffeeNames[i]));
+        }
+        for (var i = 0; i < brewedColdCoffeeNames.length; i++){
+            brewedColdCoffeeDrinks.push(new Trenta(brewedColdCoffeeNames[i]));
+        }
+    }
     
-    for (var i = 0; i < trDrinkNames.length; i++){
-        trDrinks.push(new Trenta(trDrinkNames[i]));
-    }
-    for (var i = 0; i < espDrinkNames.length; i++){
-        espHotDrinks.push(new Hot(espDrinkNames[i]));
-    }
-    for (var i = 0; i < espDrinkNames.length; i++){
-        espIcdDrinks.push(new Iced(espDrinkNames[i]));
-    }
-    for (var i = 0; i < frapDrinkNames.length; i++){
-        frapDrinks.push(new Frapp(frapDrinkNames[i]));
-    }
-    for (var i = 0; i < brewDrinkNames.length; i++){
-        brewDrinks.push(new CoffeeTea(brewDrinkNames[i]));
-    }
-    for (var i = 0; i < nitroDrinkNames.length; i++){
-        nitroDrinks.push(new Nitro(nitroDrinkNames[i]));
-    }
-    
-    const masterDrinkList = espHotDrinks.concat(espIcdDrinks, frapDrinks, brewDrinks, nitroDrinks, trDrinks);
-    
+    const masterDrinkList = espHotDrinks.concat(espIcdDrinks, frapDrinks, nitroDrinks, trDrinks, brewedHotCoffeeDrinks, brewedColdCoffeeDrinks, hotTeaDrinks);
     
 	var randInt = randomInteger(masterDrinkList.length - 1);;
 	var myDrink = masterDrinkList[randInt];
