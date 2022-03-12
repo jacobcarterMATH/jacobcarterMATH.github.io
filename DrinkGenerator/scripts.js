@@ -8,9 +8,10 @@ class Drink {
     possibleMods;
     possibleSyrups;
     possibleMilks;
-	constructor(){
+    
+	constructor(_drinkName){
 		this.size = "Gr";
-		this.drinkName = "Latte";
+		this.drinkName = _drinkName;
 		this.mods = [];
 		this.syrups = [];
         this.possibleMods = ["Caramel Drizzle", "Mocha Drizzle", "Vanilla Sweet Cream CF", "Salted Crml CF", "Whipped Cream", "Cinnamon Powder", "Cinnamon Dolce Powder", "Cocoa Powder", "Salted Brown Butter Topping", "Vanilla Bean Powder"];
@@ -117,8 +118,8 @@ class Drink {
 
 class ChargeMilk extends Drink {
     
-    constructor(){
-        super();
+    constructor(_drinkName){
+        super(_drinkName);
     }
     
     randomize(){
@@ -129,8 +130,8 @@ class ChargeMilk extends Drink {
 class Espresso extends ChargeMilk {
     shots;
     
-    constructor(){
-        super();
+    constructor(_drinkName){
+        super(_drinkName);
         this.shots = 0;
     }
     
@@ -138,21 +139,21 @@ class Espresso extends ChargeMilk {
         const currShots = this.shots;
         while (this.shots == currShots){
             this.shots = randomInteger(8);
+            if (this.shots == 0){
+                this.shots = 1;
+            }
         }
     }
     randomize(){
-        //Randomize the drink name
-        const drinkNames = ["Latte", "Shkn Espr", "Cappucino", "Caramel Macch", "Mocha", "White Mocha", "Flat White", "Americano"];
-        var randInt = randomInteger(7);
-        this.drinkName = drinkNames[randInt];
+
         super.randomize();
     }
 
 }
 
 class Hot extends Espresso {
-    constructor(){
-        super();
+    constructor(_drinkName){
+        super(_drinkName);
     }
     
     initShots(){
@@ -173,14 +174,21 @@ class Hot extends Espresso {
         const drinkSizes = ["Sh", "Tl", "Gr", "Vt"];
         var randInt = randomInteger(3);
         this.size = drinkSizes[randInt];
+        
         this.initShots();
+        randInt = randomInteger(1);
+        if (randInt == 0){
+            this.randomizeShots();
+            this.mods.push(this.shots + " Shot");
+        }
+        
     }
     
 }
 class Iced extends Espresso {
     
-    constructor(){
-        super();
+    constructor(_drinkName){
+        super(_drinkName);
     }
     
     initShots(){
@@ -207,79 +215,71 @@ class Iced extends Espresso {
 }
 
 class Frapp extends ChargeMilk{
-    constructor(){
-        super();
+    constructor(_drinkName){
+        super(_drinkName);
     }
     
     randomize(){
         super.randomize();
-        
-        const drinkNames = ["Caramel Frap","Mocha Frap","VBean Crmfr","Strawberry Crmfr","Mcha Cookie Crmbl Frap","Crml Rbn Crnch Frap","Crml Rbn Crnch Crmfr","Choc Cookie Crmbl Crmfr","2Chc Chip Crmfr","Java Chip Frap","Coffee Frap","Espresso Frap","Caffe Vanilla Frap"];
-        var randInt = randomInteger(drinkNames.length - 1);
-        this.drinkName = drinkNames[randInt];
+
     }
 }
 
 
 class NoChargeMilk extends Drink {
-    constructor(){
-        super();
+    constructor(_drinkName){
+        super(_drinkName);
+        this.possibleMilks = ['w/ 2% Milk 1/2"', 'w/ Whole Milk 1/2"', 'w/ Coconut Milk 1/2"', 'w/ Almond Milk 1/2"', 'w/ Soy Milk 1/2"', 'w/ Oat Milk 1/2"', 'w/ Nonfat Milk 1/2"', 'w/ Half & Half 1/2"', 'w/ Heavy Cream 1/2"'];
     }
     
     randomize(){
         super.randomize();
     }
+    
 }
 
 //possible sizes tall thru trenta
 class Trenta extends NoChargeMilk {
-    constructor(){
-        super();
+    constructor(_drinkName){
+        super(_drinkName);
     }
     
     randomize(){
         
         super.randomize();
-        const drinkNames = ["Icd Coff", "Cold Brew", "Shk Grn Tea", "Shk Grn Tea Lmnd", "Shk Pch Grn Tea Lmnd", "Shk Blk Tea", "Shk Blk Tea Lmnd","Shk Psn Tea", "Shk Psn Tea Lmnd","Pink Drink","Dragon Drink","Star Drink","Str Acai Rfrshr","Str Acai Rfrshr Lmnd", "Mango Drgnf Rfrshr Lmnd","Mango Drgnf Rfrshr", "Kiwi Stfrt Rfrshr", "Kiwi Stfrt Rfrshr Lmnd"];
-        var randInt = randomInteger(drinkNames.length - 1);
-        this.drinkName = drinkNames[randInt];
-        
+
         const drinkSizes = ["Tl", "Gr", "Vt", "Tr"];
-        randInt = randomInteger(3);
+        var randInt = randomInteger(3);
         this.size = drinkSizes[randInt];
+        
     }
 }
 
 //possible sizes tall thru venti
 class CoffeeTea extends NoChargeMilk {
-    constructor(){
-        super();
+    constructor(_drinkName){
+        super(_drinkName);
     }
     
     randomize(){
         
         super.randomize();
-        const drinkNames = ["Pike Place Roast", "Earl Grey", "Emp Cloud & Mist", "Mint Majsty", "Jade Ctrs Mint", "Peach Tranq", "Honey Citrus Mint"];
-        var randInt = randomInteger(drinkNames.length - 1);
-        this.drinkName = drinkNames[randInt];
+
     }
 }
 
 //possible sizes tall and grande
 class Nitro extends NoChargeMilk {
-    constructor(){
-        super();
+    constructor(_drinkName){
+        super(_drinkName);
     }
     
     randomize(){
         
         super.randomize();
-        const drinkNames = ["Nitro Cold Brew", "Nitro CB W/ VSC", "Sltd Crml CF NCB"];
-        var randInt = randomInteger(drinkNames.length - 1);
-        this.drinkName = drinkNames[randInt];
-        
+
         const drinkSizes = ["Tl", "Gr"];
-        randInt = randomInteger(1);
+        var randInt = randomInteger(1);
         this.size = drinkSizes[randInt];
     }
 }
@@ -291,24 +291,48 @@ function randomInteger(x){
 }
 
 function Generate(){
-	var randInt;
-	let myDrink = new Drink();
-    randInt = randomInteger(5);
-    if (randInt == 0){
-         myDrink = new Hot();
-    } else if (randInt == 1){
-         myDrink = new Iced();
-    } else if (randInt == 2){
-         myDrink = new Frapp();
-    } else if (randInt == 3){
-         myDrink = new Trenta();
-    } else if (randInt == 4){
-         myDrink = new CoffeeTea();
-    } else if (randInt == 5){
-         myDrink = new Nitro();
+    
+    const trDrinkNames = ["Icd Coff", "Cold Brew", "Shk Grn Tea", "Shk Grn Tea Lmnd", "Shk Pch Grn Tea Lmnd", "Shk Blk Tea", "Shk Blk Tea Lmnd","Shk Psn Tea", "Shk Psn Tea Lmnd","Pink Drink","Dragon Drink","Star Drink","Str Acai Rfrshr","Str Acai Rfrshr Lmnd", "Mango Drgnf Rfrshr Lmnd","Mango Drgnf Rfrshr", "Kiwi Stfrt Rfrshr", "Kiwi Stfrt Rfrshr Lmnd"];
+    const espDrinkNames = ["Latte", "Shkn Espr", "Cappucino", "Caramel Macch", "Mocha", "White Mocha", "Flat White", "Americano"]
+    const frapDrinkNames = ["Caramel Frap","Mocha Frap","VBean Crmfr","Strawberry Crmfr","Mcha Cookie Crmbl Frap","Crml Rbn Crnch Frap","Crml Rbn Crnch Crmfr","Choc Cookie Crmbl Crmfr","2Chc Chip Crmfr","Java Chip Frap","Coffee Frap","Espresso Frap","Caffe Vanilla Frap"];
+    const brewDrinkNames = ["Pike Place Roast", "Earl Grey", "Emp Cloud & Mist", "Mint Majsty", "Jade Ctrs Mint", "Peach Tranq", "Honey Citrus Mint"];
+    const nitroDrinkNames = ["Nitro Cold Brew", "Nitro CB W/ VSC", "Sltd Crml CF NCB"];
+    
+    const trDrinks        =    [];
+    const espHotDrinks    =    [];
+    const espIcdDrinks    =    [];
+    const frapDrinks      =    [];
+    const brewDrinks      =    [];
+    const nitroDrinks     =    [];
+    
+    
+    for (var i = 0; i < trDrinkNames.length; i++){
+        trDrinks.push(new Trenta(trDrinkNames[i]));
+    }
+    for (var i = 0; i < espDrinkNames.length; i++){
+        espHotDrinks.push(new Hot(espDrinkNames[i]));
+    }
+    for (var i = 0; i < espDrinkNames.length; i++){
+        espIcdDrinks.push(new Iced(espDrinkNames[i]));
+    }
+    for (var i = 0; i < frapDrinkNames.length; i++){
+        frapDrinks.push(new Frapp(frapDrinkNames[i]));
+    }
+    for (var i = 0; i < brewDrinkNames.length; i++){
+        brewDrinks.push(new CoffeeTea(brewDrinkNames[i]));
+    }
+    for (var i = 0; i < nitroDrinkNames.length; i++){
+        nitroDrinks.push(new Nitro(nitroDrinkNames[i]));
     }
     
+    const masterDrinkList = espHotDrinks.concat(espIcdDrinks, frapDrinks, brewDrinks, nitroDrinks, trDrinks);
+    
+    
+	var randInt = randomInteger(masterDrinkList.length - 1);;
+	var myDrink = masterDrinkList[randInt];
+    
 	myDrink.randomize();
-
+    
+    
 	document.getElementById("mainDrink").innerHTML = myDrink.toInnerHTML();
 }
