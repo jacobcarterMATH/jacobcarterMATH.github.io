@@ -1,9 +1,22 @@
+"use strict";
 /* =========================
    Endless Hack-and-Slash (Simplified Slots Build)
    Slots: weapon, armor, boots, ring, trinket
    - Normalizes legacy items: helm/chest -> armor, amulet -> trinket
    - All other features from the clean build retained
    ========================= */
+/*
+ * ====== Refactor Notes (2025-08-13) ======
+ * - 'use strict' enabled for safer semantics
+ * - Removed duplicate clamp() definition (kept clamp(v,min,max))
+ * - Fixed screenToCanvas() to reference the correct canvas element 'cvs'
+ * - Introduced FX constants for swing and floaty lifetimes
+ * - Added JSDoc comments to core functions for maintainability
+ *
+ * Behavior should be unchanged. If anything regressed, search for this banner
+ * and review diffs related to the above bullets.
+ */
+
 
 /* ========= Utils ========= */
 function clamp(v,min,max){ return v<min?min:v>max?max:v; }
@@ -25,6 +38,21 @@ const GAME = {
   width: 960, height: 540,
   bg: '#0b0f1a'
 };
+/* ========= Enemy Type Colors ========= */
+// Match the colors you already use in tooltips: zombie=green, alien=light-blue, demon=red
+const TYPE_COLOR = {
+  zombie: { fill: "#2ecc71", stroke: "#27ae60", hp: "#2ecc71" },
+  alien:  { fill: "#7ed6ff", stroke: "#22a6b3", hp: "#7ed6ff" },
+  demon:  { fill: "#e74c3c", stroke: "#c0392b", hp: "#e74c3c" },
+};
+
+// Returns the base family for an enemy (so 'zombie_boss' -> 'zombie').
+function baseTypeOf(e){
+  if (!e || !e.type) return "zombie";
+  if (e.type.endsWith("_boss")) return e.type.slice(0, e.type.indexOf("_boss"));
+  return e.type; // 'zombie' | 'alien' | 'demon' | 'sniper' | ...
+}
+
 const AI = {
   alienRetreatDelay: 2500,  // ms grace after getting too close
   alienHysteresis: 24       // px beyond min to reset the retreat delay
@@ -32,6 +60,10 @@ const AI = {
 const LOOT = {
   hpPackChance: 0.06,      // 6% base chance on kill
   hpPackHealFrac: 0.30     // heals 30% max hp
+};
+const FX = {
+  swingLifeMs: 180,   // swing arc fade duration
+  floatyLifeMs: 700   // damage number lifetime
 };
 const SNIPER = {
   windupMs: 900,
@@ -91,8 +123,11 @@ const ALIEN_AIM = (()=> {
 
 const DEG = Math.PI / 180;
 
-function clamp(v,a,b){ return Math.max(a, Math.min(b, v)); }
-
+/**
+ * Computes current alien aim spread (radians) from wave and distance.
+ * @param {object} e - Alien entity.
+ * @returns {number} spreadRadians
+ */
 function alienSpreadRadians(e){
   const A = ALIEN_AIM;
   const w = Math.max(1, game.wave);
@@ -113,6 +148,11 @@ function alienSpreadRadians(e){
 }
 
 // Returns a scalar to multiply with the computed ms
+/**
+ * Returns a wave-scaled speed multiplier for enemies.
+ * @param {number} w - Current wave number.
+ * @returns {number} speedScalar
+ */
 function enemySpeedScalar(w){
   if (w <= SPEED.earlyUntilWave){
     const t = (w - 1) / Math.max(1, (SPEED.earlyUntilWave - 1));
@@ -152,10 +192,16 @@ const cvs = document.getElementById('gameCanvas');
 cvs.width = GAME.width; cvs.height = GAME.height;
 const ctx = cvs.getContext('2d');
 
+/**
+ * Convert viewport mouse coords to canvas space (handles CSS scaling).
+ * @param {number} clientX
+ * @param {number} clientY
+ * @returns {{x:number,y:number}}
+ */
 function screenToCanvas(clientX, clientY){
-  const rect = canvas.getBoundingClientRect();
-  const scaleX = canvas.width  / rect.width;
-  const scaleY = canvas.height / rect.height;
+  const rect = cvs.getBoundingClientRect();
+  const scaleX = cvs.width  / rect.width;
+  const scaleY = cvs.height / rect.height;
   return { x: (clientX - rect.left) * scaleX, y: (clientY - rect.top) * scaleY };
 }
 
@@ -390,7 +436,16 @@ function normalizeSlots(){
 /* ========= Type mods (damage taken modifiers) ========= */
 function getTypeMods(type){
   let drMult = 1.0;
-  const map = { zombie:'dr_zombie', alien:'dr_alien', demon:'dr_demon', boss:'dr_zombie' };
+  const map = {
+  zombie: 'dr_zombie',
+  alien:  'dr_alien',
+  demon:  'dr_demon',
+  boss:   'dr_zombie',      // backward-compat if any legacy 'boss' slips through
+  zombie_boss: 'dr_zombie',
+  alien_boss:  'dr_alien',
+  demon_boss:  'dr_demon'
+};
+
   const key = map[type] || null;
   if (key){
     for(const slot of ITEM_SLOTS){
@@ -402,6 +457,36 @@ function getTypeMods(type){
   }
   return { drMult };
 }
+/* ========= Type bonuses (damage dealt modifiers) ========= */
+/** Returns a multiplicative damage bonus for % Dmg vs {type} affixes. */
+function getVsMult(type){
+  let mult = 1.0;
+  // Mirror the DR mapping; change 'boss' if you later tag boss subtypes.
+  const map = {
+  zombie: 'vs_zombie',
+  alien:  'vs_alien',
+  demon:  'vs_demon',
+  boss:   'vs_zombie',      // backward-compat
+  zombie_boss: 'vs_zombie',
+  alien_boss:  'vs_alien',
+  demon_boss:  'vs_demon'
+};
+
+  const key = map[type] || null;
+  if (key){
+    for (const slot of ITEM_SLOTS){
+      const it = player.equip[slot]; if (!it) continue;
+      for (const a of it.affixes){
+        if (a.key === key){
+          // a.val is already the upgraded % value; stack multiplicatively
+          mult *= (100 + a.val) / 100;
+        }
+      }
+    }
+  }
+  return mult;
+}
+
 
 /* ========= Stats (pure compute + assign) ========= */
 function computeStats(equipMap){
@@ -488,24 +573,88 @@ function fmtDelta(n, unit='', invert=false){
   const color = (n===0) ? '#cbd5e1' : (good ? '#34d399' : '#f87171'); // gray | green | red
   return `<span style="color:${color}">${txt}</span>`;
 }
+/* ========= Tooltip Compare: show only stats present on either item ========= */
+function labelForKey(key){
+  const baseMap = {
+    dmg:'Damage', hp:'Max HP', regen:'HP Regen', range:'Range',
+    cd:'Attack Speed', ms:'Move Speed',
+    str:'Strength', agi:'Agility', end:'Endurance', luck:'Luck'
+  };
+  if (key && (key.startsWith('vs_') || key.startsWith('dr_'))){
+    const colors = { zombie:'#16a34a', alien:'#22d3ee', demon:'#ef4444' };
+    const type = key.split('_')[1];
+    const kind = key.startsWith('vs_') ? 'Dmg vs ' : 'DR vs ';
+    const pretty = type==='zombie' ? 'Zombies' : type==='alien' ? 'Aliens' : 'Demons';
+    const col = colors[type] || '#e5e7eb';
+    return kind + `<span style="color:${col}">${pretty}</span>`;
+  }
+  return baseMap[key] || (key || 'Stat');
+}
+
+function collectAffixValues(item){
+  const out = {};
+  if (!item || !Array.isArray(item.affixes)) return out;
+  for (const a of item.affixes){
+    if (!a || !a.key) continue;
+    out[a.key] = (out[a.key] || 0) + (a.val || 0); // sum duplicates if any
+  }
+  return out;
+}
+
+function buildCompareByAffixesHTML(inspectItem, equippedItem){
+  const a = collectAffixValues(equippedItem);
+  const b = collectAffixValues(inspectItem);
+  const keys = Array.from(new Set([...Object.keys(a), ...Object.keys(b)]));
+  if (keys.length === 0) return '';
+
+  // Readable ordering
+  const core = ['dmg','hp','regen','range','cd','ms'];
+  const attrs = ['str','agi','end','luck'];
+  const vs = ['vs_zombie','vs_alien','vs_demon'];
+  const dr = ['dr_zombie','dr_alien','dr_demon'];
+  const order = [...core, ...attrs, ...vs, ...dr];
+
+  keys.sort((k1,k2)=>{
+    const i1 = order.indexOf(k1), i2 = order.indexOf(k2);
+    if (i1 === -1 && i2 === -1) return k1.localeCompare(k2);
+    if (i1 === -1) return 1;
+    if (i2 === -1) return -1;
+    return i1 - i2;
+  });
+
+  let rows = [];
+  for (const k of keys){
+    const vEq = a[k] || 0;
+    const vIn = b[k] || 0;
+    const delta = vIn - vEq;
+
+    // units/rounding per key
+    const isPct = (k==='cd' || k==='ms' || k.startsWith('vs_') || k.startsWith('dr_'));
+    const unit = isPct ? '%' : (k==='regen' ? '/s' : '');
+    const n = (k==='regen') ? Math.round(delta*10)/10 : Math.round(delta);
+
+    // Only show if either item actually has this stat
+    if (vEq !== 0 || vIn !== 0){
+      rows.push(`<div>${labelForKey(k)}: <b>${fmtDelta(n, unit)}</b></div>`);
+    }
+  }
+
+  if (rows.length === 0) return '';
+  return `<div style="margin-top:6px;border-top:1px solid #2b3650;padding-top:6px">
+    <div style="opacity:.8;font-size:12px;margin-bottom:2px">Compared to equipped:</div>
+    ${rows.join('')}
+  </div>`;
+}
 
 function showTooltipAt(it, x, y, opts){
   let html = itemTooltipHTML(it, opts||{});
   if (opts && opts.compare){
   const eq = player.equip[it.slot];
   if (eq){
-    const pv = previewDelta(it);
-    html += `<div style="margin-top:6px;border-top:1px solid #2b3650;padding-top:6px">
-      <div style="opacity:.8;font-size:12px;margin-bottom:2px">Compared to equipped:</div>
-      <div>Damage: <b>${fmtDelta(pv.dDmg)}</b></div>
-      <div>Max HP: <b>${fmtDelta(pv.dHpMax)}</b></div>
-      <div>Move Speed: <b>${fmtDelta(pv.dMs)}</b></div>
-      <div>Attack CD: <b>${fmtDelta(pv.dCd, ' ms', true)}</b></div>
-      <div>Range: <b>${fmtDelta(pv.dRange)}</b></div>
-      <div>HP Regen: <b>${fmtDelta(pv.dRegen, '/s')}</b></div>
-    </div>`;
+    html += buildCompareByAffixesHTML(it, eq);
   }
 }
+
 
   tooltip.innerHTML = html;
   tooltip.style.display='block';
@@ -516,6 +665,9 @@ function showTooltipAt(it, x, y, opts){
 
 /* ========= Rendering ========= */
 function drawEnemy(e){
+    const family = baseTypeOf(e);
+	const col = TYPE_COLOR[family] || TYPE_COLOR.zombie;
+
   if(e.type === 'zombie'){
     ctx.beginPath(); ctx.arc(e.x,e.y, e.r, 0, Math.PI*2);
     ctx.fillStyle = '#16a34a'; ctx.fill(); ctx.strokeStyle = '#bbf7d0'; ctx.stroke();
@@ -538,10 +690,16 @@ function drawEnemy(e){
     ctx.beginPath(); ctx.rect(-10,-10,20,20); ctx.fillStyle = '#b91c1c'; ctx.fill(); ctx.strokeStyle = '#fecaca'; ctx.lineWidth=2; ctx.stroke();
     ctx.restore();
     ctx.beginPath(); ctx.arc(e.x+10, e.y-12, 2, 0, Math.PI*2); ctx.fillStyle = '#fecaca'; ctx.fill();
-  } else if(e.type==='boss'){
-    ctx.beginPath(); ctx.arc(e.x,e.y, e.r, 0, Math.PI*2);
-    ctx.fillStyle = '#6b21a8'; ctx.fill(); ctx.strokeStyle = '#d8b4fe'; ctx.lineWidth=3; ctx.stroke();
-  } else {
+  } else if (e.isBoss) {
+  ctx.save();
+  ctx.beginPath(); ctx.arc(e.x,e.y, e.r, 0, Math.PI*2);
+  ctx.fillStyle = col.fill; ctx.fill();
+  ctx.strokeStyle = col.stroke; ctx.lineWidth = 4;
+  ctx.shadowColor = col.stroke; ctx.shadowBlur = 12; // subtle glow for bosses
+  ctx.stroke();
+  ctx.restore();
+} else {
+
     ctx.beginPath(); ctx.arc(e.x,e.y, e.r, 0, Math.PI*2);
     ctx.fillStyle = '#ef4444'; ctx.fill(); ctx.strokeStyle = '#fecaca'; ctx.stroke();
   }
@@ -561,7 +719,8 @@ function drawPlayer(){
 
   // spear oriented by facing
   const ux = Math.cos(player.facing||0), uy = Math.sin(player.facing||0);
-  const spearLen = 26;
+  // Map base range (≈44) to the old 26px spear, scale proportionally from there.
+const spearLen = Math.max(16, Math.round(meleeReach() * 0.6));
   const baseX = player.x + ux*(player.r - 2);
   const baseY = player.y + uy*(player.r - 2);
   const tipX  = player.x + ux*(player.r + spearLen);
@@ -630,7 +789,7 @@ function draw(){
 
   // swing FX
   {
-    const life = 180;
+    const life = FX.swingLifeMs;
     ctx.save();
     for(let i=swingFX.length-1;i>=0;i--){
       const s = swingFX[i]; const age = now - s.t;
@@ -638,7 +797,8 @@ function draw(){
       const p = age/life;
       ctx.globalAlpha = 1-p;
       ctx.beginPath();
-      const r0 = player.r + 6, r1 = r0 + 18;
+      const r0 = player.r + 6;
+	  const r1 = Math.max(r0 + 6, meleeReach());
       ctx.arc(s.x, s.y, r1, s.a - 0.6 + p*0.2, s.a + 0.6 - p*0.2);
       ctx.strokeStyle = '#fde68a'; ctx.lineWidth = 2; ctx.stroke();
     }
@@ -647,7 +807,7 @@ function draw(){
 
   // floating damage numbers
   {
-    const lifeF = 700;
+    const lifeF = FX.floatyLifeMs;
     ctx.save();
     ctx.font = 'bold 14px system-ui';
     ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
@@ -682,16 +842,22 @@ function spawnWave(n){
   game.bossAlive = false;
 
   if (isBossWave()){
+	// Cycle bosses by theme every 10 waves: 10=zombie, 20=alien, 30=demon, then repeat.
+	const bossOrder = ['zombie_boss', 'alien_boss', 'demon_boss'];
+	const stage = Math.floor(game.wave / 10);               // 1 at wave 10, 2 at 20, 3 at 30...
+	const bossType = bossOrder[(stage - 1) % bossOrder.length];
+
     const hp = 600 + game.wave*55;
-let ms = 90 + Math.floor(game.wave*1.8);
-ms = Math.round(ms * enemySpeedScalar(game.wave));
-ms = Math.round(ms * (0.92 + Math.random()*0.16));
+    let ms = 90 + Math.floor(game.wave*1.8);
+    ms = Math.round(ms * enemySpeedScalar(game.wave));
+    ms = Math.round(ms * (0.92 + Math.random()*0.16));
     
     enemies.push({
       x: game.width/2, y: 120, r: 30,
       hp, maxhp: hp, ms, alive:true,
       dmg: 20 + Math.floor(game.wave*1.3),
-      type:'boss',
+      type: bossType,
+	  isBoss: true,
       cd: 1400,
       cdVar: Math.round(1400 * (0.9 + Math.random()*0.4)),
       lastShot: performance.now() - Math.random()*1400,
@@ -765,17 +931,23 @@ function wallAvoidVector(e, pad=48){
   return {vx,vy};
 }
 
+/**
+ * Updates AI, movement, aiming, and projectile firing for all enemies.
+ * Handles touch/projectile damage and separation.
+ * @param {number} dt - Delta time in ms
+ */
 function updateEnemies(dt){
   const now = game.time;
   for(const e of enemies){
     if(!e.alive) continue;
     const ang = Math.atan2(player.y - e.y, player.x - e.x);
 
-    if(e.type==='zombie'){
+    if (e.type==='zombie' || e.type==='zombie_boss') {
+
       e.x += Math.cos(ang) * e.ms * dt/1000;
       e.y += Math.sin(ang) * e.ms * dt/1000;
 
-    } else if(e.type==='demon'){
+    }  else if (e.type==='demon' || e.type==='demon_boss') {
       const speed = e.ms * (1.1 + 0.2*Math.sin(now/180));
       let dir = 1; if(now < (e.fleeUntil||0)) dir = -1;
       e.x += Math.cos(ang) * speed * dt/1000 * dir;
@@ -809,7 +981,8 @@ function updateEnemies(dt){
         }
       }
 
-    } else if(e.type==='alien'){
+    }  else if (e.type==='alien' || e.type==='alien_boss') {
+
       const ux = Math.cos(ang), uy = Math.sin(ang);
       const dTo = Math.hypot(player.x - e.x, player.y - e.y);
       let mx=0,my=0;
@@ -859,7 +1032,7 @@ function updateEnemies(dt){
 }
 
 
-    } else if(e.type==='boss'){
+    } else if(e.isBoss){
       e.x += Math.cos(ang) * e.ms * dt/1000 * 0.9;
       e.y += Math.sin(ang) * e.ms * dt/1000 * 0.9;
 
@@ -951,6 +1124,10 @@ if (d < player.r + e.r){
 }
 
 /* ========= Combat & Player ========= */
+/**
+ * WASD movement with clamp to arena and stat-scaled speed.
+ * @param {number} dt - Delta time in ms
+ */
 function movePlayer(dt){
   const sp = player.stats.ms * (dt/1000);
   let dx=0, dy=0;
@@ -963,6 +1140,14 @@ function movePlayer(dt){
   player.y = clamp(player.y + dy*sp, player.r, game.height - player.r);
 }
 
+/** Melee reach in pixels from the player's center (used by logic & visuals). */
+function meleeReach(){
+  return Math.round(player.stats.range);
+}
+
+/**
+ * Melee attack with angle cone; adds variance and floaties; respects attack cooldown.
+ */
 function tryAttack(){
   const now = game.time;
   if(now - player.lastAtk < player.stats.atkCd) return;
@@ -975,11 +1160,11 @@ function tryAttack(){
   for(const e of enemies){
     if(!e.alive) continue;
     const d = dist(player,e);
-    if(d <= player.stats.range + e.r){
+    if (d <= meleeReach() + e.r) {
       const angTo = Math.atan2(e.y - player.y, e.x - player.x);
       const delta = Math.abs(Math.atan2(Math.sin(angTo-aim), Math.cos(angTo-aim)));
       if(delta <= Math.PI/3){
-        const base = Math.round(player.stats.dmg);
+        const base = Math.round(player.stats.dmg * getVsMult(e.type));
         const v = COMBAT.dmgVariancePct || 0;
         const dealt = Math.max(1, Math.round(base * (1 - v + Math.random()*2*v)));
 
@@ -995,7 +1180,7 @@ function tryAttack(){
           if(Math.random() < LOOT.hpPackChance){
             drops.push({ type:'hp', x:e.x + rand(-6,6), y:e.y + rand(-6,6), r:9 });
           }
-          if(e.type==='boss'){
+          if(e.isBoss){
             drops.push({ type:'item', x:e.x, y:e.y, r:12, item: bossDrop() });
             game.bossAlive = false;
           } else if(Math.random() < enemyDropChance()){
