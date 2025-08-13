@@ -1,113 +1,81 @@
-<!-- COLOR PALETTE:
-	Darkest Blue    03045E
-					023E8A
-					0077B6
-					0096C7
-					00B4D8
-					48CAE4
-					90E0EF
-					ADE8F4
-	Lightest Blue   CAF0F8
--->
+<!DOCTYPE html>
+<html lang="en">
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1"> <!-- get viewport & device width size -->
-	<link rel="stylesheet" href="styles.css">	 <!-- import stylesheet -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Endless Hack-and-Slash — Prototype</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-	<div class="sideFlex">
-        <div class="innerVertFlex"> 
-            <div class="innerVertFlexItem"> 
-                <div class="divider">
-                    <h2 align="center"> Languages </h2>
-                </div>
-                    <div class="picContent"> 
-                        <div class="innerVertFlex">
-                            <img src="images/cplusplusicon.png">
-                            <div class="innertext"> C++ </div>
-                            
-                        </div>
-                        <div class="innerVertFlex">
-                            <img src="images/csharpicon.png">
-                            <div class="innertext"> C# </div>
-                        </div>
-                        <div class="innerVertFlex">
-                            <img src="images/python.png">
-                            <div class="innertext">Python </div>
-                        </div>
-                        <div class="innerVertFlex">
-                            <img src="images/htmlicon.png">
-                            <div class="innertext"> HTML5 </div>
-                        </div>
-                        <div class="innerVertFlex">
-                            <img src="images/cssicon.png">
-                            <div class="innertext"> CSS</div>
-                        </div>
-                        <div class="innerVertFlex">
-                            <img src="images/javascripticon.jpg">
-                            <div class="innertext">Javascript </div>
-                        </div>
-                    </div>
-            </div>
-        </div>
-		<div class="innerVertFlexMain">
-			<div class="titleBox">
-				<h1> Jacob Carter </h1>
-				<h3> Developer Portfolio </h3>
-			</div>
-			<div class="linkBar">
-				
-					<li> <a> About Me </a> </li>
-					<li> <a> Contact </a> </li>
-                    <li> <a href="https://github.com/jacobcarterMATH"> <img src="images/githubicon.png"></a></li>
-				
-			</div>
-			<div class="divider">
-				<h2 align="center"> My Projects </h2>
-			</div>
-			<a href="index.html">
-				<div class="contentCard">
-					<img src="images/youarehere.GIF">
-					
-					<div class="cardText">
-						<b> This Page </b>
-						<br>
-						A landing page for my portfolio, intended not only to showcase my projects, but also to practice with CSS designs. This project currently features: <b> Flexboxes </b> and <b> Content Cards</b>.
-					</div>
-				</div>
-			</a>
-			<a href="DiabloInfoSheet/index.html">
-				<div class="contentCard">
-					<img src="images/D2CardPicture.GIF">
-					
-					<div class="cardText">
-						<b> <i>Diablo 2</i> Infosheet </b>
-						<br>
-						An interactive website for the game <i> Diablo 2</i>, which gives a lot of useful information players may need to have access to on the fly. 
-						This project features: <b> Flexboxes</b>, <b> Javascript</b>, and <b> Mobile-Friendly Design</b>.
-					</div>
-				</div>
-			</a>
-			<a href="DrinkGenerator/index.html">
-				<div class="contentCard">
-					<img src="images/starbucksLogo.png">
-					
-					<div class="cardText">
-						<b> <i>Starbucks</i> Drink Randomizer </b>
-						<br> A simple website designed to randomly generate a Starbucks beverage. I made this to help train new baristas on the register system. 
-						<br> This project features: <b> Javascript </b> and <b> Object-Oriented Design</b>.
-						</b>
-					</div>
-				</div>
-			</a>
-			
-		</div>
-        <div class="innerVertFlex"> 
-            <div class="innerVertFlexItem"> 
-                <div class="divider">
-                </div>
-            </div>
-        </div>
-	</div> 
+  <header>
+    <h1>Endless Hack-and-Slash — <span class="muted">Wave <span id="waveNum">1</span></span></h1>
+    <div>
+      <span class="pill">Credits: <span id="credits">0</span></span>
+      <span class="pill">State: <span id="state">Combat</span></span>
+    </div>
+  </header>
 
+  <div id="gameWrap" class="card" aria-label="Game Canvas">
+    <canvas id="gameCanvas" width="960" height="540"></canvas>
+    <div id="hud">
+      <div id="topLeft" class="corner hud-row" aria-live="polite">
+        <div class="bar" title="Health"><div id="hpBar"></div></div>
+        <div class="pill">HP <span id="hpText">100/100</span></div>
+        <div class="pill">ATK CD <span id="cdText">0ms</span></div>
+      </div>
+      <div id="topRight" class="corner">
+        <div class="pill">Kills: <span id="kills">0</span></div>
+        <div class="pill">Drops: <span id="drops">0</span></div>
+      </div>
+      <div id="bottomLeft" class="corner">
+        <div class="pill">Controls: <span class="kbd">W</span><span class="kbd">A</span><span class="kbd">S</span><span class="kbd">D</span> move · <span class="kbd">Mouse</span> aim · <span class="kbd">LMB</span> attack · <span class="kbd">E</span> pick up · <span class="kbd">Space</span> shop/continue</div>
+      </div>
+    </div>
+  </div>
+
+  <aside>
+    <section class="card" id="statsCard">
+      <h2>Stats</h2>
+      <div class="statgrid">
+        <div>STR <span class="muted">(damage)</span></div><div id="str">5</div>
+        <div>AGI <span class="muted">(speed/cooldown)</span></div><div id="agi">5</div>
+        <div>END <span class="muted">(max HP)</span></div><div id="end">5</div>
+        <div>LUCK <span class="muted">(drop chance/quality)</span></div><div id="luck">0</div>
+        <div>Power</div><div id="power">0</div>
+      </div>
+    </section>
+
+    <section class="card" id="equipCard">
+      <h2>Equipment</h2>
+      <div class="inv-grid" id="equipment">
+        <div class="slot equipped" data-slot="weapon">Weapon<div class="small">weapon</div></div>
+        <div class="slot equipped" data-slot="armor">Armor<div class="small">armor</div></div>
+        <div class="slot equipped" data-slot="trinket">Trinket<div class="small">trinket</div></div>
+        <div class="slot equipped" data-slot="ring">Ring<div class="small">ring</div></div>
+        <div class="slot equipped" data-slot="boots">Boots<div class="small">boots</div></div>
+      </div>
+    </section>
+
+    <section class="card" id="invCard">
+      <h2>Inventory</h2>
+      <div class="inv-grid" id="inventory"></div>
+      <div style="margin-top:8px; display:flex; gap:8px;">
+        <button class="btn" id="sellAll">Sell All</button>
+      </div>
+    </section>
+
+
+
+    <section class="card">
+      <h2>Notes</h2>
+      <ul>
+        <li>Items drop from enemies; press <span class="kbd">E</span> while near to pick up.</li>
+        <li>Equip by clicking an inventory item; it auto-slots if compatible.</li>
+        <li>Stats are recalculated from base + equipment every frame.</li>
+      </ul>
+    </section>
+  </aside>
+
+  <script src="game.js" defer></script>
 </body>
+</html>
