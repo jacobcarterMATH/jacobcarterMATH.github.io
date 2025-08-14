@@ -1037,7 +1037,7 @@ function spawnWave(n){
 		// Gated pools by wave
 		const baseTypes = ['zombie'];
 		if (game.wave >= 3)  baseTypes.push('demon');  // demons start at wave 3
-		if (game.wave >= 11) baseTypes.push('alien');  // aliens start at wave 11
+		if (game.wave >= 6) baseTypes.push('alien');  // aliens start at wave 11
 		const types = (game.wave >= 16) ? baseTypes.concat('sniper') : baseTypes; // snipers start at wave 16
 
 		let sniperCount = 0, maxSnipers = sniperCapForWave(game.wave);
