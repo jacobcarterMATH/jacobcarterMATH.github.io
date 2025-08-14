@@ -72,9 +72,20 @@ const SNIPER = {
   spawnDelayMs: 900,       // grace after spawn before aiming
   minDist: 360,
   maxDist: 520,
-  bulletSpeed: 560,
-  dontSpawnUntil: 11,    // Don't spawn snipers until wave 11 (after 1st boss).
+  bulletSpeed: 560,    
 };
+/* ========= Spawn gates by wave ========= */
+const SPAWN_GATE = Object.freeze({
+  demon:  3,   // demons appear starting wave 3
+  alien:  11,  // aliens appear starting wave 11
+  sniper: 16   // snipers appear starting wave 16
+});
+
+function canSpawnType(type, wave){
+  const gate = SPAWN_GATE[type];
+  return gate == null || wave >= gate;
+}
+
 const root = (typeof globalThis !== 'undefined') ? globalThis : window;
 const COMBAT = (root.COMBAT && typeof root.COMBAT === 'object')
   ? Object.assign({ dmgVariancePct: 0.10 }, root.COMBAT)
@@ -1023,9 +1034,14 @@ function spawnWave(n){
     return;
   }
    
-  const baseTypes = ['zombie','alien','demon'];
-  const types = (game.wave >= SNIPER.dontSpawnUntil) ? baseTypes.concat('sniper') : baseTypes;
-  let sniperCount = 0, maxSnipers = sniperCapForWave(game.wave);
+		// Gated pools by wave
+		const baseTypes = ['zombie'];
+		if (game.wave >= 3)  baseTypes.push('demon');  // demons start at wave 3
+		if (game.wave >= 11) baseTypes.push('alien');  // aliens start at wave 11
+		const types = (game.wave >= 16) ? baseTypes.concat('sniper') : baseTypes; // snipers start at wave 16
+
+		let sniperCount = 0, maxSnipers = sniperCapForWave(game.wave);
+
 
   for(let i=0;i<n;i++){
     const edge = rint(0,3);
