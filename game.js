@@ -70,7 +70,8 @@ const SNIPER = {
   spawnDelayMs: 900,       // grace after spawn before aiming
   minDist: 360,
   maxDist: 520,
-  bulletSpeed: 560
+  bulletSpeed: 560,
+  dontSpawnUntil: 11,    // Don't spawn snipers until wave 11 (after 1st boss).
 };
 const root = (typeof globalThis !== 'undefined') ? globalThis : window;
 const COMBAT = (root.COMBAT && typeof root.COMBAT === 'object')
@@ -91,11 +92,11 @@ const DAMAGE = {
 
 const SPEED = {
   earlyMin: 0.2,     // 20% speed on wave 1
-  earlyMax: 1.00,     // reaches 100% by earlyUntilWave
-  earlyUntilWave: 30,  // linear ramp from waves 1..20
-  lateStartWave: 45,  // after this, we add a gentle slope
-  lateSlopePerWave: 0.03, // +3% per wave past lateStartWave
-  cap: 1.85           // never exceed 185% of base
+  earlyMax: 0.6,     // reaches 60% by earlyUntilWave
+  earlyUntilWave: 50,  // linear ramp from waves 1..30
+  lateStartWave: 60,  // after this, we add a gentle slope
+  lateSlopePerWave: 0.005, // +0.5% per wave past lateStartWave
+  cap: 1           // never exceed base value 
 };
 const NAME_SEEDS = [
   'Dawn','Ash','Mist','Iron','Gales','Echoes',
@@ -241,6 +242,35 @@ const AFFIX_POOL = [
   { key:'dr_alien',  name:'% DR vs Aliens',   kind:'pct', min:10, max:20 },
   { key:'dr_demon',  name:'% DR vs Demons',   kind:'pct', min:10, max:20 }
 ];
+/* ========= Boss-only affixes & tunables ========= */
+// These never roll on normal drops; only added to boss drops.
+const BOSS_AFFIX_POOL = [
+  // Chance to instantly kill targets that are already low (see threshold below).
+  { key:'exec_chance', name:'Execute chance (<50% HP)', kind:'pct',
+    min:5, max:20, slots:['weapon','ring','trinket'] },
+
+  // Flat HP returned on each hit that deals damage.
+  { key:'lifesteal',   name:'Life on Hit', kind:'flat',
+    min:1, max:4, slots:['weapon','ring'] },
+
+	  // Apply a short slow on hit; value is percent slow.
+	{ key:'slow_on_hit', name:'Slow on Hit (1.4s)', kind:'pct',
+	  min:25, max:50, slots:['weapon','boots','ring','armor'] }
+
+];
+const BOSS_AFFIX_KEYS = new Set(BOSS_AFFIX_POOL.map(a => a.key));
+const BOSS_VALID_SLOTS = Array.from(new Set(BOSS_AFFIX_POOL.flatMap(a => a.slots)));
+
+function slotSupportsBossAffix(slot){
+  return BOSS_AFFIX_POOL.some(a => a.slots.includes(slot));
+}
+
+const BOSS_AFFIX_TUNES = {
+  EXEC_THRESHOLD_PCT: 50,     // execute can trigger at or below this remaining HP%
+  SLOW_DURATION_MS:   1400,   // how long the slow lasts
+  SLOW_MIN_MULT:      0.30    // don't slow below 30% of base speed
+};
+
 function makeAffix(power){
   const a = choice(AFFIX_POOL);
   const spread = (a.kind==='flat') ? rand(a.min,a.max) : rint(a.min,a.max);
@@ -402,6 +432,10 @@ function itemTooltipHTML(it, opts){
     `<div style="opacity:.8">${it.slot} • power ${it.power}</div>`,
     `<hr style="border-color:#2b3650">`
   ];
+  if (it.isBossItem){
+  lines.push(`<div style="font-size:14px;opacity:.8;margin:2px 0;color:#ea03ff">Boss Item</div>`);
+}
+
   for (const a of it.affixes){
     lines.push(`<div>${affixLabelHTML(a)}</div>`);
   }
@@ -457,6 +491,18 @@ function getTypeMods(type){
   }
   return { drMult };
 }
+
+
+/** Sum all values for a given affix key across equipped items. */
+function getAffixSum(key){
+  let sum = 0;
+  for (const slot of ITEM_SLOTS){
+    const it = player.equip[slot]; if (!it) continue;
+    for (const a of it.affixes){ if (a.key === key) sum += (a.val||0); }
+  }
+  return sum;
+}
+
 /* ========= Type bonuses (damage dealt modifiers) ========= */
 /** Returns a multiplicative damage bonus for % Dmg vs {type} affixes. */
 function getVsMult(type){
@@ -575,11 +621,18 @@ function fmtDelta(n, unit='', invert=false){
 }
 /* ========= Tooltip Compare: show only stats present on either item ========= */
 function labelForKey(key){
+  // Direct names for boss-only affixes
+  if (key === 'exec_chance') return 'Execute chance';
+  if (key === 'lifesteal')   return 'Life on Hit';
+  if (key === 'slow_on_hit') return 'Slow on Hit';
+
   const baseMap = {
     dmg:'Damage', hp:'Max HP', regen:'HP Regen', range:'Range',
     cd:'Attack Speed', ms:'Move Speed',
     str:'Strength', agi:'Agility', end:'Endurance', luck:'Luck'
   };
+
+  // Colored labels for type-specific stats
   if (key && (key.startsWith('vs_') || key.startsWith('dr_'))){
     const colors = { zombie:'#16a34a', alien:'#22d3ee', demon:'#ef4444' };
     const type = key.split('_')[1];
@@ -588,8 +641,10 @@ function labelForKey(key){
     const col = colors[type] || '#e5e7eb';
     return kind + `<span style="color:${col}">${pretty}</span>`;
   }
+
   return baseMap[key] || (key || 'Stat');
 }
+
 
 function collectAffixValues(item){
   const out = {};
@@ -610,9 +665,10 @@ function buildCompareByAffixesHTML(inspectItem, equippedItem){
   // Readable ordering
   const core = ['dmg','hp','regen','range','cd','ms'];
   const attrs = ['str','agi','end','luck'];
+  const boss = ['exec_chance','lifesteal','slow_on_hit'];
   const vs = ['vs_zombie','vs_alien','vs_demon'];
   const dr = ['dr_zombie','dr_alien','dr_demon'];
-  const order = [...core, ...attrs, ...vs, ...dr];
+  const order = [...core, ...attrs, ...boss, ...vs, ...dr];
 
   keys.sort((k1,k2)=>{
     const i1 = order.indexOf(k1), i2 = order.indexOf(k2);
@@ -629,7 +685,13 @@ function buildCompareByAffixesHTML(inspectItem, equippedItem){
     const delta = vIn - vEq;
 
     // units/rounding per key
-    const isPct = (k==='cd' || k==='ms' || k.startsWith('vs_') || k.startsWith('dr_'));
+    const isPct = (
+	  k==='cd' || k==='ms' ||
+	  k==='exec_chance' || k==='slow_on_hit' ||
+	  k.startsWith('vs_') || k.startsWith('dr_')
+	);
+
+
     const unit = isPct ? '%' : (k==='regen' ? '/s' : '');
     const n = (k==='regen') ? Math.round(delta*10)/10 : Math.round(delta);
 
@@ -757,7 +819,10 @@ function draw(){
       ctx.restore();
     }
   }
-
+	
+    const fade = game.dropsFading ? Math.max(0, Math.min(1, (game.dropsFadeEnd - now) / 700)) : 1;
+	ctx.save();
+	ctx.globalAlpha *= fade;
   // drops
   for(const d of drops){
     if(d.type==='hp'){
@@ -771,6 +836,7 @@ function draw(){
       ctx.fillStyle = '#f59e0b'; ctx.fill(); ctx.strokeStyle = '#fde68a'; ctx.stroke();
     }
   }
+  ctx.restore();
 
   // enemies
   for(const e of enemies){ if(!e.alive) continue; drawEnemy(e); }
@@ -837,7 +903,18 @@ const projectiles = [];
 function isBossWave(){ return game.wave % 10 === 0; }
 function sniperCapForWave(w){ return Math.min(1 + Math.floor(w/8), 4); }
 
+/* ========= Wave cleanup ========= */
+// Replace the previous "clear immediately" version with this:
+function clearPickups(){
+  const now = (typeof performance !== 'undefined' && performance.now) ? performance.now() : Date.now();
+  game.dropsFading = true;
+  game.dropsFadeEnd = now + 700; // 0.7s subtle fade window
+}
+
+
 function spawnWave(n){
+  // Clear leftover pickups from prior wave
+  clearPickups();
   enemies.length = 0;
   game.bossAlive = false;
 
@@ -867,9 +944,9 @@ function spawnWave(n){
     game.bossAlive = true;
     return;
   }
-
+   
   const baseTypes = ['zombie','alien','demon'];
-  const types = (game.wave >= 6) ? baseTypes.concat('sniper') : baseTypes;
+  const types = (game.wave >= SNIPER.dontSpawnUntil) ? baseTypes.concat('sniper') : baseTypes;
   let sniperCount = 0, maxSnipers = sniperCapForWave(game.wave);
 
   for(let i=0;i<n;i++){
@@ -913,14 +990,66 @@ function spawnWave(n){
 function enemyDropChance(){
   const base = 0.10 + game.wave * 0.008;
   const bonus = Math.min(0.25, (player.stats.luck||0) * 0.0025);
-  return Math.min(0.55, base + bonus);
+ 
+ return Math.min(0.55, base + bonus);
 }
+
+function makeBossAffix(forItem, power){
+  // pick from pool that is valid for this slot
+  const candidates = BOSS_AFFIX_POOL.filter(a => a.slots.includes(forItem.slot));
+  if (candidates.length === 0) return null;
+  const a = choice(candidates);
+  const spread = (a.kind === 'flat') ? rand(a.min,a.max) : rint(a.min,a.max);
+  const val = (a.kind === 'flat') ? Math.round(spread*10)/10 : spread;
+  return { key:a.key, name:a.name, val, pct:(a.kind==='pct') };
+}
+
+function rollBossAffixes(item){
+  const want = 1 + (Math.random() < 0.50 ? 1 : 0); // 1–2 boss affixes
+  const used = new Set(item.affixes.map(a=>a.key));
+  let tries = 0;
+  while (item.affixes.length < 6 && (item.affixes.filter(a => BOSS_AFFIX_POOL.some(b=>b.key===a.key)).length < want) && tries < 12){
+    const a = makeBossAffix(item, item.power + 10);
+    tries++;
+    if (!a || used.has(a.key)) continue;
+    ensureAffixMeta(a);
+    item.affixes.push(a);
+    used.add(a.key);
+  }
+  // bump power/rarity to feel special
+  item.power += 6;
+  item.rarity = rarityFor(item.power + (item.affixes?.length||0)*5);
+}
+
 function bossDrop(){
-  const boosted = makeItem(game.wave + 5, player.stats.luck + 3);
-  if(boosted.affixes.length < 4) boosted.affixes.push(makeAffix(boosted.power + 8));
-  boosted.power += 8; boosted.rarity = rarityFor(boosted.power);
+  // roll only slots that can carry boss affixes
+  let boosted; let attempts = 0;
+  do {
+    boosted = makeItem(game.wave + 5, player.stats.luck + 3);
+    attempts++;
+  } while (!slotSupportsBossAffix(boosted.slot) && attempts < 20);
+
+  // make it feel spicy
+  if (boosted.affixes.length < 4) boosted.affixes.push(makeAffix(boosted.power + 8));
+  boosted.power += 8;
+  boosted.rarity = rarityFor(boosted.power);
+
+  // inject 1–2 boss-only affixes; FORCE at least one if RNG failed
+  rollBossAffixes(boosted);
+  const hasBoss = boosted.affixes.some(a => BOSS_AFFIX_KEYS.has(a.key));
+  if (!hasBoss){
+    const forced = makeBossAffix(boosted, boosted.power + 12);
+    if (forced){ ensureAffixMeta(forced); boosted.affixes.push(forced); }
+    boosted.rarity = rarityFor(boosted.power + 10);
+  }
+
+  // tag for quick verification in tooltips/dev
+  boosted.isBossItem = true;
   return boosted;
 }
+
+
+
 
 function wallAvoidVector(e, pad=48){
   let vx=0, vy=0;
@@ -941,14 +1070,16 @@ function updateEnemies(dt){
   for(const e of enemies){
     if(!e.alive) continue;
     const ang = Math.atan2(player.y - e.y, player.x - e.x);
+	const slowActive = now < (e.slowUntil || 0);
+	const slow = slowActive ? (e.slowMult || 1) : 1;
 
     if (e.type==='zombie' || e.type==='zombie_boss') {
 
-      e.x += Math.cos(ang) * e.ms * dt/1000;
-      e.y += Math.sin(ang) * e.ms * dt/1000;
+      e.x += Math.cos(ang) * e.ms * slow * dt/1000;
+      e.y += Math.sin(ang) * e.ms * slow * dt/1000;
 
     }  else if (e.type==='demon' || e.type==='demon_boss') {
-      const speed = e.ms * (1.1 + 0.2*Math.sin(now/180));
+      const speed = e.ms * (1.1 + 0.2*Math.sin(now/180)) * slow;
       let dir = 1; if(now < (e.fleeUntil||0)) dir = -1;
       e.x += Math.cos(ang) * speed * dt/1000 * dir;
       e.y += Math.sin(ang) * speed * dt/1000 * dir;
@@ -963,7 +1094,7 @@ function updateEnemies(dt){
         const side = (e.side !== undefined) ? e.side : (e.side=(Math.random()<0.5?-1:1));
         mx = -uy*side; my = ux*side; if(Math.random()<0.003) e.side *= -1;
       }
-      const sp = e.ms * 0.9 * dt/1000; e.x += mx*sp; e.y += my*sp;
+      const sp = e.ms * 0.9 * slow * dt/1000; e.x += mx*sp; e.y += my*sp;
 
       const cdUse = e.cdVar || e.cd || 2400;
       const ready = (now - (e.lastShot||0)) > cdUse;
@@ -1004,7 +1135,7 @@ function updateEnemies(dt){
       const nearEdge = (Math.abs(w.vx)>0.1 || Math.abs(w.vy)>0.1);
       if (nearEdge && now - (e.lastEdgeFlip||0) > 1000){ e.side *= -1; e.lastEdgeFlip = now; }
 
-      const sp = e.ms * ((dTo < min && now >= (e.retreatAt||0)) ? 1.15 : 1.0) * dt/1000;
+      const sp = e.ms * ((dTo < min && now >= (e.retreatAt||0)) ? 1.15 : 1.0) * slow * dt/1000;
       e.x += mx*sp; e.y += my*sp;
 
       const cdUse = e.cdVar || e.cd || 1200;
@@ -1145,6 +1276,30 @@ function meleeReach(){
   return Math.round(player.stats.range);
 }
 
+/* ========= Centralized enemy death (keeps drops consistent) ========= */
+function killEnemy(e, cause = 'generic'){
+  if (!e || !e.alive) return;
+
+  e.alive = false;
+  game.kills++;
+  game.credits += 1 + Math.floor(game.wave * 0.6);
+
+  // HP pack roll (same as your current logic)
+  if (Math.random() < LOOT.hpPackChance){
+    drops.push({ type:'hp', x:e.x + rand(-6,6), y:e.y + rand(-6,6), r:9 });
+  }
+
+  // Item drop (boss vs normal)
+  if (e.isBoss){
+    const bi = bossDrop();
+    drops.push({ type:'item', x:e.x, y:e.y, r:12, item: bi });
+    game.bossAlive = false;
+  } else if (Math.random() < enemyDropChance()){
+    game.drops++;
+    drops.push({ type:'item', x:e.x, y:e.y, r:10, item: makeItem(game.wave, player.stats.luck) });
+  }
+}
+
 /**
  * Melee attack with angle cone; adds variance and floaties; respects attack cooldown.
  */
@@ -1164,30 +1319,45 @@ function tryAttack(){
       const angTo = Math.atan2(e.y - player.y, e.x - player.x);
       const delta = Math.abs(Math.atan2(Math.sin(angTo-aim), Math.cos(angTo-aim)));
       if(delta <= Math.PI/3){
-        const base = Math.round(player.stats.dmg * getVsMult(e.type));
-        const v = COMBAT.dmgVariancePct || 0;
-        const dealt = Math.max(1, Math.round(base * (1 - v + Math.random()*2*v)));
+        // Base damage (includes % Dmg vs {type})
+		const vs   = getVsMult(e.type);
+		const base = Math.round(player.stats.dmg * vs);
+		const v    = COMBAT.dmgVariancePct || 0;
+		let dealt  = Math.max(1, Math.round(base * (1 - v + Math.random()*2*v)));
+
+		// Execute (if enemy already low)
+		const execPct = getAffixSum('exec_chance');
+		if (execPct > 0){
+		  const hpPct = (e.hp / e.maxhp) * 100;
+		  if (hpPct <= BOSS_AFFIX_TUNES.EXEC_THRESHOLD_PCT && Math.random()*100 < execPct){
+			dealt = Math.max(dealt, e.hp); // ensure lethal
+		  }
+		}
+
 
         e.hp -= dealt;
+		// Life steal: flat healing on any damaging hit
+		const steal = getAffixSum('lifesteal');
+		if (steal > 0){
+		  player.stats.hp = Math.min(player.stats.maxhp, player.stats.hp + steal);
+		}
+
+		// Apply slow on hit
+		const slowPct = getAffixSum('slow_on_hit');
+		if (slowPct > 0){
+		  e.slowMult  = Math.max(BOSS_AFFIX_TUNES.SLOW_MIN_MULT, 1 - slowPct/100);
+		  e.slowUntil = now + BOSS_AFFIX_TUNES.SLOW_DURATION_MS;
+		}
+
         e.x += Math.cos(aim)*6; e.y += Math.sin(aim)*6;
         floaties.push({ x:e.x, y:e.y - e.r - 4, val: dealt, t: now });
 
         if(e.type==='demon'){ e.fleeUntil = now + 650; }
 
-        if(e.hp <= 0){
-          e.alive = false; game.kills++;
-          game.credits += 1 + Math.floor(game.wave*0.6);
-          if(Math.random() < LOOT.hpPackChance){
-            drops.push({ type:'hp', x:e.x + rand(-6,6), y:e.y + rand(-6,6), r:9 });
-          }
-          if(e.isBoss){
-            drops.push({ type:'item', x:e.x, y:e.y, r:12, item: bossDrop() });
-            game.bossAlive = false;
-          } else if(Math.random() < enemyDropChance()){
-            game.drops++;
-            drops.push({ type:'item', x:e.x, y:e.y, r:10, item: makeItem(game.wave, player.stats.luck) });
-          }
-        }
+        if (e.hp <= 0){
+		  killEnemy(e, 'melee');
+		}
+
       }
     }
   }
@@ -1477,12 +1647,23 @@ function applyUpgradeToItem(item){
         makeUpgradeOffer('agi', 1 + Math.floor(game.wave/10), 'Agility +'),
         makeUpgradeOffer('end', 1 + Math.floor(game.wave/10), 'Endurance +'),
       ];
+	  // Luck upgrade appears with probability: 10% + 1% per current Luck
+	{
+  // Chance = 10% + 1% per current Luck (clamped to 80% so it doesn't get silly)
+  const p = Math.min(0.80, 0.10 + 0.01 * (player.stats.luck || 0));
+  if (Math.random() < p){
+    game.shopOffers.push(makeUpgradeOffer('luck', 1, 'Luck +'));
+  }
+}
       const it1 = makeItem(game.wave+1, player.stats.luck);
       const it2 = makeItem(game.wave+2, player.stats.luck);
 // Equipment upgrades (one each per intermission)
-game.shopOffers.push(makeUpgradeItemOffer('weapon','Upgrade Weapon'));
-game.shopOffers.push(makeUpgradeItemOffer('trinket','Upgrade Amulet')); // 'trinket' slot, label says Amulet
-game.shopOffers.push(makeUpgradeItemOffer('armor','Upgrade Armor'));
+	game.shopOffers.push(makeUpgradeItemOffer('weapon','Upgrade Weapon'));
+	game.shopOffers.push(makeUpgradeItemOffer('trinket','Upgrade Amulet')); // 'trinket' slot, label says Amulet
+	game.shopOffers.push(makeUpgradeItemOffer('armor','Upgrade Armor'));
+	game.shopOffers.push(makeUpgradeItemOffer('ring','Upgrade Ring'));
+	game.shopOffers.push(makeUpgradeItemOffer('boots','Upgrade Boots'));
+
 
       // Wave-1: one-time cheap *random* starter offer (STR/AGI/END)
 if (game.wave === 1){
@@ -1745,7 +1926,9 @@ function init(){
 }
 let last = performance.now();
 function loop(now){
-  const dt = Math.max(0, Math.min(now - last, 50)); last = now; game.time = now;
+  const dt = Math.max(0, Math.min(now - last, 50)); 
+  last = now; 
+  game.time = now;
   recalcStats();
   applyRegen(dt);
   movePlayer(dt);
@@ -1757,6 +1940,13 @@ function loop(now){
   } else if (game.state === 'intermission'){
     // let enemies idle if any leftovers (no spawns)
   }
+  // drop fading handler
+	if (game.dropsFading && now >= game.dropsFadeEnd){
+	  drops.length = 0;
+	  if (typeof game.drops === 'number') game.drops = 0;
+	  game.dropsFading = false;
+	}
+
   draw();
   renderHUD();
   requestAnimationFrame(loop);
