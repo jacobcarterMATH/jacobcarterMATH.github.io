@@ -34,6 +34,8 @@ const uuid = (typeof crypto !== 'undefined' && crypto.randomUUID)
     });
 
 /* ========= Tunables ========= */
+const TAU = Math.PI * 2;
+
 const GAME = {
   width: 960, height: 540,
   bg: '#0b0f1a'
@@ -583,27 +585,47 @@ function previewDelta(it){
 /* ========= Input ========= */
 const keys = new Set();
 const mouse = { x:0, y:0, down:false };
+
 window.addEventListener('keydown', (e)=>{
   const k = e.key.toLowerCase();
   keys.add(k);
-  if (k === ' ') { e.preventDefault(); tryAdvance(); }
-  if (k === 'b'){
-    const overlay = document.getElementById('shopOverlay');
-    if (game.state === 'shop') closeShopSoft();
-    else if (game.state === 'intermission') openShop();
+
+  // Space: open/close shop (no wave advance)
+  if (k === ' ') {
+    e.preventDefault();
+    tryAdvance();
+    return;
+  }
+
+  // N: start next wave (only when shop is open)
+if (k === 'n' && game.state === 'shop') {
+  e.preventDefault();
+  const btn = document.getElementById('startWaveBtn');
+  if (btn && !btn.disabled) btn.click();   // reuse the button's exact logic
+  return;
+}
+
+
+  // E: pickup
+  if (k === 'e') {
+    e.preventDefault();
+    tryPickup();
+    return;
   }
 });
+
 window.addEventListener('keyup', (e)=> keys.delete(e.key.toLowerCase()));
+
 cvs.addEventListener('mousemove', (e)=>{
   const r = cvs.getBoundingClientRect();
   const sx = cvs.width / r.width, sy = cvs.height / r.height;
   mouse.x = (e.clientX - r.left)*sx;
   mouse.y = (e.clientY - r.top)*sy;
 });
+
 cvs.addEventListener('mousedown', ()=>{ mouse.down = true; });
 window.addEventListener('mouseup', ()=>{ mouse.down = false; });
-window.addEventListener('blur', ()=>{ keys.clear(); mouse.down=false; });
-window.addEventListener('keydown', (e)=>{ if(e.key.toLowerCase()==='e') tryPickup(); });
+window.addEventListener('blur', ()=>{ keys.clear(); mouse.down = false; });
 
 /* ========= Tooltip (above overlays) ========= */
 let tooltip = document.getElementById('tooltip');
@@ -823,19 +845,75 @@ function draw(){
     const fade = game.dropsFading ? Math.max(0, Math.min(1, (game.dropsFadeEnd - now) / 700)) : 1;
 	ctx.save();
 	ctx.globalAlpha *= fade;
+	// Subtle breathing pulse (scales radius + alpha). Period ~= 1.8s
+
+
   // drops
-  for(const d of drops){
-    if(d.type==='hp'){
-      ctx.beginPath(); ctx.arc(d.x,d.y,d.r,0,Math.PI*2);
-      ctx.fillStyle = '#22c55e'; ctx.fill(); ctx.strokeStyle = '#bbf7d0'; ctx.stroke();
-      ctx.beginPath(); ctx.moveTo(d.x, d.y-5); ctx.lineTo(d.x, d.y+5);
-      ctx.moveTo(d.x-5, d.y); ctx.lineTo(d.x+5, d.y);
-      ctx.strokeStyle = '#064e3b'; ctx.stroke();
-    } else if(d.type==='item'){
-      ctx.beginPath(); ctx.rect(d.x-6, d.y-6, 12, 12);
-      ctx.fillStyle = '#f59e0b'; ctx.fill(); ctx.strokeStyle = '#fde68a'; ctx.stroke();
-    }
+for (const d of drops) {
+  // --- Pronounced pulse ---
+  const DROP_PULSE_MS = 1800;      // pulse period
+  const ph = (d.pulse != null ? d.pulse : 0);
+  const t  = (now % DROP_PULSE_MS) / DROP_PULSE_MS;
+  const s  = (Math.sin(t * TAU + ph) + 1) * 0.5; // 0..1
+
+  // stronger swing: alpha 0.55→1.00, scale 0.90→1.10
+  const alphaPulse = 0.55 + 0.45 * s;
+  const scalePulse = 0.90 + 0.20 * s;
+
+  ctx.save();
+  ctx.globalAlpha *= alphaPulse;
+
+  // Use a pulsed radius as your size basis
+  const r = d.r * scalePulse;
+
+  if (d.type === 'item') {
+    // === Yellow SQUARE item drop ===
+    const half = r;                       // side = 2r
+    const x = d.x - half, y = d.y - half;
+
+    ctx.fillStyle   = '#facc15';          // amber-400
+    ctx.strokeStyle = '#d97706';          // amber-600
+    ctx.lineWidth   = 2;
+
+    ctx.beginPath();
+    ctx.rect(x, y, half*2, half*2);
+    ctx.fill();
+    ctx.stroke();
+
+    // (optional) crisp pixel alignment:
+    // ctx.translate(0.5, 0.5);
+
+  } else if (d.type === 'hp') {
+    // === Green CIRCLE with a "+" ===
+    // circle
+    ctx.beginPath();
+    ctx.arc(d.x, d.y, r, 0, TAU);
+    ctx.fillStyle   = '#10b981';          // emerald-500
+    ctx.strokeStyle = '#064e3b';          // emerald-900
+    ctx.lineWidth   = 2;
+    ctx.fill();
+    ctx.stroke();
+
+    // plus sign (scales with r)
+    const arm = r * 0.55;                 // half-length of each bar
+    ctx.beginPath();
+    ctx.lineWidth   = Math.max(2, r * 0.28);
+    ctx.lineCap     = 'round';
+    ctx.strokeStyle = '#ecfdf5';          // very light green/white
+
+    // horizontal
+    ctx.moveTo(d.x - arm, d.y);
+    ctx.lineTo(d.x + arm, d.y);
+    // vertical
+    ctx.moveTo(d.x, d.y - arm);
+    ctx.lineTo(d.x, d.y + arm);
+
+    ctx.stroke();
   }
+
+  ctx.restore();
+}
+
   ctx.restore();
 
   // enemies
@@ -1286,17 +1364,17 @@ function killEnemy(e, cause = 'generic'){
 
   // HP pack roll (same as your current logic)
   if (Math.random() < LOOT.hpPackChance){
-    drops.push({ type:'hp', x:e.x + rand(-6,6), y:e.y + rand(-6,6), r:9 });
+    drops.push({ type:'hp', x:e.x + rand(-6,6), y:e.y + rand(-6,6), r:9,  pulse: Math.random()*TAU });
   }
 
   // Item drop (boss vs normal)
   if (e.isBoss){
     const bi = bossDrop();
-    drops.push({ type:'item', x:e.x, y:e.y, r:12, item: bi });
+    drops.push({ type:'item', x:e.x, y:e.y, r:12, item: bossDrop(),    pulse: Math.random()*TAU });
     game.bossAlive = false;
   } else if (Math.random() < enemyDropChance()){
     game.drops++;
-    drops.push({ type:'item', x:e.x, y:e.y, r:10, item: makeItem(game.wave, player.stats.luck) });
+    drops.push({ type:'item', x:e.x, y:e.y, r:10, item: makeItem(game.wave, player.stats.luck), pulse: Math.random()*TAU });
   }
 }
 
@@ -1386,12 +1464,21 @@ function tryPickup(){
 }
 
 function checkWaveEnd(){
-  if(game.state!=='combat') return;
-  if(enemies.every(e=>!e.alive)){
+  if (game.state !== 'combat') return;
+  if (enemies.every(e => !e.alive)){
+    // Clear any stray enemy projectiles/telegraphs before intermission begins
+    projectiles.length = 0;
+
+    // If you have any other hostile visuals (e.g., sniper sightlines), also clear them here:
+    // sightlines && (sightlines.length = 0);
+
     game.state = 'intermission';
-    openShop({reset:true});
+    // If you still had auto-open here, keep it commented out:
+    // openShop({reset:true});
+    renderHUD();
   }
 }
+
 function gameOver(){
   game.state = 'over';
   alert('You died on wave '+game.wave+'. Refresh to try again.');
@@ -1549,11 +1636,12 @@ document.getElementById('sellAll').addEventListener('click', ()=>{
         </div>
         <div id="shopList" style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px;"></div>
         <div style="display:flex;gap:8px;justify-content:flex-end">
-          <button id="shopClose" style="padding:8px 12px">Start next wave</button>
+          <button id="startWaveBtn" style="padding:8px 12px">Start (N)ext Wave</button>
         </div>
       </div>`;
     document.body.appendChild(el);
-el.querySelector('#shopClose').addEventListener('click', ()=>{ hideTooltip(); closeShop(); });
+el.querySelector('#startWaveBtn').addEventListener('click', ()=>{ hideTooltip(); closeShop(); });
+
 el.querySelector('#shopSoftClose').addEventListener('click', ()=>{ hideTooltip(); closeShopSoft(); });
 el.querySelector('#shopCard').addEventListener('mouseleave', hideTooltip); // belt & suspenders
 
@@ -1871,6 +1959,165 @@ function showShopFlash(html){
 }
 
 /* ========= HUD ========= */
+// === Hint fade helpers (define once) ===
+const HINT_FADE_MS = 220;
+
+function showHint(text){
+  const el = document.getElementById('keyHint');
+  if (!el) return;
+  if (text != null) el.textContent = text;
+  if (el.style.display !== 'block'){
+    el.style.display = 'block';
+    void el.offsetWidth; // reflow to enable transition
+  }
+  el.style.opacity = '1';
+}
+
+function hideHint(){
+  const el = document.getElementById('keyHint');
+  if (!el) return;
+  el.style.opacity = '0';
+  setTimeout(() => {
+    if (el.style.opacity === '0') el.style.display = 'none';
+  }, HINT_FADE_MS + 16);
+}
+// === Key-hint: creation + fade helpers ===
+
+function ensureKeyHint(){
+  let el = document.getElementById('keyHint');
+  if (!el){
+    el = document.createElement('div');
+    el.id = 'keyHint';
+    Object.assign(el.style, {
+      position:'fixed', right:'12px', bottom:'12px',
+      background:'#0f1629', color:'#e5e7eb',
+      border:'1px solid #2b3650', borderRadius:'8px',
+      padding:'10px 14px', font:'16px system-ui',
+      opacity:'0', transition:`opacity ${HINT_FADE_MS}ms ease`,
+      zIndex:'10060', display:'none', pointerEvents:'none'
+    });
+    document.body.appendChild(el);
+  }
+  return el;
+}
+function ensurePickupHint(){
+  ensureKeyHintStyles();
+  let el = document.getElementById('pickupHint');
+  if (!el){
+    el = document.createElement('div');
+    el.id = 'pickupHint';
+    Object.assign(el.style, {
+      position:'fixed', right:'12px', bottom:'56px', // stacked above the other hint
+      background:'#0f1629', color:'#e5e7eb',
+      border:'1px solid #2b3650', borderRadius:'8px',
+      padding:'8px 12px', font:'14px system-ui',
+      zIndex:'10060', pointerEvents:'none',
+      display:'none', opacity:'0', transition:'opacity 220ms ease',
+      animation:'none'
+    });
+    document.body.appendChild(el);
+  }
+  return el;
+}
+
+function showPickupHintPulsing(text){
+  const el = ensurePickupHint();
+  if (text != null) el.textContent = text;
+  if (el.style.display !== 'block'){ el.style.display = 'block'; void el.offsetWidth; }
+  el.style.animation = `keyHintPulse ${HINT_PULSE_MS}ms ease-in-out infinite`;
+  el.style.opacity = '1';
+}
+
+function hidePickupHint(){
+  const el = ensurePickupHint();
+  el.style.animation = 'none';
+  el.style.opacity = '0';
+  setTimeout(()=>{ if (el.style.opacity==='0') el.style.display='none'; }, 236);
+}
+
+// Helper: proximity check matches tryPickup's reach (+small leniency)
+function playerNearDrop(){
+  for (const d of drops){
+    const reach = player.r + (d.r || 10) + 6; // +6 px cushion feels better
+    if (Math.hypot(player.x - d.x, player.y - d.y) <= reach) return true;
+  }
+  return false;
+}
+
+function showHint(text){
+  const el = ensureKeyHint();
+  if (text != null) el.textContent = text;
+  if (el.style.display !== 'block'){
+    el.style.display = 'block';
+    void el.offsetWidth; // reflow so the transition runs
+  }
+  el.style.opacity = '1';
+}
+
+function hideHint(){
+  const el = ensureKeyHint();
+  el.style.opacity = '0';
+  setTimeout(()=>{ if (el.style.opacity === '0') el.style.display = 'none'; }, HINT_FADE_MS + 16);
+}
+// === Key-hint: pulsing fade helpers (define once) ===
+const HINT_PULSE_MS = 1700;    // full pulse cycle (~1.7s)
+
+function ensureKeyHintStyles(){
+  if (!document.getElementById('keyHintPulseStyles')){
+    const style = document.createElement('style');
+    style.id = 'keyHintPulseStyles';
+    style.textContent = `
+@keyframes keyHintPulse {
+  0%   { opacity: 0; }
+  15%  { opacity: 1; }  /* fade in */
+  50%  { opacity: 1; }  /* hold visible */
+  100% { opacity: 0; }  /* fade out */
+}`;
+    document.head.appendChild(style);
+  }
+}
+
+function ensureKeyHint(){
+  ensureKeyHintStyles();
+  let el = document.getElementById('keyHint');
+  if (!el){
+    el = document.createElement('div');
+    el.id = 'keyHint';
+    Object.assign(el.style, {
+      position:'fixed', right:'12px', bottom:'12px',
+      background:'#0f1629', color:'#e5e7eb',
+      border:'1px solid #2b3650', borderRadius:'8px',
+      padding:'10px 14px', font:'16px system-ui',
+      zIndex:'10060', pointerEvents:'none',
+      // start hidden; use transition only for the "hide" path
+      opacity:'0', display:'none', transition:`opacity ${HINT_FADE_MS}ms ease`,
+      // animation will be set/cleared by the helpers below
+      animation:'none'
+    });
+    document.body.appendChild(el);
+  }
+  return el;
+}
+
+function showHintPulsing(text){
+  const el = ensureKeyHint();
+  if (text != null) el.textContent = text;
+  if (el.style.display !== 'block'){
+    el.style.display = 'block';
+    void el.offsetWidth; // reflow so CSS can apply the animation cleanly
+  }
+  // run the pulse forever
+  el.style.animation = `keyHintPulse ${HINT_PULSE_MS}ms ease-in-out infinite`;
+}
+
+function hideHint(){
+  const el = ensureKeyHint();
+  // stop the pulse, fade out, then hide
+  el.style.animation = 'none';
+  el.style.opacity = '0';
+  setTimeout(()=>{ if (el.style.opacity === '0') el.style.display='none'; }, HINT_FADE_MS + 16);
+}
+
 function renderHUD(){
   const hpPct = Math.max(0, Math.min(1, player.stats.hp / player.stats.maxhp));
   document.getElementById('hpBar').style.width = (hpPct*100)+'%';
@@ -1884,21 +2131,39 @@ function renderHUD(){
   renderStatsPanel();
   // B-key hint
   let hint = document.getElementById('keyHint');
+  
   if (!hint){
     hint = document.createElement('div');
     hint.id='keyHint';
-    Object.assign(hint.style, {
-      position:'fixed', right:'12px', bottom:'12px',
-      background:'#0f1629', color:'#e5e7eb',
-      border:'1px solid #2b3650', borderRadius:'6px',
-      padding:'6px 10px', font:'12px system-ui',
-      opacity:'0.9', zIndex:'10060', display:'none'
-    });
+	Object.assign(hint.style, {
+	  position:'fixed', right:'12px', bottom:'12px',
+	  background:'#0f1629', color:'#e5e7eb',
+	  border:'1px solid #2b3650', borderRadius:'8px',
+	  padding:'10px 14px', font:'16px system-ui',
+	  opacity:'0', transition:'opacity 220ms ease',
+	  zIndex:'10060', display:'none', pointerEvents:'none'
+	});
+
+
     document.body.appendChild(hint);
   }
-  if (game.state === 'shop'){ hint.textContent='Press B to close the shop'; hint.style.display='block'; }
-  else if (game.state === 'intermission'){ hint.textContent='Press B to open the shop'; hint.style.display='block'; }
-  else { hint.style.display='none'; }
+// --- Key-hint state (pulse when visible) ---
+if (game.state === 'shop'){
+  showHintPulsing('Press Space to close the shop');
+} else if (game.state === 'intermission'){
+  showHintPulsing('Press Space to open the shop');
+} else {
+  hideHint();
+}
+// --- Pickup hint: only during combat, when near a drop ---
+if (playerNearDrop()){
+  showPickupHintPulsing('Press E to pick up');
+} else {
+  hidePickupHint();
+}
+
+
+
 }
 
 /* ========= Wave control ========= */
@@ -1909,9 +2174,10 @@ function startNextWave(){
   game.state = 'combat';
 }
 function tryAdvance(){
-  if(game.state==='intermission') openShop(); // allow reopening
-  else if(game.state==='shop') closeShop();
+  if (game.state === 'intermission') openShop();     // open (or reopen) the shop
+  else if (game.state === 'shop') closeShopSoft();   // close the shop, stay in intermission
 }
+
 
 /* ========= Boot ========= */
 function init(){
