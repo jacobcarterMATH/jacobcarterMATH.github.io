@@ -133,6 +133,12 @@ const ALIEN_AIM = (()=> {
     perShotJitterDeg: 2.5
   }, prior || {});
 })();
+/* ========= Demon Boss Blink Buff ========= */
+const DEMON_BLINK = {
+  DURATION_MS: 1200,   // how long the post-teleport buff lasts
+  MS_MULT:     1.45,   // movement speed multiplier during buff
+  DMG_MULT:    1.35    // contact damage multiplier during buff
+};
 
 
 const DEG = Math.PI / 180;
@@ -307,6 +313,39 @@ function rarityFor(p){
   if (p>=30) return 'uncommon';
   return 'common';
 }
+/* ========= UI Color Tokens (global) ========= */
+const UI_COLORS = {
+  slotFill: {
+    weapon:'#fcd34d', armor:'#93c5fd', boots:'#f472b6', ring:'#f59e0b', trinket:'#34d399',
+    // legacy aliases
+    helm:'#93c5fd', chest:'#93c5fd', amulet:'#34d399',
+    fallback:'#a3a3a3'
+  },
+  rarity: {
+    common:    { border:'#64748b', glow:'#64748b', text:'#cbd5e1' },
+    uncommon:  { border:'#10b981', glow:'#10b981', text:'#d1fae5' },
+    rare:      { border:'#60a5fa', glow:'#60a5fa', text:'#dbeafe' },
+    epic:      { border:'#a78bfa', glow:'#a78bfa', text:'#ede9fe' },
+    legendary: { border:'#f59e0b', glow:'#f59e0b', text:'#fffbeb' }
+  },
+  gold: { border:'#facc15', glow:'#facc15' } // special “featured” styling (Luck offer)
+};
+
+const RARITY_NAMES = ['common','uncommon','rare','epic','legendary'];
+function rarityName(r){
+  return (typeof r === 'number')
+    ? RARITY_NAMES[Math.max(0, Math.min(4, r))]
+    : String(r || 'common').toLowerCase();
+}
+function rarityBorder(r){
+  const rn = rarityName(r);
+  return (UI_COLORS.rarity[rn] || UI_COLORS.rarity.common).border;
+}
+function rarityGlow(r){
+  const rn = rarityName(r);
+  return (UI_COLORS.rarity[rn] || UI_COLORS.rarity.common).glow;
+}
+
 const ITEM_NAMES = {
   weapon:  ['Spear','Glaive','Halberd','Pike'],
   armor:   ['Vest','Cuirass','Tunic','Coat'],
@@ -339,12 +378,8 @@ function renderStatsPanel(){
 
 // Inline SVG icons (covers legacy names for safety)
 function iconFor(slot, rarity){
-  const fill = ({
-    weapon:'#fcd34d', armor:'#93c5fd', boots:'#f472b6', ring:'#f59e0b', trinket:'#34d399',
-    // legacy aliases
-    helm:'#93c5fd', chest:'#93c5fd', amulet:'#34d399'
-  })[slot] || '#a3a3a3';
-  const glow = ({ common:'#64748b', uncommon:'#10b981', rare:'#60a5fa', epic:'#a78bfa', legendary:'#f59e0b' })[rarity] || '#64748b';
+const fill = UI_COLORS.slotFill[slot] || UI_COLORS.slotFill.fallback;
+const glow = rarityGlow(rarity);
   const stroke = '#0b0f1a';
 
   let inner = '';
@@ -1000,6 +1035,11 @@ function clearPickups(){
   game.dropsFadeEnd = now + 700; // 0.7s subtle fade window
 }
 
+function bossFamilyForWave(w){
+  const order = ['zombie','alien','demon'];      // 10=zombie, 20=alien, 30=demon, repeat
+  const stage = Math.floor(w / 10);              // 1 at wave 10, 2 at 20, 3 at 30...
+  return order[(stage - 1 + order.length) % order.length];
+}
 
 function spawnWave(n){
   // Clear leftover pickups from prior wave
@@ -1030,6 +1070,28 @@ function spawnWave(n){
       side:(Math.random()<0.5?-1:1),
       retreatAt:0
     });
+		// Tag boss with family + seed state
+	{
+	  const b = enemies[enemies.length - 1];
+	  b.isBoss = true;
+	  b.bossFamily = bossFamilyForWave(game.wave);  // 'zombie' | 'alien' | 'demon'
+	  b.enraged = false;                            // for zombie rage
+	  if (b.bossFamily === 'alien') b.ocNext = performance.now() + 2500; // seed overcharge
+	}
+
+	// Tag boss with a family (cycle: 10=zombie, 20=alien, 30=demon, repeat)
+	{
+	  const order = ['zombie','alien','demon'];
+	  const stage = Math.floor(game.wave / 10);              // 1 at wave 10, 2 at 20...
+	  const fam = order[(stage - 1 + order.length) % order.length];
+	  const b = enemies[enemies.length - 1];
+	  b.isBoss = true;
+	  b.bossFamily = fam;         // 'zombie' | 'alien' | 'demon'
+	  b.enraged = false;          // used by zombie boss rage
+	  // Alien boss overcharge timing seed
+	  if (fam === 'alien') b.ocNext = performance.now() + 2500;
+	}
+
     game.bossAlive = true;
     return;
   }
@@ -1037,7 +1099,7 @@ function spawnWave(n){
 		// Gated pools by wave
 		const baseTypes = ['zombie'];
 		if (game.wave >= 3)  baseTypes.push('demon');  // demons start at wave 3
-		if (game.wave >= 6) baseTypes.push('alien');  // aliens start at wave 11
+		if (game.wave >= 6) baseTypes.push('alien');  // aliens start at wave 6
 		const types = (game.wave >= 16) ? baseTypes.concat('sniper') : baseTypes; // snipers start at wave 16
 
 		let sniperCount = 0, maxSnipers = sniperCapForWave(game.wave);
@@ -1231,10 +1293,44 @@ function updateEnemies(dt){
 
       const sp = e.ms * ((dTo < min && now >= (e.retreatAt||0)) ? 1.15 : 1.0) * slow * dt/1000;
       e.x += mx*sp; e.y += my*sp;
+	// --- Alien boss overcharge cycle ---
+		if (e.isBoss) {
+		  if (!e.ocNext) e.ocNext = now + 3000;   // seed next overcharge
 
-      const cdUse = e.cdVar || e.cd || 1200;
-      if (now - (e.lastShot||0) > cdUse){
-  e.lastShot = now;
+		  // Start charging when timer hits
+		  if (!e.ocCharging && now >= e.ocNext) {
+			e.ocCharging     = true;
+			e.ocChargeUntil  = now + 1200;        // 1.2s windup
+			e.aiming = true;                      // reuse your aim telegraph UI
+			e.aimStart = now;
+			e.aimDur   = e.ocChargeUntil - now;
+			e.aimAng   = Math.atan2(player.y - e.y, player.x - e.x);
+		  }
+
+		  // Finish charge → fire radial burst
+		  if (e.ocCharging && now >= e.ocChargeUntil) {
+			const count = 16;                     // spokes
+			const spd   = 220 + game.wave * 6;
+			for (let i = 0; i < count; i++) {
+			  const a = (Math.PI * 2) * (i / count);
+			  projectiles.push({
+				x:e.x, y:e.y,
+				vx: Math.cos(a)*spd, vy: Math.sin(a)*spd,
+				r:4, dmg: Math.round(e.dmg * 0.8),
+				alive:true, src:'boss'
+			  });
+			}
+			// reset state + cooldown
+			e.ocCharging = false; e.aiming = false;
+			e.ocNext = now + 4500;               // 4.5s until next burst
+			e.lastShot = now;                    // also resets basic shot timer
+		  }
+		}
+
+if (!e.isBoss || !e.ocCharging) {
+  const cdUse = e.cdVar || e.cd || 1200;
+  if (now - (e.lastShot||0) > cdUse){
+    e.lastShot = now;
 
   // Aim toward player, then add spread
   const base   = Math.atan2(player.y - e.y, player.x - e.x);
@@ -1255,21 +1351,112 @@ function updateEnemies(dt){
     src: 'alien'
   });
 }
+}
 
 
-    } else if(e.isBoss){
-      e.x += Math.cos(ang) * e.ms * dt/1000 * 0.9;
-      e.y += Math.sin(ang) * e.ms * dt/1000 * 0.9;
+    } else if (e.isBoss) {
+  const fam = (typeof baseTypeOf === 'function')
+  ? baseTypeOf(e)
+  : (e.bossFamily || (e.type.endsWith('_boss') ? e.type.replace('_boss','') : e.type));
 
+
+  if (fam === 'zombie') {
+    // Heavy chase; a bit faster if enraged
+    const mult = e.enraged ? 1.15 : 0.9;
+    e.x += Math.cos(ang) * e.ms * dt/1000 * mult;
+    e.y += Math.sin(ang) * e.ms * dt/1000 * mult;
+    // No ranged attack here
+
+  } else if (fam === 'demon') {
+    // Glide + occasional retreat (like demons)
+	const buffMS = (now < (e.blinkUntil || 0)) ? DEMON_BLINK.MS_MULT : 1;
+    const speed = e.ms * (1.1 + 0.2*Math.sin(now/180)) * buffMS;
+    let dir = 1; if (now < (e.fleeUntil||0)) dir = -1;
+    e.x += Math.cos(ang) * speed * dt/1000 * dir;
+    e.y += Math.sin(ang) * speed * dt/1000 * dir;
+    // No ranged attack here
+
+  } else if (fam === 'alien') {
+    // Move like alien AI
+    const ux = Math.cos(ang), uy = Math.sin(ang);
+    const dTo = Math.hypot(player.x - e.x, player.y - e.y);
+    let mx=0,my=0;
+    const min=200, max=260;
+    const side = (e.side !== undefined) ? e.side : (e.side=(Math.random()<0.5?-1:1));
+
+    if (dTo < min){
+      if (!e.retreatAt) e.retreatAt = now + AI.alienRetreatDelay;
+      if (now < e.retreatAt){ mx=-uy*side; my=ux*side; }
+      else { mx=-ux; my=-uy; }
+    } else {
+      if (dTo > min + AI.alienHysteresis) e.retreatAt = 0;
+      if (dTo > max){ mx=ux*0.6; my=uy*0.6; }
+      else { mx=-uy*side; my=ux*side; }
+    }
+
+    const w = wallAvoidVector(e, 56);
+    mx += w.vx*1.2; my += w.vy*1.2;
+    const nearEdge = (Math.abs(w.vx)>0.1 || Math.abs(w.vy)>0.1);
+    if (nearEdge && now - (e.lastEdgeFlip||0) > 1000){ e.side *= -1; e.lastEdgeFlip = now; }
+
+    const sp = e.ms * ((dTo < min && now >= (e.retreatAt||0)) ? 1.15 : 1.0) * dt/1000;
+    e.x += mx*sp; e.y += my*sp;
+
+    // ---- Overcharge cycle: charge-up then radial burst ----
+    if (!e.ocNext) e.ocNext = now + 3000; // safety seed
+
+    if (!e.ocCharging && now >= e.ocNext){
+      e.ocCharging    = true;
+      e.ocChargeUntil = now + 1200;      // 1.2s windup
+      // reuse aiming telegraph
+      e.aiming = true; e.aimStart = now; e.aimDur = 1200; e.aimAng = ang;
+    }
+
+    if (e.ocCharging){
+      if (now >= e.ocChargeUntil){
+        const count = 16;
+        const spd   = 220 + game.wave * 6;
+        for (let i=0;i<count;i++){
+          const a = (Math.PI*2) * (i / count);
+          projectiles.push({
+            x:e.x, y:e.y,
+            vx: Math.cos(a)*spd, vy: Math.sin(a)*spd,
+            r:4, dmg: Math.round(e.dmg*0.8),
+            alive:true, src:'boss'
+          });
+        }
+        e.ocCharging = false; e.aiming = false;
+        e.ocNext = now + 4500;        // cooldown to next overcharge
+        e.lastShot = now;             // also gate basic shot
+      }
+    } else {
+      // Basic alien shot (paused during charge)
       const cdUse = e.cdVar || e.cd || 1200;
-      if(now - (e.lastShot||0) > cdUse){
+      if (now - (e.lastShot||0) > cdUse){
         e.lastShot = now;
-        const vx = Math.cos(ang) * (180 + game.wave*6);
-        const vy = Math.sin(ang) * (180 + game.wave*6);
+        const base   = Math.atan2(player.y - e.y, player.x - e.x);
+        const spread = alienSpreadRadians(e);
+        const a      = base + (Math.random()*2 - 1) * spread;
+        const spd    = 180 + game.wave * 6;
+        const vx     = Math.cos(a) * spd;
+        const vy     = Math.sin(a) * spd;
         projectiles.push({ x:e.x, y:e.y, vx, vy, r:4, dmg: Math.round(e.dmg*0.7), alive:true, src:'boss' });
       }
+    }
 
-    } else {
+  } else {
+    // Fallback (shouldn't happen): slow chase + basic shot
+    e.x += Math.cos(ang) * e.ms * dt/1000 * 0.9;
+    e.y += Math.sin(ang) * e.ms * dt/1000 * 0.9;
+    const cdUse = e.cdVar || e.cd || 1200;
+    if (now - (e.lastShot||0) > cdUse){
+      e.lastShot = now;
+      const vx = Math.cos(ang) * (180 + game.wave*6);
+      const vy = Math.sin(ang) * (180 + game.wave*6);
+      projectiles.push({ x:e.x, y:e.y, vx, vy, r:4, dmg: Math.round(e.dmg*0.7), alive:true, src:'boss' });
+    }
+  }
+	} else {
       e.x += Math.cos(ang) * e.ms * dt/1000;
       e.y += Math.sin(ang) * e.ms * dt/1000;
     }
@@ -1284,7 +1471,18 @@ if (d < player.r + e.r){
   }
   if (now >= (e.nextTouchAt || 0) && player.meleeHitsInWindow < DAMAGE.meleeMaxHitsPerWindow) {
     const mods = getTypeMods(e.type);
-    const raw = Math.max(HIT.minContact, Math.round(e.dmg * HIT.contactMul * mods.drMult));
+    let raw = Math.max(HIT.minContact, Math.round(e.dmg * HIT.contactMul * mods.drMult));
+	// Demon boss post-teleport damage buff (short frenzy)
+	if (e.isBoss) {
+	  const fam = (typeof baseTypeOf === 'function')
+		? baseTypeOf(e)
+		: (e.bossFamily || (e.type.endsWith('_boss') ? e.type.replace('_boss','') : e.type));
+
+	  if (fam === 'demon' && now < (e.blinkUntil || 0)) {
+		raw = Math.max(HIT.minContact, Math.round(raw * DEMON_BLINK.DMG_MULT));
+	  }
+	}
+
     if (raw > 0) {
       player.stats.hp -= raw;
 	  floaties.push({ x:player.x, y:player.y - player.r - 4, val: raw, t: now });
@@ -1429,7 +1627,7 @@ function tryAttack(){
 		}
 
 
-        e.hp -= dealt;
+        
 		// Life steal: flat healing on any damaging hit
 		const steal = getAffixSum('lifesteal');
 		if (steal > 0){
@@ -1442,9 +1640,46 @@ function tryAttack(){
 		  e.slowMult  = Math.max(BOSS_AFFIX_TUNES.SLOW_MIN_MULT, 1 - slowPct/100);
 		  e.slowUntil = now + BOSS_AFFIX_TUNES.SLOW_DURATION_MS;
 		}
-
+		e.hp -= dealt;
         e.x += Math.cos(aim)*6; e.y += Math.sin(aim)*6;
         floaties.push({ x:e.x, y:e.y - e.r - 4, val: dealt, t: now });
+		// --- Boss reactions keyed to subtype ---
+		if (e.isBoss) {
+		  // Prefer your existing helper if present
+		  const fam = (typeof baseTypeOf === 'function')
+			? baseTypeOf(e)                              // 'zombie' | 'alien' | 'demon'
+			: (e.bossFamily || (e.type.endsWith('_boss') ? e.type.replace('_boss','') : e.type));
+
+		  // Zombie boss: one-time Rage at 50% HP
+		  if (fam === 'zombie' && !e.enraged && e.hp <= e.maxhp * 0.5) {
+			e.enraged = true;
+			e.ms  = Math.round(e.ms * 1.25);   // movement ↑
+			e.dmg = Math.round(e.dmg * 1.20);  // damage ↑
+			floaties.push({ x:e.x, y:e.y - e.r - 14, val: 'Rage!', t: now });
+		  }
+
+		  // Demon boss: chance to teleport on hit (CD gated)
+		  if (fam === 'demon' && now >= (e.tpReadyAt || 0)) {
+			if (Math.random() < 0.35) {
+			  const away = Math.atan2(e.y - player.y, e.x - player.x);
+			  const dist = 220 + Math.random()*160;
+			  const pad  = 36;
+			  e.x = clamp(e.x + Math.cos(away)*dist, pad, game.width - pad);
+			  e.y = clamp(e.y + Math.sin(away)*dist, pad, game.height - pad);
+			  e.tpReadyAt = now + 1600;
+			  // Post-teleport frenzy (short, sharp buff)
+				e.blinkUntil = now + DEMON_BLINK.DURATION_MS;
+				floaties.push({ x:e.x, y:e.y - e.r - 28, val: 'Frenzy!', t: now });
+
+			  floaties.push({ x:e.x, y:e.y - e.r - 14, val: 'Blink', t: now });
+			} else {
+			  e.tpReadyAt = now + 250;
+			}
+		  }
+		}
+
+
+
 
         if(e.type==='demon'){ e.fleeUntil = now + 650; }
 
@@ -1851,6 +2086,24 @@ function renderShop(){
       hideTooltip();
       buyOffer(idx);
     });
+	// Ensure a visible base border so colors show
+if (!card.style.border)       card.style.border = '2px solid #2b3650';
+if (!card.style.borderRadius) card.style.borderRadius = '8px';
+card.style.transition = 'box-shadow 120ms ease, transform 120ms ease';
+
+// Gold frame for the Luck upgrade offer
+if (o.kind === 'upgrade' && o.key === 'luck') {
+  const col = UI_COLORS.gold.border;
+  card.style.borderColor = col;
+  card.style.boxShadow   = `0 0 0 2px ${col}, inset 0 0 16px ${col}40`;
+}
+
+// Rarity-colored frame for item offers
+if (o.item) {
+  const col = rarityBorder(o.item.rarity);
+  card.style.borderColor = col;
+  card.style.boxShadow   = `0 0 0 2px ${col}, inset 0 0 14px ${col}33`;
+}
 
     list.appendChild(card);
   });
